@@ -1,5 +1,6 @@
 package com.wdretzer.nasaprojetointegrador.splashscreen
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -8,6 +9,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.adapter.IntroAdapter
+import com.wdretzer.nasaprojetointegrador.login.Login
 
 
 class SplashActivity : AppCompatActivity(R.layout.activity_splash) {
@@ -42,8 +44,8 @@ class SplashActivity : AppCompatActivity(R.layout.activity_splash) {
             click++
 
             if (click == 3 || (click == 1 && viewPager.currentItem == 2)) {
-//                startActivity(Intent(this, Login::class.java))
-//                finish()
+                startActivity(Intent(this, Login::class.java))
+                finish()
             }
         }
     }

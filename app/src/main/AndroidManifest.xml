@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NasaProjetoIntegrador">
         <activity
+            android:name=".homeplanetas.HomePlanetas"
+            android:exported="true" />
+        <activity
+            android:name=".login.Login"
+            android:exported="true" />
+        <activity
             android:name=".splashscreen.SplashActivity"
             android:exported="true" />
         <activity

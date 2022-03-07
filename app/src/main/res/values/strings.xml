@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">NasaProjetoIntegrador</string>
     <string name="nome_app">Pequeno Explorador</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="descricao_login">Entre com sua senha ou realize seu cadastro.</string>
+    <string name="cabecalho_login">Olá Seja Bem-Vindo!!</string>
 </resources>
