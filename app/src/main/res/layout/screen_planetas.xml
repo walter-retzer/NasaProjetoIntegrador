@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black"
-    tools:context=".splashscreen.SplashActivity">
+    android:layout_height="wrap_content"
+    tools:context=".homeplanetas.HomePlanetas">
 
     <ImageView
         android:id="@+id/imagem_planeta1"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="65dp"
+        android:layout_width="140dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="15dp"
         android:background="@color/white"
+        android:backgroundTint="@color/black"
         android:scaleType="fitXY"
         android:src="@drawable/planet"
+        app:layout_constraintEnd_toStartOf="@id/imagem_planeta2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,38 +23,198 @@
         android:id="@+id/textPlaneta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_marginTop="2dp"
         android:text="Mercurio"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imagem_planeta1"
-        app:layout_constraintStart_toEndOf="@+id/imagem_planeta1"
-        app:layout_constraintTop_toTopOf="@+id/imagem_planeta1" />
+        app:layout_constraintEnd_toEndOf="@+id/imagem_planeta1"
+        app:layout_constraintStart_toStartOf="@+id/imagem_planeta1"
+        app:layout_constraintTop_toBottomOf="@+id/imagem_planeta1" />
 
     <ImageView
         android:id="@+id/imagem_planeta2"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="65dp"
+        android:layout_width="140dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="15dp"
         android:background="@color/white"
+        android:backgroundTint="@color/black"
         android:scaleType="fitXY"
-        android:src="@drawable/saturns"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagem_planeta1" />
+        android:src="@drawable/planet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imagem_planeta1"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textPlaneta2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_marginTop="2dp"
+        android:backgroundTint="@color/black"
         android:text="Vênus"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imagem_planeta2"
-        app:layout_constraintStart_toEndOf="@+id/imagem_planeta2"
-        app:layout_constraintTop_toTopOf="@+id/imagem_planeta2" />
+        app:layout_constraintEnd_toEndOf="@+id/imagem_planeta2"
+        app:layout_constraintStart_toStartOf="@+id/imagem_planeta2"
+        app:layout_constraintTop_toBottomOf="@+id/imagem_planeta2" />
+
+
+    <ImageView
+        android:id="@+id/imagem_planeta3"
+        android:layout_width="140dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="35dp"
+        android:background="@color/white"
+        android:backgroundTint="@color/black"
+        android:scaleType="fitXY"
+        android:src="@drawable/planet"
+        app:layout_constraintEnd_toStartOf="@id/imagem_planeta4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imagem_planeta1" />
+
+    <TextView
+        android:id="@+id/textPlaneta3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Terra"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/imagem_planeta3"
+        app:layout_constraintStart_toStartOf="@+id/imagem_planeta3"
+        app:layout_constraintTop_toBottomOf="@+id/imagem_planeta3" />
+
+    <ImageView
+        android:id="@+id/imagem_planeta4"
+        android:layout_width="140dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="35dp"
+        android:background="@color/white"
+        android:backgroundTint="@color/black"
+        android:scaleType="fitXY"
+        android:src="@drawable/planet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imagem_planeta3"
+        app:layout_constraintTop_toBottomOf="@id/imagem_planeta1" />
+
+    <TextView
+        android:id="@+id/textPlaneta4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Marte"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/imagem_planeta4"
+        app:layout_constraintStart_toStartOf="@+id/imagem_planeta4"
+        app:layout_constraintTop_toBottomOf="@+id/imagem_planeta4" />
+
+
+    <ImageView
+        android:id="@+id/imagem_planeta5"
+        android:layout_width="140dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="35dp"
+        android:background="@color/white"
+        android:backgroundTint="@color/black"
+        android:scaleType="fitXY"
+        android:src="@drawable/planet"
+        app:layout_constraintEnd_toStartOf="@id/imagem_planeta6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imagem_planeta3" />
+
+    <TextView
+        android:id="@+id/textPlaneta5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Jupiter"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/imagem_planeta5"
+        app:layout_constraintStart_toStartOf="@+id/imagem_planeta5"
+        app:layout_constraintTop_toBottomOf="@+id/imagem_planeta5" />
+
+    <ImageView
+        android:id="@+id/imagem_planeta6"
+        android:layout_width="140dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="35dp"
+        android:background="@color/white"
+        android:backgroundTint="@color/black"
+        android:scaleType="fitXY"
+        android:src="@drawable/planet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imagem_planeta5"
+        app:layout_constraintTop_toBottomOf="@id/imagem_planeta3" />
+
+    <TextView
+        android:id="@+id/textPlaneta6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Saturno"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/imagem_planeta6"
+        app:layout_constraintStart_toStartOf="@+id/imagem_planeta6"
+        app:layout_constraintTop_toBottomOf="@+id/imagem_planeta6" />
+
+    <ImageView
+        android:id="@+id/imagem_planeta7"
+        android:layout_width="140dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="35dp"
+        android:background="@color/white"
+        android:backgroundTint="@color/black"
+        android:scaleType="fitXY"
+        android:src="@drawable/planet"
+        app:layout_constraintEnd_toStartOf="@id/imagem_planeta8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imagem_planeta5" />
+
+    <TextView
+        android:id="@+id/textPlaneta7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Urano"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/imagem_planeta7"
+        app:layout_constraintStart_toStartOf="@+id/imagem_planeta7"
+        app:layout_constraintTop_toBottomOf="@+id/imagem_planeta7" />
+
+    <ImageView
+        android:id="@+id/imagem_planeta8"
+        android:layout_width="140dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="35dp"
+        android:background="@color/white"
+        android:backgroundTint="@color/black"
+        android:scaleType="fitXY"
+        android:src="@drawable/planet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imagem_planeta7"
+        app:layout_constraintTop_toBottomOf="@id/imagem_planeta5" />
+
+    <TextView
+        android:id="@+id/textPlaneta8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Netuno"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/imagem_planeta8"
+        app:layout_constraintStart_toStartOf="@+id/imagem_planeta8"
+        app:layout_constraintTop_toBottomOf="@+id/imagem_planeta8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

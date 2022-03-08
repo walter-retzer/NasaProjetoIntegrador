@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/stars"
     tools:context=".homeplanetas.HomePlanetas">
 
     <TextView
-        android:id="@+id/btn_planeta"
+        android:id="@+id/planeta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:text="PLANETAS"
         android:padding="10dp"
         android:textSize="16sp"
@@ -23,41 +23,42 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/btn_imagens"
+        android:id="@+id/imagem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:text="IMAGENS"
         android:padding="10dp"
         android:textSize="16sp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:background="@drawable/background_item_plhome_focus"
-        app:layout_constraintStart_toEndOf="@+id/btn_planeta"
-        app:layout_constraintEnd_toStartOf="@+id/btn_favoritos"
+        android:background="@drawable/background_item_plhome_black"
+        app:layout_constraintStart_toEndOf="@+id/planeta"
+        app:layout_constraintEnd_toStartOf="@+id/favoritos"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/btn_favoritos"
+        android:id="@+id/favoritos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:text="FAVORITOS"
         android:padding="10dp"
         android:textSize="16sp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:background="@drawable/background_item_plhome_focus"
-        app:layout_constraintStart_toEndOf="@+id/btn_imagens"
+        android:background="@drawable/background_item_plhome_black"
+        app:layout_constraintStart_toEndOf="@+id/imagem"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager"
+        android:id="@+id/view_pager_planetas"
+        android:layout_marginTop="15dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/planeta" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
