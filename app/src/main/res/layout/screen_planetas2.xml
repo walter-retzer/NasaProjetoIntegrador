@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".homeplanetas.HomePlanetas">
+    android:layout_height="wrap_content"
+    tools:context=".homeplanetas.FragmentPlanet1">
 
     <ImageView
         android:id="@+id/search_imagem"
@@ -23,18 +23,19 @@
         android:id="@+id/textSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="10dp"
         android:hint="Digite uma palavra..."
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="22sp"
+        android:imeOptions="actionSend|flagNoEnterAction"
         app:layout_constraintEnd_toEndOf="@+id/search_imagem"
         app:layout_constraintStart_toStartOf="@+id/search_imagem"
         app:layout_constraintTop_toBottomOf="@+id/search_imagem" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_search"
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:layout_marginStart="25dp"

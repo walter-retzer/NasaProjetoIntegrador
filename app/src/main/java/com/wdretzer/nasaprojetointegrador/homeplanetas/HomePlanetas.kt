@@ -1,13 +1,11 @@
 package com.wdretzer.nasaprojetointegrador.homeplanetas
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.adapter.AdapterHomePlanets
-import com.wdretzer.nasaprojetointegrador.imagensnasa.ImgensNasa
 
 class HomePlanetas : AppCompatActivity() {
 
@@ -41,9 +39,8 @@ class HomePlanetas : AppCompatActivity() {
         })
 
         imagem.setOnClickListener {
-
-            val intent = Intent(this, ImgensNasa::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, ImgensNasa::class.java)
+//            startActivity(intent)
         }
     }
 

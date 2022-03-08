@@ -13,11 +13,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NasaProjetoIntegrador">
         <activity
-            android:name=".imagensnasa.ImgensNasa"
+            android:name=".cadastro.CadastroUsuarioFacebook"
             android:exported="true" />
         <activity
-            android:name=".homeplanetas.HomePlanetas"
+            android:name=".cadastro.CadastroUsuarioGoogle"
             android:exported="true" />
+        <activity
+            android:name=".cadastro.CadastroUsuario"
+            android:exported="true" />
+        <activity
+            android:name=".imagensnasa.ImgensNasa"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".homeplanetas.HomePlanetas"
+            android:exported="true"
+            android:windowSoftInputMode="stateVisible|adjustResize|adjustPan" />
         <activity
             android:name=".login.Login"
             android:exported="true" />

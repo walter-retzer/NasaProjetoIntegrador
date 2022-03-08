@@ -52,6 +52,5 @@ class ImgensNasa : AppCompatActivity() {
 
         val recycler = findViewById<RecyclerView>(R.id.nasa_recycler)
         recycler?.adapter = ImagensAdpter(listDados)
-
     }
 }

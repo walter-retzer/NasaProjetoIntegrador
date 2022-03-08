@@ -9,4 +9,10 @@
     <string name="email">Email</string>
     <string name="descricao_login">Entre com sua senha ou realize seu cadastro.</string>
     <string name="cabecalho_login">Olá Seja Bem-Vindo!!</string>
+    <string name="cadastro_descricao">Realize seu cadastro e começe a explorar o nosso universo!!</string>
+    <string name="nome_completo">Nome Completo</string>
+    <string name="senha">Senha</string>
+    <string name="confirma_senha">Confirma Senha</string>
+    <string name="descricao_google_cadastro">Entre com a sua conta Google para realizar o seu cadastro e começar a explorar o nosso Universo!!</string>
+    <string name="cadastro_facebook_conta">Entre com a sua conta Facebook para realizar o seu cadastro e começar a explorar o nosso Universo!!</string>
 </resources>
