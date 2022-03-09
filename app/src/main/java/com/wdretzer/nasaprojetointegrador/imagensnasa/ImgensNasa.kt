@@ -1,5 +1,6 @@
 package com.wdretzer.nasaprojetointegrador.imagensnasa
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -51,6 +52,16 @@ class ImgensNasa : AppCompatActivity() {
         )
 
         val recycler = findViewById<RecyclerView>(R.id.nasa_recycler)
-        recycler?.adapter = ImagensAdpter(listDados)
+        recycler?.adapter = ImagensAdpter(listDados) {
+            val description = it.description
+            val imagem = it.image
+
+            val intent = Intent(this, DetalheImagem::class.java).apply {
+                putExtra("Detalhe", description)
+                putExtra("Imagem", imagem)
+            }
+            startActivity(intent)
+
+        }
     }
 }

@@ -9,14 +9,16 @@ import com.bumptech.glide.Glide
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.model.Dados
 
-class ImagensAdpter(private val list: MutableList<Dados>) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ImagensAdpter(
+    private val list: MutableList<Dados>,
+    private val action: (Dados) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
 
         return ImagensViewHolder(
-            inflater.inflate(R.layout.item_planeta_imagem, parent, false)
+            inflater.inflate(R.layout.item_planeta_imagem, parent, false), action
         )
 
     }
@@ -31,9 +33,17 @@ class ImagensAdpter(private val list: MutableList<Dados>) :
 
 }
 
-class ImagensViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
+class ImagensViewHolder(view: View, detailAction: (Dados) -> Unit) : RecyclerView.ViewHolder(view) {
     var imagemPlanetas: ImageView = view.findViewById(R.id.planeta_item)
+    private var itemCorrente: Dados? = null
+
+    init {
+        view.setOnClickListener {
+            itemCorrente?.let {
+                detailAction.invoke(it)
+            }
+        }
+    }
 
     fun bind(item: Dados) {
 
@@ -41,4 +51,5 @@ class ImagensViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             .load(item.image)
             .into(imagemPlanetas)
     }
+
 }

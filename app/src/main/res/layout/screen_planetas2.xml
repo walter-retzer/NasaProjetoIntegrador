@@ -4,49 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/black"
     tools:context=".homeplanetas.FragmentPlanet1">
 
-    <ImageView
-        android:id="@+id/search_imagem"
-        android:layout_width="300dp"
-        android:layout_height="400dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/white"
-        android:backgroundTint="@color/black"
-        android:scaleType="fitXY"
-        android:src="@drawable/search_images"
+    <TextView
+        android:id="@+id/text_sistema_solar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/background_text_splash"
+        android:padding="10dp"
+        android:text="Nosso Sistema Solar"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="Digite uma palavra..."
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="22sp"
-        android:imeOptions="actionSend|flagNoEnterAction"
-        app:layout_constraintEnd_toEndOf="@+id/search_imagem"
-        app:layout_constraintStart_toStartOf="@+id/search_imagem"
-        app:layout_constraintTop_toBottomOf="@+id/search_imagem" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_search"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/button"
-        android:imeOptions="actionNext"
-        android:text="Procurar"
-        android:textColor="@color/white"
+    <ImageView
+        android:id="@+id/sistema_solar"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/card_background_fav"
+        android:padding="5dp"
+        android:src="@drawable/sistema_s"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/text_sistema_solar" />
+
+    <TextView
+        android:id="@+id/descricao_sistema_solar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
+        android:padding="10dp"
+        android:text="@string/descricao_solar"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sistema_solar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

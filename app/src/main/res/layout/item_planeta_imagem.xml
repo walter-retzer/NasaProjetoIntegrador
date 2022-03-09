@@ -17,10 +17,12 @@
             android:id="@+id/planeta_item"
             android:layout_width="230dp"
             android:layout_height="150dp"
+            android:background="@drawable/card_background_fav"
+            android:backgroundTint="@color/black"
             android:layout_gravity="center_vertical|center_horizontal"
             android:layout_weight="1"
             android:scaleType="fitXY"
-            android:src="@drawable/marte" />
+            android:src="@drawable/saturn" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

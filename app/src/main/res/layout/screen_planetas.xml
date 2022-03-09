@@ -14,7 +14,7 @@
         android:background="@color/white"
         android:backgroundTint="@color/black"
         android:scaleType="fitXY"
-        android:src="@drawable/planet"
+        android:src="@drawable/mercurio"
         app:layout_constraintEnd_toStartOf="@id/imagem_planeta2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,11 +37,11 @@
         android:id="@+id/imagem_planeta2"
         android:layout_width="140dp"
         android:layout_height="130dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="12dp"
         android:background="@color/white"
         android:backgroundTint="@color/black"
         android:scaleType="fitXY"
-        android:src="@drawable/planet"
+        android:src="@drawable/venus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imagem_planeta1"
         app:layout_constraintTop_toTopOf="parent" />
@@ -70,7 +70,7 @@
         android:background="@color/white"
         android:backgroundTint="@color/black"
         android:scaleType="fitXY"
-        android:src="@drawable/planet"
+        android:src="@drawable/terra"
         app:layout_constraintEnd_toStartOf="@id/imagem_planeta4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imagem_planeta1" />
@@ -97,7 +97,7 @@
         android:background="@color/white"
         android:backgroundTint="@color/black"
         android:scaleType="fitXY"
-        android:src="@drawable/planet"
+        android:src="@drawable/planeta_marte"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imagem_planeta3"
         app:layout_constraintTop_toBottomOf="@id/imagem_planeta1" />
@@ -125,7 +125,7 @@
         android:background="@color/white"
         android:backgroundTint="@color/black"
         android:scaleType="fitXY"
-        android:src="@drawable/planet"
+        android:src="@drawable/jupiter"
         app:layout_constraintEnd_toStartOf="@id/imagem_planeta6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imagem_planeta3" />
@@ -152,7 +152,7 @@
         android:background="@color/white"
         android:backgroundTint="@color/black"
         android:scaleType="fitXY"
-        android:src="@drawable/planet"
+        android:src="@drawable/saturno"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imagem_planeta5"
         app:layout_constraintTop_toBottomOf="@id/imagem_planeta3" />
@@ -179,7 +179,7 @@
         android:background="@color/white"
         android:backgroundTint="@color/black"
         android:scaleType="fitXY"
-        android:src="@drawable/planet"
+        android:src="@drawable/urano"
         app:layout_constraintEnd_toStartOf="@id/imagem_planeta8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imagem_planeta5" />
@@ -206,7 +206,7 @@
         android:background="@color/white"
         android:backgroundTint="@color/black"
         android:scaleType="fitXY"
-        android:src="@drawable/planet"
+        android:src="@drawable/netuno"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imagem_planeta7"
         app:layout_constraintTop_toBottomOf="@id/imagem_planeta5" />

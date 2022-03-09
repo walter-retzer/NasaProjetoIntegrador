@@ -75,6 +75,7 @@
         android:textColorHint="@color/black"
         app:boxStrokeColor="@color/blue"
         app:endIconMode="clear_text"
+        app:endIconTint="@color/black"
         app:hintTextColor="@color/blue"
         app:iconPadding="5dp"
         app:layout_constraintEnd_toEndOf="parent"

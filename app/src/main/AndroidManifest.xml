@@ -13,6 +13,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NasaProjetoIntegrador">
         <activity
+            android:name=".perfil.Perfil"
+            android:exported="true" />
+        <activity
+            android:name=".detalheplaneta.DetalhePlaneta"
+            android:exported="true" />
+        <activity
+            android:name=".pesquisaimg.PesquisaImagens"
+            android:exported="true" />
+        <activity
+            android:name=".menuprinipal.InicioGuia"
+            android:exported="true" />
+        <activity
+            android:name=".imagensnasa.DetalheImagem"
+            android:exported="true" />
+        <activity
             android:name=".cadastro.CadastroUsuarioFacebook"
             android:exported="true" />
         <activity

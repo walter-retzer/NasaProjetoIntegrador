@@ -15,4 +15,7 @@
     <string name="confirma_senha">Confirma Senha</string>
     <string name="descricao_google_cadastro">Entre com a sua conta Google para realizar o seu cadastro e começar a explorar o nosso Universo!!</string>
     <string name="cadastro_facebook_conta">Entre com a sua conta Facebook para realizar o seu cadastro e começar a explorar o nosso Universo!!</string>
+    <string name="descricao_solar">O Sistema Solar é um conjunto de corpos celestes que gravitam na órbita de um sol (uma estrela). O nosso sistema solar é formado por oito planetas: Mercúrio, Vênus, Terra, Marte, Júpiter, Saturno, Urano e Netuno.</string>
+    <string name="marte_decricao">Marte é o quarto planeta a partir do Sol, o segundo menor do Sistema Solar. Batizado em homenagem ao deus romano da guerra, muitas vezes é descrito como o Planeta Vermelho, porque o óxido de ferro predominante em sua superfície lhe dá uma aparência avermelhada.</string>
+    <string name="venus_curiosidade">O planeta mais quente não é o mais próximo do Sol Apesar de muitos pensarem que é Mercúrio, na verdade é Vênus. A explicação é por ele possuir uma atmosfera muito mais densa. Em Vênus a atmosfera é muito compacta, formada por uma enorme quantidade de gás carbônico, por ser muito densa desenvolve um elevado efeito estufa que faz o planeta produzir altíssimas temperaturas. Onde os raios solares incidem de forma perpendicular na superfície do planeta as temperaturas atingem até 460ºC.</string>
 </resources>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/stars"
+        android:layout_marginBottom="25dp"
+        tools:context=".menuprinipal.InicioGuia">
+
+        <TextView
+            android:id="@+id/tituloMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/background_text_splash"
+            android:padding="10dp"
+            android:text="Menu Principal"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/menu_planeta"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/card_background_fav"
+            android:backgroundTint="@color/cinza"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/sistema_solar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tituloMenu" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_planetas"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/button"
+            android:text="Sistema Solar"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/menu_planeta"
+            app:layout_constraintStart_toStartOf="@+id/menu_planeta"
+            app:layout_constraintTop_toBottomOf="@+id/menu_planeta" />
+
+        <ImageView
+            android:id="@+id/background_cinza"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/card_background_fav"
+            android:backgroundTint="@color/cinza"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_planetas" />
+
+        <ImageView
+            android:id="@+id/menu_pesquisa_imagens"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/card_background_fav"
+            android:backgroundTint="@color/cinza"
+            android:paddingTop="160dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/search_imagens"
+            app:layout_constraintBottom_toBottomOf="@+id/background_cinza"
+            app:layout_constraintEnd_toEndOf="@+id/background_cinza"
+            app:layout_constraintStart_toStartOf="@+id/background_cinza"
+            app:layout_constraintTop_toTopOf="@+id/background_cinza" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_pesquisa_imagens"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/button"
+            android:text="Pesquisar Imagens"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/menu_pesquisa_imagens"
+            app:layout_constraintStart_toStartOf="@+id/menu_pesquisa_imagens"
+            app:layout_constraintTop_toBottomOf="@+id/background_cinza" />
+
+        <ImageView
+            android:id="@+id/menu_img_favoritas"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/card_background_fav"
+            android:backgroundTint="@color/cinza"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/imagem_fav"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_pesquisa_imagens" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_img_favoritas"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/button"
+            android:text="Imagens Favoritas"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/menu_img_favoritas"
+            app:layout_constraintStart_toStartOf="@+id/menu_img_favoritas"
+            app:layout_constraintTop_toBottomOf="@+id/menu_img_favoritas" />
+
+        <ImageView
+            android:id="@+id/menu_perfil"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/card_background_fav"
+            android:backgroundTint="@color/cinza"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/perfil"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_img_favoritas" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_perfil"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/button"
+            android:text="Perfil do Astronauta"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/menu_perfil"
+            app:layout_constraintStart_toStartOf="@+id/menu_perfil"
+            app:layout_constraintTop_toBottomOf="@+id/menu_perfil" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

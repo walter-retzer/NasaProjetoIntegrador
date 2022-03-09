@@ -8,7 +8,7 @@ import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.cadastro.CadastroUsuario
 import com.wdretzer.nasaprojetointegrador.cadastro.CadastroUsuarioFacebook
 import com.wdretzer.nasaprojetointegrador.cadastro.CadastroUsuarioGoogle
-import com.wdretzer.nasaprojetointegrador.homeplanetas.HomePlanetas
+import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
 
 class Login : AppCompatActivity() {
 
@@ -26,7 +26,7 @@ class Login : AppCompatActivity() {
 
         buttonLogin.setOnClickListener {
             val position: Int = 0
-            val intent = Intent(this, HomePlanetas::class.java)
+            val intent = Intent(this, InicioGuia::class.java)
             intent.putExtra("position", position)
             startActivity(intent)
         }

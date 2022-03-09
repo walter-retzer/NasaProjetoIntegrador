@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".homeplanetas.HomePlanetas">
+    tools:context=".detalheplaneta.DetalhePlaneta">
 
     <TextView
-        android:id="@+id/text_titulo_curiosidades"
+        android:id="@+id/titulo_detalhe_planeta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -16,7 +16,7 @@
         android:layout_marginStart="25dp"
         android:background="@drawable/background_text_splash"
         android:padding="10dp"
-        android:text="Curiosidades do Sistema Solar"
+        android:text="Informações do Planeta"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -25,17 +25,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/sistema_solar"
-        android:layout_width="300dp"
+        android:id="@+id/img_detalhe_planeta"
+        android:layout_width="350dp"
         android:layout_height="300dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/card_background_fav"
         android:padding="5dp"
-        android:src="@drawable/planeta_venus"
+        android:src="@drawable/marte"
         app:layout_constraintEnd_toEndOf="parent"
-        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_titulo_curiosidades" />
+        app:layout_constraintTop_toBottomOf="@+id/titulo_detalhe_planeta" />
 
     <TextView
         android:id="@+id/descricao_sistema_solar"
@@ -45,12 +44,13 @@
         android:layout_marginEnd="25dp"
         android:layout_marginStart="25dp"
         android:padding="10dp"
-        android:text="@string/venus_curiosidade"
+        android:text="@string/marte_decricao"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sistema_solar" />
+        app:layout_constraintTop_toBottomOf="@+id/img_detalhe_planeta" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
