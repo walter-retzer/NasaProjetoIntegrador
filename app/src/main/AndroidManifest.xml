@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NasaProjetoIntegrador">
         <activity
+            android:name=".imagensnasa.ImagensFavoritas"
+            android:exported="true" />
+        <activity
             android:name=".perfil.Perfil"
             android:exported="true" />
         <activity

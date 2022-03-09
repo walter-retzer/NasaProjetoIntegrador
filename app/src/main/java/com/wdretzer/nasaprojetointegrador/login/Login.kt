@@ -25,30 +25,22 @@ class Login : AppCompatActivity() {
         getSupportActionBar()?.hide()
 
         buttonLogin.setOnClickListener {
-            val position: Int = 0
             val intent = Intent(this, InicioGuia::class.java)
-            intent.putExtra("position", position)
             startActivity(intent)
         }
 
         buttonCadastrar.setOnClickListener {
-            val position: Int = 0
             val intent = Intent(this, CadastroUsuario::class.java)
-            intent.putExtra("position", position)
             startActivity(intent)
         }
 
         buttonGoogle.setOnClickListener {
-            val position: Int = 0
             val intent = Intent(this, CadastroUsuarioGoogle::class.java)
-            intent.putExtra("position", position)
             startActivity(intent)
         }
 
         buttonFacebook.setOnClickListener {
-            val position: Int = 0
             val intent = Intent(this, CadastroUsuarioFacebook::class.java)
-            intent.putExtra("position", position)
             startActivity(intent)
         }
 

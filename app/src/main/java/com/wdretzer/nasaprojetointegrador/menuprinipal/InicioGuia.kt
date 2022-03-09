@@ -6,6 +6,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.homeplanetas.HomePlanetas
+import com.wdretzer.nasaprojetointegrador.imagensnasa.ImagensFavoritas
 import com.wdretzer.nasaprojetointegrador.perfil.Perfil
 import com.wdretzer.nasaprojetointegrador.pesquisaimg.PesquisaImagens
 
@@ -24,7 +25,7 @@ class InicioGuia : AppCompatActivity() {
         getSupportActionBar()?.hide()
 
         buttonPlanetas.setOnClickListener {
-            val position: Int = 0
+            val position: Int = 1
             val intent = Intent(this, HomePlanetas::class.java)
             intent.putExtra("position", position)
             startActivity(intent)
@@ -36,10 +37,8 @@ class InicioGuia : AppCompatActivity() {
         }
 
         buttonImgFav.setOnClickListener {
-//            val position: Int = 0
-//            val intent = Intent(this, InicioGuia::class.java)
-//            intent.putExtra("position", position)
-//            startActivity(intent)
+            val intent = Intent(this, ImagensFavoritas::class.java)
+            startActivity(intent)
         }
 
         buttonPerfil.setOnClickListener {

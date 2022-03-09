@@ -76,6 +76,7 @@
         app:boxStrokeColor="@color/blue"
         app:endIconMode="clear_text"
         app:hintTextColor="@color/blue"
+        app:endIconTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/texto_descricao_login"
