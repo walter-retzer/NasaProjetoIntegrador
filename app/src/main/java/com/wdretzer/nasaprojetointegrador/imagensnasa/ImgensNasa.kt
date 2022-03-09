@@ -2,6 +2,7 @@ package com.wdretzer.nasaprojetointegrador.imagensnasa
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.wdretzer.nasaprojetointegrador.R
@@ -9,6 +10,9 @@ import com.wdretzer.nasaprojetointegrador.model.Dados
 import com.wdretzer.nasaprojetointegrador.recyclerview.ImagensAdpter
 
 class ImgensNasa : AppCompatActivity() {
+
+    private val buttonDetalhe: TextView by lazy { findViewById(R.id.text_img_encontradas) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_imgens_nasa)
@@ -16,10 +20,15 @@ class ImgensNasa : AppCompatActivity() {
         // Desabilita a Action Bar que exibe o nome do Projeto:
         getSupportActionBar()?.hide()
 
+        buttonDetalhe.setOnClickListener {
+            val intent = Intent(this, DetalheImagem::class.java)
+            startActivity(intent)
+        }
+
         val listDados = mutableListOf<Dados>(
             Dados(
                 description = "Marte",
-                image = "https://static.natgeo.pt/files/styles/image_3200/public/NASA_05_MARS.jpg?w=710&h=710",
+                image = "https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2021/11/Perseverance-Nasa-Marte.jpg",
             ),
             Dados(
                 description = "Marte",

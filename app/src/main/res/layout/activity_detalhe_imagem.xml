@@ -4,6 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".imagensnasa.DetalheImagem">
+
+    <TextView
+        android:id="@+id/titulo_detalhe_imagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/background_text_splash"
+        android:padding="10dp"
+        android:text="Detalhe da Imagem"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_detalhe_imagem"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/card_background_fav"
+        android:padding="5dp"
+        android:src="@drawable/rover"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo_detalhe_imagem" />
+
+    <TextView
+        android:id="@+id/descricao_sistema_solar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
+        android:padding="10dp"
+        android:text="Foto tirada pelo Rover Curiosity na cratera..."
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_detalhe_imagem" />
+
+    <ImageView
+        android:id="@+id/inicio"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/card_background_fav"
+        android:padding="5dp"
+        android:src="@drawable/inicio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/baixar"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/baixar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/card_background_fav"
+        android:padding="5dp"
+        android:src="@drawable/baixar"
+        app:layout_constraintEnd_toStartOf="@+id/favoritar"
+        app:layout_constraintStart_toEndOf="@+id/inicio"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/favoritar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/card_background_fav"
+        android:padding="5dp"
+        android:src="@drawable/favoritar"
+        app:layout_constraintEnd_toStartOf="@+id/compartilhar"
+        app:layout_constraintStart_toEndOf="@+id/baixar"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/compartilhar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/card_background_fav"
+        android:padding="5dp"
+        android:src="@drawable/compartilhar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/favoritar"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
