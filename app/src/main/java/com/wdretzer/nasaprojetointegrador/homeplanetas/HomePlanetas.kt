@@ -38,10 +38,6 @@ class HomePlanetas : AppCompatActivity() {
             }
         })
 
-        imagem.setOnClickListener {
-//            val intent = Intent(this, ImgensNasa::class.java)
-//            startActivity(intent)
-        }
     }
 
     private fun setupViewPager() {

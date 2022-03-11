@@ -46,9 +46,5 @@ class InicioGuia : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-
-
-
     }
 }

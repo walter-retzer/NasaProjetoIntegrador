@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/titulo_detalhe_imagem" />
 
     <TextView
-        android:id="@+id/descricao_sistema_solar"
+        android:id="@+id/descricao_detalhe_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

@@ -11,14 +11,14 @@ import com.wdretzer.nasaprojetointegrador.model.Dados
 
 class ImagensAdpter(
     private val list: MutableList<Dados>,
-    private val action: (Dados) -> Unit
+    private val detailAction: (Dados) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
 
         return ImagensViewHolder(
-            inflater.inflate(R.layout.item_planeta_imagem, parent, false), action
+            inflater.inflate(R.layout.item_planeta_imagem, parent, false), detailAction
         )
 
     }
@@ -30,6 +30,10 @@ class ImagensAdpter(
     }
 
     override fun getItemCount(): Int = list.size
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 
 }
 
@@ -50,6 +54,13 @@ class ImagensViewHolder(view: View, detailAction: (Dados) -> Unit) : RecyclerVie
         Glide.with(imagemPlanetas.context)
             .load(item.image)
             .into(imagemPlanetas)
+
+        itemCorrente = item
+
+        item.image?.let {
+            Glide.with(imagemPlanetas.context)
+                .load(it)
+                .into(imagemPlanetas) }
     }
 
 }

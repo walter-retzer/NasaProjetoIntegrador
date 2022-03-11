@@ -3,6 +3,7 @@ package com.wdretzer.nasaprojetointegrador.imagensnasa
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.wdretzer.nasaprojetointegrador.R
@@ -61,16 +62,21 @@ class ImgensNasa : AppCompatActivity() {
         )
 
         val recycler = findViewById<RecyclerView>(R.id.nasa_recycler)
-        recycler?.adapter = ImagensAdpter(listDados) {
+        recycler.adapter = ImagensAdpter(listDados) {
             val description = it.description
             val imagem = it.image
-
-            val intent = Intent(this, DetalheImagem::class.java).apply {
-                putExtra("Detalhe", description)
-                putExtra("Imagem", imagem)
+            it.image.let {
+                sendToDetalheImage(description,imagem)
+                Toast.makeText(this, "Clicou na imagem!", Toast.LENGTH_LONG).show()
             }
-            startActivity(intent)
-
         }
+    }
+
+    private fun sendToDetalheImage(description:String, imagem:String){
+        val intent = Intent(this, DetalheImagem::class.java).apply {
+            putExtra("Detalhe", description)
+            putExtra("Imagem", imagem)
+        }
+        startActivity(intent)
     }
 }
