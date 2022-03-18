@@ -37,12 +37,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tituloMenuImagens" />
 
+
     <ImageView
         android:id="@+id/border_search"
         android:layout_width="match_parent"
         android:layout_height="165dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
         android:src="@drawable/background_login"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,12 +61,12 @@
         android:background="@color/white"
         android:backgroundTint="@color/white"
         android:hint="Digite uma palavra..."
+        android:imeOptions="actionSend|flagNoEnterAction"
         android:textColorHint="@color/black"
         app:boxStrokeColor="@color/blue"
         app:endIconMode="clear_text"
         app:endIconTint="@color/black"
         app:hintTextColor="@color/blue"
-        android:imeOptions="actionSend|flagNoEnterAction"
         app:layout_constraintEnd_toEndOf="@+id/search_imagem"
         app:layout_constraintStart_toStartOf="@+id/search_imagem"
         app:layout_constraintTop_toTopOf="@+id/border_search"
@@ -73,11 +74,11 @@
         app:startIconTint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_nome_cadastro"
+            android:id="@+id/input_search_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textPersonName"
-            android:maxLength="8"
+            android:inputType="text"
+            android:maxLength="25"
             android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -96,6 +97,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textSearch" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
+        tools:context=".pesquisaimg.PesquisaImagens"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/search_imagem">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="150dp"
+            android:scaleType="fitXY"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:lottie_autoPlay="false"
+            app:lottie_fileName="rocket-loader.json"
+            app:lottie_loop="true"
+            app:lottie_speed="2" />
+    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

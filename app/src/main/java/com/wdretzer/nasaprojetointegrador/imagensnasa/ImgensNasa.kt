@@ -4,15 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.wdretzer.nasaprojetointegrador.R
-import com.wdretzer.nasaprojetointegrador.model.Dados
 import com.wdretzer.nasaprojetointegrador.recyclerview.ImagensAdpter
+import com.wdretzer.nasaprojetointegrador.viewmodel.NasaViewModel
 
 class ImgensNasa : AppCompatActivity() {
 
     private val buttonDetalhe: TextView by lazy { findViewById(R.id.text_img_encontradas) }
+    private val viewModelNasa: NasaViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,62 +23,77 @@ class ImgensNasa : AppCompatActivity() {
         // Desabilita a Action Bar que exibe o nome do Projeto:
         getSupportActionBar()?.hide()
 
+        val bundle: Bundle? = intent.extras
+
+        if (bundle != null) {
+            val setSearchText = bundle.getString("Search")
+            chamadas(setSearchText.toString())
+        }
+
+        renderizar()
+
         buttonDetalhe.setOnClickListener {
             val intent = Intent(this, DetalheImagem::class.java)
             startActivity(intent)
         }
 
-        val listDados = mutableListOf<Dados>(
-            Dados(
-                description = "Marte",
-                image = "https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2021/11/Perseverance-Nasa-Marte.jpg",
-            ),
-            Dados(
-                description = "Marte",
-                image = "https://img.r7.com/images/marte-nasa-22042021121625066?dimensions=771x420&&&&&&&&&&&&&&&resize=771x420&crop=900x490+0+124",
-            ),
-            Dados(
-                description = "Marte",
-                image = "https://ep01.epimg.net/elpais/imagenes/2018/03/21/album/1521647027_352581_1521648462_noticia_normal.jpg",
-            ),
-            Dados(
-                description = "Marte",
-                image = "https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2021/09/marte-1.jpg",
-            ),
-            Dados(
-                description = "Marte",
-                image = "https://static.dw.com/image/57259942_401.jpg",
-            ),
-            Dados(
-                description = "Marte",
-                image = "https://super.abril.com.br/wp-content/uploads/2021/02/perseverance_site.jpg?quality=70&strip=info",
-            ),
-            Dados(
-                description = "Marte",
-                image = "https://conteudo.imguol.com.br/c/noticias/9e/2021/12/04/selfie-feita-a-partir-de-81-imagens-forma-panorama-de-360-graus-de-marte-1638648526467_v2_4x3.jpg",
-            ),
-            Dados(
-                description = "Marte",
-                image = "https://mega.ibxk.com.br/2020/01/29/29170355502560.jpg?ims=610x",
-            )
-        )
+    }
 
-        val recycler = findViewById<RecyclerView>(R.id.nasa_recycler)
-        recycler.adapter = ImagensAdpter(listDados) {
-            val description = it.description
-            val imagem = it.image
-            it.image.let {
-                sendToDetalheImage(description,imagem)
-                Toast.makeText(this, "Clicou na imagem!", Toast.LENGTH_LONG).show()
+    private fun renderizar() {
+        oberservarNasa()
+    }
+
+    private fun oberservarNasa() {
+
+        viewModelNasa.error.observe(this) {
+            if (it) {
+                Toast.makeText(this, "Falha!!", Toast.LENGTH_LONG).show()
+            }
+        }
+
+
+        viewModelNasa.success.observe(this) {
+            val itens = it.collection.items
+            val recycler = findViewById<RecyclerView>(R.id.nasa_recycler)
+
+            recycler.adapter = ImagensAdpter(itens) {
+                val description = it.data.first().title.toString()
+                val imagem = it.links.first().href
+                val date = it.data.first().dateCreated.toString()
+                val criadores = it.data.first().creators.toString()
+                val keywords =
+                    it.data.first().keywords.filter { it != "}" }.joinToString(", ").toString()
+
+
+                imagem.let {
+                    sendToDetalheImage(description, imagem, date, criadores, keywords)
+                    Toast.makeText(this, "Imagem selecionada!", Toast.LENGTH_LONG).show()
+                }
             }
         }
     }
 
-    private fun sendToDetalheImage(description:String, imagem:String){
+
+    private fun sendToDetalheImage(
+        description: String,
+        imagem: String,
+        date: String,
+        creator: String,
+        keyword: String
+    ) {
         val intent = Intent(this, DetalheImagem::class.java).apply {
             putExtra("Detalhe", description)
             putExtra("Imagem", imagem)
+            putExtra("Date", date)
+            putExtra("Criador", creator)
+            putExtra("Keyword", keyword)
+
         }
         startActivity(intent)
     }
+
+    private fun chamadas(search: String) {
+        viewModelNasa.request(search)
+    }
+
 }
