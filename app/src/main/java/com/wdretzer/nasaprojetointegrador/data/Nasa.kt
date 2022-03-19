@@ -41,7 +41,7 @@ data class DataItens(
 class ItensData(
     val title: String,
     @SerializedName("date_created")
-    val dateCreated: String,
+    val dateCreated: String? = " ",
     @SerializedName("secondary_creator")
     val creators: String,
     val keywords: List<String>

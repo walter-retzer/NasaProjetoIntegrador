@@ -2,6 +2,7 @@ package com.wdretzer.nasaprojetointegrador.imagensnasa
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +34,7 @@ class DetalheImagem : AppCompatActivity() {
             val setDate = bundle.getString("Date")
             val setCriador = bundle.getString("Criador")
             val setKeywords = bundle.getString("Keyword")
+            val setKeywordsVisible = bundle.getString("KeywordsVisible")
 
             Glide.with(imagemDetalhe.context)
                 .load(setImagem)
@@ -40,9 +42,18 @@ class DetalheImagem : AppCompatActivity() {
 
             textoDetalhe.text = "Descrição: ${setText}"
             dataDetalhe.text = "Data: ${setDate}"
-            criadoresDetalhe.text = "Origem: ${setCriador}"
-            keywordsDetalhe.text = "Plavras-Chaves: ${setKeywords}"
 
+            if (setCriador == "null") {
+                criadoresDetalhe.visibility = View.GONE
+            } else {
+                criadoresDetalhe.text = "Origem: ${setCriador}"
+            }
+
+            if (setKeywordsVisible == "true") {
+                keywordsDetalhe.visibility = View.GONE
+            } else {
+                keywordsDetalhe.text = "Plavras-Chaves: ${setKeywords}"
+            }
         }
 
         buttonMenu.setOnClickListener {

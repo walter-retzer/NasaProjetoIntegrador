@@ -2,10 +2,12 @@ package com.wdretzer.nasaprojetointegrador.imagensnasa
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.recyclerview.ImagensAdpter
@@ -14,6 +16,19 @@ import com.wdretzer.nasaprojetointegrador.viewmodel.NasaViewModel
 class ImgensNasa : AppCompatActivity() {
 
     private val buttonDetalhe: TextView by lazy { findViewById(R.id.text_img_encontradas) }
+    private val loading: FrameLayout
+        get() = findViewById(R.id.loading)
+
+
+    var description: String? = null
+    var imagem: String? = null
+    var date: String? = null
+    var criadores: String? = null
+    var creadoresVisible: String = "false"
+    var keywords: String? = null
+    var keywordsVisible: String = "false"
+
+
     private val viewModelNasa: NasaViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,22 +66,41 @@ class ImgensNasa : AppCompatActivity() {
             }
         }
 
+        viewModelNasa.loading.observe(this) {
+            loading.isVisible = it
+        }
 
         viewModelNasa.success.observe(this) {
             val itens = it.collection.items
             val recycler = findViewById<RecyclerView>(R.id.nasa_recycler)
 
             recycler.adapter = ImagensAdpter(itens) {
-                val description = it.data.first().title.toString()
-                val imagem = it.links.first().href
-                val date = it.data.first().dateCreated.toString()
-                val criadores = it.data.first().creators.toString()
-                val keywords =
-                    it.data.first().keywords.filter { it != "}" }.joinToString(", ").toString()
 
+                description = it.data.first().title
+                imagem = it.links.first().href
+                date = it.data.first().dateCreated.toString()
+
+                criadores = try {
+                    it.data.first().creators.toString()
+                } catch (e: Exception) {
+                    "null"
+                }
+
+                try {
+                    keywords = it.data.first().keywords.filter { it != "}" }.joinToString(", ")
+                } catch (e: Exception) {
+                    keywordsVisible = "true"
+                }
 
                 imagem.let {
-                    sendToDetalheImage(description, imagem, date, criadores, keywords)
+                    sendToDetalheImage(
+                        description = description.toString(),
+                        imagem = imagem.toString(),
+                        date = date.toString(),
+                        creator = criadores.toString(),
+                        keyword = keywords.toString(),
+                        keywordsVisible = keywordsVisible
+                    )
                     Toast.makeText(this, "Imagem selecionada!", Toast.LENGTH_LONG).show()
                 }
             }
@@ -79,7 +113,8 @@ class ImgensNasa : AppCompatActivity() {
         imagem: String,
         date: String,
         creator: String,
-        keyword: String
+        keyword: String,
+        keywordsVisible: String,
     ) {
         val intent = Intent(this, DetalheImagem::class.java).apply {
             putExtra("Detalhe", description)
@@ -87,7 +122,7 @@ class ImgensNasa : AppCompatActivity() {
             putExtra("Date", date)
             putExtra("Criador", creator)
             putExtra("Keyword", keyword)
-
+            putExtra("KeywordsVisible", keywordsVisible)
         }
         startActivity(intent)
     }

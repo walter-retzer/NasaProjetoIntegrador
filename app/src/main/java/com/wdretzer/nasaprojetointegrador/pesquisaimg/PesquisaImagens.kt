@@ -6,10 +6,15 @@ import android.os.Handler
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.textfield.TextInputEditText
+import com.google.mlkit.nl.translate.TranslateLanguage
+import com.google.mlkit.nl.translate.Translation
+import com.google.mlkit.nl.translate.TranslatorOptions
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.imagensnasa.ImgensNasa
 
@@ -19,6 +24,8 @@ class PesquisaImagens : AppCompatActivity() {
     private val animationView: LottieAnimationView by lazy { findViewById(R.id.lottie) }
     private val img: ImageView by lazy { findViewById(R.id.search_imagem) }
     private val textSearch: TextInputEditText by lazy { findViewById(R.id.input_search_img) }
+    private val textView: TextView by lazy { findViewById(R.id.tituloMenuImagens) }
+    private var searchWords: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,18 +36,63 @@ class PesquisaImagens : AppCompatActivity() {
 
         textSearch.getText().toString()
 
-        buttonPlanetas.setOnClickListener {
-            img.visibility = View.INVISIBLE
-            animationView.isVisible = true
-            animationView.loop(true)
-            animationView.playAnimation()
+        val translationConfigs = TranslatorOptions.Builder()
+            .setSourceLanguage(TranslateLanguage.PORTUGUESE)
+            .setTargetLanguage(TranslateLanguage.ENGLISH)
+            .build()
+        val translator = Translation.getClient(translationConfigs)
 
-            // Iniciando as Telas de Boas Vindas:
-            Handler().postDelayed({
-                animationView.pauseAnimation()
-                sendToImagensNasa(textSearch.getText().toString())
-                img.visibility = View.VISIBLE
-            }, 3000)
+
+        buttonPlanetas.setOnClickListener {
+
+            if (textSearch.text?.isEmpty() == true) {
+                Toast.makeText(this, "Digite uma palavra!!", Toast.LENGTH_SHORT).show()
+            }
+
+            if (textSearch.text?.isNotEmpty() == true) {
+                translator.downloadModelIfNeeded()
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Download Successful", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+                    }
+                translator.translate(textSearch.text.toString())
+                    .addOnSuccessListener {
+                        textView.setText(it)
+                        searchWords = it
+                    }
+                    .addOnFailureListener {
+                        it.printStackTrace()
+                    }
+
+                img.visibility = View.INVISIBLE
+                animationView.isVisible = true
+                animationView.loop(true)
+                animationView.playAnimation()
+
+                // Iniciando as Telas de Boas Vindas:
+                Handler().postDelayed({
+                    animationView.pauseAnimation()
+                    sendToImagensNasa(searchWords)
+                    img.visibility = View.VISIBLE
+                }, 3000)
+            }
+
+
+//        buttonPlanetas.setOnClickListener {
+//            img.visibility = View.INVISIBLE
+//            animationView.isVisible = true
+//            animationView.loop(true)
+//            animationView.playAnimation()
+//
+//            // Iniciando as Telas de Boas Vindas:
+//            Handler().postDelayed({
+//                animationView.pauseAnimation()
+//                sendToImagensNasa(textSearch.getText().toString())
+//                img.visibility = View.VISIBLE
+//            }, 3000)
+//        }
         }
     }
 
@@ -52,6 +104,9 @@ class PesquisaImagens : AppCompatActivity() {
         startActivity(intent)
     }
 
+    private fun translateSearch(view: View) {
+
+    }
 
 
 }
