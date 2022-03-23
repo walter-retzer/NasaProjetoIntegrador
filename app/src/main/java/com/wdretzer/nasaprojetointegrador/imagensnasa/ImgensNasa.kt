@@ -19,7 +19,6 @@ class ImgensNasa : AppCompatActivity() {
     private val loading: FrameLayout
         get() = findViewById(R.id.loading)
 
-
     var description: String? = null
     var imagem: String? = null
     var date: String? = null
@@ -62,7 +61,7 @@ class ImgensNasa : AppCompatActivity() {
 
         viewModelNasa.error.observe(this) {
             if (it) {
-                Toast.makeText(this, "Falha!!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Falha em encontrar as imagens!", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -74,11 +73,27 @@ class ImgensNasa : AppCompatActivity() {
             val itens = it.collection.items
             val recycler = findViewById<RecyclerView>(R.id.nasa_recycler)
 
-            recycler.adapter = ImagensAdpter(itens) {
+            Toast.makeText(this, "Foram encontradas ${itens.size} imagens!!", Toast.LENGTH_LONG).show()
 
-                description = it.data.first().title
-                imagem = it.links.first().href
-                date = it.data.first().dateCreated.toString()
+            recycler.adapter = ImagensAdpter(itens) { it ->
+
+                imagem = try {
+                    it.links.first().href
+                } catch (e: Exception) {
+                    "null"
+                }
+
+                description = try {
+                    it.data.first().title
+                } catch (e: Exception) {
+                    "null"
+                }
+
+                date = try {
+                    it.data.first().dateCreated.toString()
+                } catch (e: Exception) {
+                    "null"
+                }
 
                 criadores = try {
                     it.data.first().creators.toString()

@@ -1,16 +1,19 @@
 package com.wdretzer.nasaprojetointegrador.data
 
 import com.google.gson.annotations.SerializedName
-import com.wdretzer.doctordigital.data.GsonFactory
-import com.wdretzer.doctordigital.data.Okhttp
-import com.wdretzer.doctordigital.data.RetrofitFactory
+import com.wdretzer.nasaprojetointegrador.netwok.GsonFactory
+import com.wdretzer.nasaprojetointegrador.netwok.Okhttp
+import com.wdretzer.nasaprojetointegrador.netwok.RetrofitFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface Nasa {
 
     @GET("search?")
-    suspend fun getDataNasa(@Query("q") search: String): NasaRequest
+    suspend fun getDataNasa(
+        @Query("q") search: String,
+        @Query("media_type") type: String = "image"
+        ): NasaRequest
 
     companion object {
         val api: Nasa by lazy {
@@ -41,14 +44,12 @@ data class DataItens(
 class ItensData(
     val title: String,
     @SerializedName("date_created")
-    val dateCreated: String? = " ",
+    val dateCreated: String,
     @SerializedName("secondary_creator")
-    val creators: String,
+    val creators: String? = "",
     val keywords: List<String>
 )
-
 
 data class Links(
     val href: String
 )
-

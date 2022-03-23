@@ -5,13 +5,18 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.mlkit.nl.translate.TranslateLanguage
+import com.google.mlkit.nl.translate.Translation
+import com.google.mlkit.nl.translate.TranslatorOptions
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
 
 class DetalheImagem : AppCompatActivity() {
 
+    var strTranslate: String = ""
     private val buttonMenu: ImageView by lazy { findViewById(R.id.inicio) }
     private val imagemDetalhe: ImageView by lazy { findViewById(R.id.img_detalhe_imagem) }
     private val textoDetalhe: TextView by lazy { findViewById(R.id.descricao_detalhe_img) }
@@ -36,11 +41,13 @@ class DetalheImagem : AppCompatActivity() {
             val setKeywords = bundle.getString("Keyword")
             val setKeywordsVisible = bundle.getString("KeywordsVisible")
 
+            translate(setText.toString(), "Detalhe")
+
             Glide.with(imagemDetalhe.context)
                 .load(setImagem)
                 .into(imagemDetalhe)
 
-            textoDetalhe.text = "Descrição: ${setText}"
+
             dataDetalhe.text = "Data: ${setDate}"
 
             if (setCriador == "null") {
@@ -52,7 +59,8 @@ class DetalheImagem : AppCompatActivity() {
             if (setKeywordsVisible == "true") {
                 keywordsDetalhe.visibility = View.GONE
             } else {
-                keywordsDetalhe.text = "Plavras-Chaves: ${setKeywords}"
+                //keywordsDetalhe.text = "Plavras-Chaves: ${setKeywords}"
+                translate(setKeywords.toString(), "Keyword")
             }
         }
 
@@ -60,5 +68,32 @@ class DetalheImagem : AppCompatActivity() {
             val intent = Intent(this, InicioGuia::class.java)
             startActivity(intent)
         }
+
+
+    }
+
+    private fun translate(str: String, type: String) {
+        val translationConfigs = TranslatorOptions.Builder()
+            .setSourceLanguage(TranslateLanguage.ENGLISH)
+            .setTargetLanguage(TranslateLanguage.PORTUGUESE)
+            .build()
+        val translator = Translation.getClient(translationConfigs)
+
+        translator.downloadModelIfNeeded()
+            .addOnFailureListener {
+                Toast.makeText(this, "Erro no Texto da Descrição", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                it.printStackTrace()
+            }
+        translator.translate(str)
+            .addOnSuccessListener {
+                if(type == "Detalhe" ) {
+                    textoDetalhe.text = "Descrição: ${it}"
+                }
+                if(type == "Keyword" ) {
+                    keywordsDetalhe.text = "Plavras-Chaves: ${it}"
+                }
+            }
     }
 }

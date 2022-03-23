@@ -1,4 +1,4 @@
-package com.wdretzer.doctordigital.data
+package com.wdretzer.nasaprojetointegrador.netwok
 
 import com.google.gson.Gson
 import okhttp3.OkHttpClient

@@ -51,16 +51,38 @@ class ImagensViewHolder(view: View, detailAction: (DataItens) -> Unit) : Recycle
 
     fun bind(item: DataItens) {
 
-        Glide.with(imagemPlanetas.context)
-            .load(item.links.first().href)
-            .into(imagemPlanetas)
+        try {
+            //keywords = it.data.first().keywords.filter { it != "}" }.joinToString(", ")
+            Glide.with(imagemPlanetas.context)
+                .load(item.links.first().href)
+                .placeholder(R.drawable.astronauta_inicio)
+                .error(R.drawable.icon_error)
+                .into(imagemPlanetas)
+
+        } catch (e: Exception) {
+
+        }
+
+
+//        Glide.with(imagemPlanetas.context)
+//            .load(item.links.first().href)
+//            .placeholder(R.drawable.astronauta_inicio)
+//            .error(R.drawable.icon_error)
+//            .into(imagemPlanetas)
 
         itemCorrente = item
 
-        item.links.first().href?.let {
-            Glide.with(imagemPlanetas.context)
-                .load(it)
-                .into(imagemPlanetas) }
+            try {
+                item.links.first().href.let {
+                    Glide.with(imagemPlanetas.context)
+                        .load(it)
+                        .into(imagemPlanetas)
+                }
+
+            } catch (e: Exception) {
+
+            }
+
     }
 
 }

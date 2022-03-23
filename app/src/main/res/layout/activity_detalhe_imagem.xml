@@ -95,6 +95,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/criador_detalhe_img" />
 
+<!--    <TextView-->
+<!--        android:id="@+id/teste_translate"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginEnd="25dp"-->
+<!--        android:layout_marginStart="25dp"-->
+<!--        android:text="tradutor: "-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/keyword_detalhe_img" />-->
+
     <ImageView
         android:id="@+id/inicio"
         android:layout_width="80dp"

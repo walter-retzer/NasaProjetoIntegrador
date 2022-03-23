@@ -34,14 +34,13 @@ class PesquisaImagens : AppCompatActivity() {
         // Desabilita a Action Bar que exibe o nome do Projeto:
         getSupportActionBar()?.hide()
 
-        textSearch.getText().toString()
+        textSearch.text.toString()
 
         val translationConfigs = TranslatorOptions.Builder()
             .setSourceLanguage(TranslateLanguage.PORTUGUESE)
             .setTargetLanguage(TranslateLanguage.ENGLISH)
             .build()
         val translator = Translation.getClient(translationConfigs)
-
 
         buttonPlanetas.setOnClickListener {
 
@@ -52,14 +51,14 @@ class PesquisaImagens : AppCompatActivity() {
             if (textSearch.text?.isNotEmpty() == true) {
                 translator.downloadModelIfNeeded()
                     .addOnSuccessListener {
-                        Toast.makeText(this, "Download Successful", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Pesquisando imagens...", Toast.LENGTH_SHORT).show()
                     }
                     .addOnFailureListener {
-                        Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Error no item pesquisado, digite novamente, por favor.", Toast.LENGTH_SHORT).show()
                     }
                 translator.translate(textSearch.text.toString())
                     .addOnSuccessListener {
-                        textView.setText(it)
+                        //textView.setText(it)
                         searchWords = it
                     }
                     .addOnFailureListener {
@@ -76,9 +75,8 @@ class PesquisaImagens : AppCompatActivity() {
                     animationView.pauseAnimation()
                     sendToImagensNasa(searchWords)
                     img.visibility = View.VISIBLE
-                }, 3000)
+                }, 6000)
             }
-
 
 //        buttonPlanetas.setOnClickListener {
 //            img.visibility = View.INVISIBLE

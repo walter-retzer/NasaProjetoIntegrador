@@ -1,5 +1,4 @@
-package com.wdretzer.doctordigital.data
-
+package com.wdretzer.nasaprojetointegrador.netwok
 
 import com.wdretzer.nasaprojetointegrador.BuildConfig
 import okhttp3.OkHttpClient
