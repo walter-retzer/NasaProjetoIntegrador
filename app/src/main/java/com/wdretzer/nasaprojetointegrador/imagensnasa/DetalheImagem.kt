@@ -1,11 +1,14 @@
 package com.wdretzer.nasaprojetointegrador.imagensnasa
 
 import android.content.Intent
+import android.icu.text.SimpleDateFormat
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.mlkit.nl.translate.TranslateLanguage
@@ -13,6 +16,7 @@ import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
+
 
 class DetalheImagem : AppCompatActivity() {
 
@@ -24,6 +28,7 @@ class DetalheImagem : AppCompatActivity() {
     private val criadoresDetalhe: TextView by lazy { findViewById(R.id.criador_detalhe_img) }
     private val keywordsDetalhe: TextView by lazy { findViewById(R.id.keyword_detalhe_img) }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalhe_imagem)
@@ -32,6 +37,8 @@ class DetalheImagem : AppCompatActivity() {
         getSupportActionBar()?.hide()
 
         val bundle: Bundle? = intent.extras
+        keywordsDetalhe.visibility = View.GONE
+        criadoresDetalhe.visibility = View.GONE
 
         if (bundle != null) {
             val setImagem = bundle.getString("Imagem")
@@ -39,28 +46,33 @@ class DetalheImagem : AppCompatActivity() {
             val setDate = bundle.getString("Date")
             val setCriador = bundle.getString("Criador")
             val setKeywords = bundle.getString("Keyword")
-            val setKeywordsVisible = bundle.getString("KeywordsVisible")
 
-            translate(setText.toString(), "Detalhe")
-
-            Glide.with(imagemDetalhe.context)
-                .load(setImagem)
-                .into(imagemDetalhe)
-
-
-            dataDetalhe.text = "Data: ${setDate}"
-
-            if (setCriador == "null") {
-                criadoresDetalhe.visibility = View.GONE
-            } else {
-                criadoresDetalhe.text = "Origem: ${setCriador}"
+            setText?.let {
+                translate(it, "Detalhe")
             }
 
-            if (setKeywordsVisible == "true") {
-                keywordsDetalhe.visibility = View.GONE
-            } else {
-                //keywordsDetalhe.text = "Plavras-Chaves: ${setKeywords}"
-                translate(setKeywords.toString(), "Keyword")
+            setKeywords?.let {
+                keywordsDetalhe.visibility = View.VISIBLE
+                translate(it, "Keyword")
+            }
+
+            setDate?.let {
+                val parser =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                val formatter = SimpleDateFormat("dd.MM.yyyy,  HH:mm:ss")
+                val formattedDate = formatter.format(parser.parse(it))
+                dataDetalhe.text = "Data: $formattedDate"
+            }
+
+            setCriador?.let {
+                criadoresDetalhe.visibility = View.VISIBLE
+                criadoresDetalhe.text = "Origem: $it"
+            }
+
+            setImagem?.let {
+                Glide.with(imagemDetalhe.context)
+                    .load(it)
+                    .error(R.drawable.icon_error)
+                    .into(imagemDetalhe)
             }
         }
 
@@ -68,9 +80,8 @@ class DetalheImagem : AppCompatActivity() {
             val intent = Intent(this, InicioGuia::class.java)
             startActivity(intent)
         }
-
-
     }
+
 
     private fun translate(str: String, type: String) {
         val translationConfigs = TranslatorOptions.Builder()
@@ -86,13 +97,14 @@ class DetalheImagem : AppCompatActivity() {
             .addOnFailureListener {
                 it.printStackTrace()
             }
+
         translator.translate(str)
             .addOnSuccessListener {
                 if(type == "Detalhe" ) {
-                    textoDetalhe.text = "Descrição: ${it}"
+                    textoDetalhe.text = "Descrição: $it"
                 }
                 if(type == "Keyword" ) {
-                    keywordsDetalhe.text = "Plavras-Chaves: ${it}"
+                    keywordsDetalhe.text = "Plavras-Chaves: $it"
                 }
             }
     }

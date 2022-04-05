@@ -7,12 +7,15 @@ import com.wdretzer.nasaprojetointegrador.netwok.RetrofitFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+
 interface Nasa {
 
     @GET("search?")
     suspend fun getDataNasa(
         @Query("q") search: String,
-        @Query("media_type") type: String = "image"
+        @Query("page") page: Int = 1,
+        @Query("media_type") type: String = "image",
+
         ): NasaRequest
 
     companion object {
@@ -32,7 +35,19 @@ data class NasaRequest(val collection: NasaItens)
 data class NasaItens(
     val href: String,
     val version: String,
-    val items: List<DataItens>
+    val items: List<DataItens>,
+    val metadata: NasaMetadata,
+    val links: List<NasaNextPage>
+)
+
+data class NasaNextPage(
+    @SerializedName("href")
+    val nextPage: String? = "false"
+)
+
+data class NasaMetadata(
+    @SerializedName("total_hits")
+    val totalHits: Int
 )
 
 data class DataItens(
@@ -41,12 +56,12 @@ data class DataItens(
     val links: List<Links>
 )
 
-class ItensData(
+data class ItensData(
     val title: String,
     @SerializedName("date_created")
     val dateCreated: String,
     @SerializedName("secondary_creator")
-    val creators: String? = "",
+    val creators: String? = null,
     val keywords: List<String>
 )
 

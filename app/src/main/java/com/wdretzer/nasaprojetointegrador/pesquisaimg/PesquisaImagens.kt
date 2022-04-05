@@ -58,7 +58,7 @@ class PesquisaImagens : AppCompatActivity() {
                     }
                 translator.translate(textSearch.text.toString())
                     .addOnSuccessListener {
-                        //textView.setText(it)
+                        textView.setText(it)
                         searchWords = it
                     }
                     .addOnFailureListener {
@@ -77,20 +77,6 @@ class PesquisaImagens : AppCompatActivity() {
                     img.visibility = View.VISIBLE
                 }, 6000)
             }
-
-//        buttonPlanetas.setOnClickListener {
-//            img.visibility = View.INVISIBLE
-//            animationView.isVisible = true
-//            animationView.loop(true)
-//            animationView.playAnimation()
-//
-//            // Iniciando as Telas de Boas Vindas:
-//            Handler().postDelayed({
-//                animationView.pauseAnimation()
-//                sendToImagensNasa(textSearch.getText().toString())
-//                img.visibility = View.VISIBLE
-//            }, 3000)
-//        }
         }
     }
 
@@ -101,10 +87,5 @@ class PesquisaImagens : AppCompatActivity() {
         }
         startActivity(intent)
     }
-
-    private fun translateSearch(view: View) {
-
-    }
-
 
 }

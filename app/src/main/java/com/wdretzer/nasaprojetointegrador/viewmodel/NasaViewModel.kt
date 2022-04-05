@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
+
 class NasaViewModel (private val repository: NasaRepository = NasaRepository.instance) : ViewModel() {
 
     private val _error: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -26,14 +27,14 @@ class NasaViewModel (private val repository: NasaRepository = NasaRepository.ins
     val loading: LiveData<Boolean>
         get() = _loading
 
-    fun request(search: String) = viewModelScope.launch(Dispatchers.Main){
+    fun request(search: String, page: Int) = viewModelScope.launch(Dispatchers.Main){
         repository
-            .requestData(search)
+            .requestData(search, page)
             .onStart { _loading.postValue(true) }
-            .catch { _error.value = true }
+            .catch { _error.postValue(true) }
             .onCompletion { _loading.postValue(false) }
             .collect {
-                _success.value = it
+                _success.postValue(it)
             }
     }
 }
