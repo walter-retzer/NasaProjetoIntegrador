@@ -1,6 +1,5 @@
 package com.wdretzer.nasaprojetointegrador.data
 
-import com.google.gson.annotations.SerializedName
 import com.wdretzer.nasaprojetointegrador.netwok.GsonFactory
 import com.wdretzer.nasaprojetointegrador.netwok.Okhttp
 import com.wdretzer.nasaprojetointegrador.netwok.RetrofitFactory
@@ -29,42 +28,3 @@ interface Nasa {
         }
     }
 }
-
-data class NasaRequest(val collection: NasaItens)
-
-data class NasaItens(
-    val href: String,
-    val version: String,
-    val items: List<DataItens>,
-    val metadata: NasaMetadata,
-    val links: List<NasaNextPage>
-)
-
-data class NasaNextPage(
-    @SerializedName("href")
-    val nextPage: String? = "false"
-)
-
-data class NasaMetadata(
-    @SerializedName("total_hits")
-    val totalHits: Int
-)
-
-data class DataItens(
-    val href: String,
-    val data: List<ItensData>,
-    val links: List<Links>
-)
-
-data class ItensData(
-    val title: String,
-    @SerializedName("date_created")
-    val dateCreated: String,
-    @SerializedName("secondary_creator")
-    val creators: String? = null,
-    val keywords: List<String>
-)
-
-data class Links(
-    val href: String
-)

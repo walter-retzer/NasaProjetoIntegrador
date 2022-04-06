@@ -15,13 +15,13 @@ import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.wdretzer.nasaprojetointegrador.R
-import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
+import com.wdretzer.nasaprojetointegrador.favoritos.ImagemFavoritosActivity
 
 
 class DetalheImagem : AppCompatActivity() {
 
     var strTranslate: String = ""
-    private val buttonMenu: ImageView by lazy { findViewById(R.id.inicio) }
+    private val buttonMenu: ImageView by lazy { findViewById(R.id.favoritar) }
     private val imagemDetalhe: ImageView by lazy { findViewById(R.id.img_detalhe_imagem) }
     private val textoDetalhe: TextView by lazy { findViewById(R.id.descricao_detalhe_img) }
     private val dataDetalhe: TextView by lazy { findViewById(R.id.data_detalhe_img) }
@@ -77,7 +77,7 @@ class DetalheImagem : AppCompatActivity() {
         }
 
         buttonMenu.setOnClickListener {
-            val intent = Intent(this, InicioGuia::class.java)
+            val intent = Intent(this, ImagemFavoritosActivity::class.java)
             startActivity(intent)
         }
     }

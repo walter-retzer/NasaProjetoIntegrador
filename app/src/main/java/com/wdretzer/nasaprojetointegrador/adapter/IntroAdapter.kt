@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
+
 class IntroAdapter(fragmentManager: FragmentActivity, private val views: List<Fragment>): FragmentStateAdapter(fragmentManager) {
 
     override fun getItemCount(): Int = views.size
@@ -15,5 +16,4 @@ class IntroAdapter(fragmentManager: FragmentActivity, private val views: List<Fr
             views[position]
         }
     }
-
 }

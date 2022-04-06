@@ -1,6 +1,5 @@
 package com.wdretzer.nasaprojetointegrador.imagensnasa
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.FrameLayout
@@ -12,13 +11,17 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wdretzer.nasaprojetointegrador.R
+import com.wdretzer.nasaprojetointegrador.bancodados.DataBaseFactory
+import com.wdretzer.nasaprojetointegrador.data.DataResult
+import com.wdretzer.nasaprojetointegrador.data.NasaItens
+import com.wdretzer.nasaprojetointegrador.data.NasaRequest
 import com.wdretzer.nasaprojetointegrador.recyclerview.ImagensAdpter
 import com.wdretzer.nasaprojetointegrador.viewmodel.NasaViewModel
 
 
 class ImgensNasa : AppCompatActivity() {
 
-    var page = 1
+    var page: Int = 1
     var totalImagens: Int = 0
     var nextPage: Boolean = false
 
@@ -29,16 +32,13 @@ class ImgensNasa : AppCompatActivity() {
     val recycler: RecyclerView
         get() = findViewById(R.id.nasa_recycler)
 
-    private var adp = ImagensAdpter() {}
+    private var adp = ImagensAdpter(::saveFavourite){}
 
     var description: String? = null
     var imagem: String? = null
     var date: String? = null
     var criadores: String? = null
     var keywords: String? = null
-
-    var kTeste: String? = null
-
 
     private val viewModelNasa: NasaViewModel by viewModels()
     var setSearchText: String = ""
@@ -54,10 +54,9 @@ class ImgensNasa : AppCompatActivity() {
 
         if (bundle != null) {
             setSearchText = bundle.getString("Search").toString()
-            chamadas(setSearchText, page)
         }
 
-        oberservarNasa()
+        chamadas(setSearchText, page)
         recyclerView()
         setScrollView()
 
@@ -65,16 +64,17 @@ class ImgensNasa : AppCompatActivity() {
 
 
     private fun chamadas(search: String, page: Int) {
-        viewModelNasa.request(search, page)
+        viewModelNasa.request(search, page).observe(this, ::oberservarNasa)
     }
 
+
     private fun recyclerView() {
-        adp = ImagensAdpter {
-            val imagemApi = it.links.first().href
-            val descriptionApi = it.data.first().title
-            val dataApi = it.data.first().dateCreated
-            val criadoresApi = it.data.first().creators
-            val keywordsApi = it.data.first().keywords
+        adp = ImagensAdpter(::saveFavourite) {
+            val imagemApi = it.items.first().links.first().href
+            val descriptionApi = it.items.first().data.first().title
+            val dataApi = it.items.first().data.first().dateCreated
+            val criadoresApi = it.items.first().data.first().creators
+            val keywordsApi = it.items.first().data.first().keywords
 
             descriptionApi.let { descricao ->
                 description = descricao
@@ -110,31 +110,42 @@ class ImgensNasa : AppCompatActivity() {
     }
 
 
-    @SuppressLint("SetTextI18n")
-    fun oberservarNasa() {
-
-        viewModelNasa.error.observe(this) {
-            if (it) {
-                Toast.makeText(this, "Falha em encontrar as imagens!", Toast.LENGTH_LONG).show()
+    private fun saveFavourite(item: NasaItens) {
+        viewModelNasa.addOrRemoveFavourite(item).observe(this) {
+            if (it is DataResult.Success) {
+                adp.updateItem(item)
             }
         }
+    }
 
-        viewModelNasa.loading.observe(this) {
-            loading.isVisible = it
-        }
+    fun oberservarNasa(result: DataResult<NasaRequest>) {
+        when (result) {
+            is DataResult.Loading -> {
+                loading.isVisible = result.isLoading
+            }
 
-        viewModelNasa.success.observe(this) {
+            is DataResult.Empty -> {
+                Toast.makeText(this, "Resultado não encontrado!", Toast.LENGTH_LONG).show()
+            }
 
-            adp.updateList(it.collection.items)
+            is DataResult.Error -> {
+                Toast.makeText(this, "Falha em encontrar as imagens!", Toast.LENGTH_LONG).show()
+            }
 
-            nextPage = it.collection.links != null
+            is DataResult.Success -> {
+                adp.updateList(mutableListOf(result.data.collection))
 
-            totalItens.text = "${it.collection.metadata.totalHits} Imagens Encontradas!"
-            totalImagens += (it.collection.items.size)
-            Toast.makeText(this, "Há $totalImagens imagens disponíveis!!", Toast.LENGTH_LONG)
-                .show()
+                nextPage = result.data.collection.links != null
+
+//                totalItens.text =
+//                    "${result.data.collection.metadata?.totalHits} Imagens Encontradas!"
+//                totalImagens += (result.data.collection.items.size)
+//                Toast.makeText(this, "Há $totalImagens imagens disponíveis!!", Toast.LENGTH_LONG)
+//                    .show()
+            }
         }
     }
+
 
     private fun setScrollView() {
         recycler
@@ -171,5 +182,11 @@ class ImgensNasa : AppCompatActivity() {
             putExtra("Keyword", keyword)
         }
         startActivity(intent)
+    }
+
+
+    override fun onStart() {
+        DataBaseFactory.removeInstance()
+        super.onStart()
     }
 }

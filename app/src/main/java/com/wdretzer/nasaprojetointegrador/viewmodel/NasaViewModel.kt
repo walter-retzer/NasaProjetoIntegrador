@@ -1,40 +1,25 @@
 package com.wdretzer.nasaprojetointegrador.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.wdretzer.nasaprojetointegrador.data.NasaRequest
+import androidx.lifecycle.asLiveData
+import com.wdretzer.nasaprojetointegrador.data.NasaItens
 import com.wdretzer.nasaprojetointegrador.repository.NasaRepository
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.flowOn
 
 
-class NasaViewModel (private val repository: NasaRepository = NasaRepository.instance) : ViewModel() {
+class NasaViewModel(
+    private val repository: NasaRepository = NasaRepository.instance,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+) : ViewModel() {
 
-    private val _error: MutableLiveData<Boolean> = MutableLiveData(false)
-    val error: LiveData<Boolean> = _error
+    fun request(search: String, page: Int) =
+        repository.requestData(search, page).flowOn(dispatcher).asLiveData()
 
-    private val _success: MutableLiveData<NasaRequest> = MutableLiveData()
-    val success: LiveData<NasaRequest>
-    get() = _success
+    fun addOrRemoveFavourite(item: NasaItens) = repository.addOrRemoveFavourite(item).flowOn(dispatcher).asLiveData()
+    fun getFavourite() = repository.getFavourite().flowOn(dispatcher).asLiveData()
 
-    private val _loading = MutableLiveData(false)
-    val loading: LiveData<Boolean>
-        get() = _loading
 
-    fun request(search: String, page: Int) = viewModelScope.launch(Dispatchers.Main){
-        repository
-            .requestData(search, page)
-            .onStart { _loading.postValue(true) }
-            .catch { _error.postValue(true) }
-            .onCompletion { _loading.postValue(false) }
-            .collect {
-                _success.postValue(it)
-            }
-    }
+    //fun getFavouriteImg() = repository.getFavouriteImg().flowOn(dispatcher).asLiveData()
 }
