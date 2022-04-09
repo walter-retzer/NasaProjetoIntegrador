@@ -1,5 +1,8 @@
 package com.wdretzer.nasaprojetointegrador.repository
 
+import com.google.mlkit.nl.translate.TranslateLanguage
+import com.google.mlkit.nl.translate.Translation
+import com.google.mlkit.nl.translate.TranslatorOptions
 import com.wdretzer.nasaprojetointegrador.bancodados.DataBaseFactory
 import com.wdretzer.nasaprojetointegrador.data.*
 import com.wdretzer.nasaprojetointegrador.data.extension.updateStatus
@@ -17,33 +20,17 @@ class NasaRepository(
 
     private val dao = DataBaseFactory.getDataBase().nasaDao()
 
-
     fun requestData(search: String, page: Int) = flow<DataResult<NasaRequest>> {
 
         val localItens = dao.listAll()
         val response: NasaRequest = api.getDataNasa(search, page)
 
-        val novaLista = mutableListOf(response.collection).map { apiNasaItens ->
-            if (localItens.filter {
-                    it.items.first() == apiNasaItens.items.first()
-                }
-                    .getOrNull(0) != null)
-                apiNasaItens.copy(
-                    isFavourite = true
-                ) else apiNasaItens
-        }
+        emit(DataResult.Success(response.copy(collection = response.collection.copy(isFavourite = true))))
 
-        var teste: NasaItens
-        novaLista.map {
-            teste = it
-        }
-
-        //emit(DataResult.Success(response.copy(collection = novaLista as NasaItens)))
-        emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
 
-    fun getFavourite() = flow <MutableList<NasaItens>> {
+    fun getFavourite() = flow<MutableList<NasaItens>> {
         val localItens = dao.listAll().map {
             NasaItens(it)
         }
@@ -53,34 +40,41 @@ class NasaRepository(
 
     fun addOrRemoveFavourite(item: NasaItens) = flow {
         try {
-            val numeroRegistro = dao.countApiId(item.items)
+            val numeroRegistro = dao.countApiId(listOf(item.data.first()))
             val itemExist = numeroRegistro >= 1
 
             if (itemExist) {
-                dao.deleteByApiId(item.items)
+                dao.deleteByApiId(listOf(item.data.first()))
             } else {
+
+                val titleEng = item.data.first().title
+                var teste: String = ""
+                val translationConfigs = TranslatorOptions.Builder()
+                    .setSourceLanguage(TranslateLanguage.ENGLISH)
+                    .setTargetLanguage(TranslateLanguage.PORTUGUESE)
+                    .build()
+                val translator = Translation.getClient(translationConfigs)
+
+                translator.translate(titleEng)
+                    .addOnSuccessListener {
+                        teste   = it
+                    }
+
+                kotlinx.coroutines.delay(200L)
+
+                item.data.map {
+                    it.title = teste
+                }
+
                 dao.insert(item.toNasaEntity())
             }
 
-            emit(
-                DataResult.Success(
-                    item.copy(
-                        href = itemExist.not().toString()
-                    )
-                )
-            )
+            emit(DataResult.Success(item.copy(isFavourite = true,)))
+
         } catch (e: Exception) {
             emit(DataResult.Error(IllegalStateException()))
         }
     }.updateStatus().flowOn(dispatcher)
-
-
-//    fun getFavouriteImg() = flow <MutableList<DataResult<NasaRequest>>> {
-//        val localItens = dao.listAll().map {
-//            NasaItens(it)
-//        }
-//        emit(localItens as MutableList<DataResult<NasaRequest>>)
-//    }.flowOn(dispatcher)
 
     companion object {
         val instance: NasaRepository by lazy { NasaRepository() }

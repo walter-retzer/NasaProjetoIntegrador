@@ -3,46 +3,38 @@ package com.wdretzer.nasaprojetointegrador.data
 import com.google.gson.annotations.SerializedName
 import com.wdretzer.nasaprojetointegrador.bancodados.NasaEntity
 
-data class NasaRequest(val collection: NasaItens)
 
-data class NasaItens(
+// Modelo de Data Class de Retorno da API NASA:
+data class NasaRequest(val collection: NasaReturn)
+
+// Classe NasaReturn e suas as variaveis:
+data class NasaReturn(
     val href: String,
     val version: String,
-    val items: List<DataItens>,
+    val items: List<NasaItens>,
     val links: List<NasaNextPage>,
-    val metadata: NasaMetadata? = null,
-    val isFavourite: Boolean = false,
-){
+    val metadata: NasaMetadata,
+    val isFavourite: Boolean = false
+)
+
+//Os dados principais utilizados no App estão acessíveis por ets classe:
+data class NasaItens(
+    val href: String = " ",
+    val data: List<ItensData>,
+    val links: List<Links>,
+    val isFavourite: Boolean = false
+) {
+    // construtor para o banco de dados:
     constructor(nasaEntity: NasaEntity) : this(
         nasaEntity.href,
-        nasaEntity.version,
-        nasaEntity.items,
-        nasaEntity.links,
-        )
+        nasaEntity.data,
+        nasaEntity.links
+    )
 }
 
-
-data class NasaNextPage(
-    @SerializedName("href")
-    val nextPage: String? = "false"
-)
-
-
-data class NasaMetadata(
-    @SerializedName("total_hits")
-    val totalHits: Int
-)
-
-
-data class DataItens(
-    val href: String,
-    val data: List<ItensData>,
-    val links: List<Links>
-)
-
-
+// Classe com as informações complementares referente a Imagem enviada pela API NASA:
 data class ItensData(
-    val title: String,
+    var title: String,
     @SerializedName("date_created")
     val dateCreated: String,
     @SerializedName("secondary_creator")
@@ -50,16 +42,26 @@ data class ItensData(
     val keywords: List<String>
 )
 
-
+// Classe que contém o link da imagem gerada pela API NASA:
 data class Links(
     val href: String
 )
 
+// Variável que recebe a paginação da API NASA
+data class NasaNextPage(
+    @SerializedName("href")
+    val nextPage: String
+)
 
+// Classe que retorna a quantidade total de imagens encontradas pela pesquisa na API:
+data class NasaMetadata(
+    @SerializedName("total_hits")
+    val totalHits: Int = 0
+)
+
+// Função para armazenar as informações do item favorito que irá será copiado no Banco de Dados:
 fun NasaItens.toNasaEntity() = NasaEntity(
     href = href,
-    version = version,
-    items = items,
-//    metadata = metadata,
+    data = data,
     links = links
 )

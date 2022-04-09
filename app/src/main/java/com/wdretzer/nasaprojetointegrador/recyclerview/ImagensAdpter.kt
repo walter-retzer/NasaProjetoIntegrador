@@ -17,7 +17,7 @@ import com.wdretzer.nasaprojetointegrador.data.NasaItens
 
 class ImagensAdpter(
     private val action: (NasaItens) -> Unit,
-    private val detailAction: (NasaItens) -> Unit,
+    private val detailAction: (NasaItens) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val diffUtil = AsyncListDiffer<NasaItens>(this, DIFF_UTIL)
@@ -42,15 +42,17 @@ class ImagensAdpter(
         return position
     }
 
-    fun updateList(newItens: List<NasaItens>) {
-        diffUtil.submitList(diffUtil.currentList.plus(newItens))
-    }
-
     fun updateItem(item: NasaItens) {
         val newList =
             diffUtil.currentList.map { nasa ->
-                if (nasa.href == item.href) item else nasa }
+                if (nasa.href == item.href) item
+                else nasa
+            }
         diffUtil.submitList(newList)
+    }
+
+    fun updateList(newItens: List<NasaItens>) {
+        diffUtil.submitList(diffUtil.currentList.plus(newItens))
     }
 
     companion object {
@@ -69,7 +71,7 @@ class ImagensAdpter(
 
 class ImagensViewHolder(
     view: View,
-    private val detailAction: (NasaItens) -> Unit,
+    detailAction: (NasaItens) -> Unit,
     private val action: (NasaItens) -> Unit
 ) : RecyclerView.ViewHolder(view) {
     var imagemPlanetas: ImageView = view.findViewById(R.id.planeta_item)
@@ -87,27 +89,33 @@ class ImagensViewHolder(
 
     fun bind(item: NasaItens) {
 
+        imagemNumber.text = "Imagem ${(itemViewType + 1)}"
+        favourite.setImageResource(if (item.isFavourite) R.drawable.icon_heart_fav else R.drawable.icon_heart)
+
         favourite.setOnClickListener {
+
+            if (item.isFavourite) {
+                Toast.makeText(imagemPlanetas.context, "Item Desavoritado!", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                Toast.makeText(imagemPlanetas.context, "Item Favoritado!", Toast.LENGTH_SHORT)
+                    .show()
+            }
             action.invoke(item)
-            Toast.makeText(imagemPlanetas.context, "Item Favoritado!", Toast.LENGTH_SHORT).show()
         }
 
-
-
-        imagemNumber.text = "Imagem ${(itemViewType + 1)}"
         Glide.with(imagemPlanetas.context)
-            .load(item.items.first().links.first().href)
+            .load(item.links.first().href)
             .placeholder(R.drawable.astronauta_inicio)
             .error(R.drawable.icon_error)
             .into(imagemPlanetas)
 
         itemCorrente = item
-        item.items.first().links.first().href.let {
+        item.links.first().href.let {
             Glide.with(imagemPlanetas.context)
                 .load(it)
                 .into(imagemPlanetas)
         }
-
-
     }
 }
+

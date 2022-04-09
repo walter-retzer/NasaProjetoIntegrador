@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_dark"
+    android:background="@color/black"
     tools:context=".favoritos.ImagemFavoritosActivity">
 
     <TextView
@@ -31,7 +31,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/inicio"
+        app:layout_constraintBottom_toTopOf="@+id/inicio_fav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titulo_detalhe_imagem"
@@ -39,7 +39,7 @@
         tools:listitem="@layout/item_planeta_imagem" />
 
     <ImageView
-        android:id="@+id/inicio"
+        android:id="@+id/inicio_fav"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginBottom="15dp"
@@ -59,7 +59,7 @@
         android:padding="5dp"
         android:src="@drawable/baixar"
         app:layout_constraintEnd_toStartOf="@+id/favoritar"
-        app:layout_constraintStart_toEndOf="@+id/inicio"
+        app:layout_constraintStart_toEndOf="@+id/inicio_fav"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView

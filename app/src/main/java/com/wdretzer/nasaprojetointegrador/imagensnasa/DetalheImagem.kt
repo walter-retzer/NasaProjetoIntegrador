@@ -28,6 +28,8 @@ class DetalheImagem : AppCompatActivity() {
     private val criadoresDetalhe: TextView by lazy { findViewById(R.id.criador_detalhe_img) }
     private val keywordsDetalhe: TextView by lazy { findViewById(R.id.keyword_detalhe_img) }
 
+    private var setSearch: String = ""
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +48,7 @@ class DetalheImagem : AppCompatActivity() {
             val setDate = bundle.getString("Date")
             val setCriador = bundle.getString("Criador")
             val setKeywords = bundle.getString("Keyword")
+            setSearch = bundle.getString("Search").toString()
 
             setText?.let {
                 translate(it, "Detalhe")
@@ -57,7 +60,7 @@ class DetalheImagem : AppCompatActivity() {
             }
 
             setDate?.let {
-                val parser =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 val formatter = SimpleDateFormat("dd.MM.yyyy,  HH:mm:ss")
                 val formattedDate = formatter.format(parser.parse(it))
                 dataDetalhe.text = "Data: $formattedDate"
@@ -75,13 +78,8 @@ class DetalheImagem : AppCompatActivity() {
                     .into(imagemDetalhe)
             }
         }
-
-        buttonMenu.setOnClickListener {
-            val intent = Intent(this, ImagemFavoritosActivity::class.java)
-            startActivity(intent)
-        }
+        buttonMenu.setOnClickListener { sendToImagensNasa(setSearch) }
     }
-
 
     private fun translate(str: String, type: String) {
         val translationConfigs = TranslatorOptions.Builder()
@@ -100,12 +98,20 @@ class DetalheImagem : AppCompatActivity() {
 
         translator.translate(str)
             .addOnSuccessListener {
-                if(type == "Detalhe" ) {
+                if (type == "Detalhe") {
                     textoDetalhe.text = "Descrição: $it"
                 }
-                if(type == "Keyword" ) {
+                if (type == "Keyword") {
                     keywordsDetalhe.text = "Plavras-Chaves: $it"
                 }
             }
+    }
+
+    private fun sendToImagensNasa(search: String) {
+
+        val intent = Intent(this, ImagemFavoritosActivity::class.java).apply {
+            putExtra("Search", search)
+        }
+        startActivity(intent)
     }
 }

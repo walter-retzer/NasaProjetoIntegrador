@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.wdretzer.nasaprojetointegrador.R
+import com.wdretzer.nasaprojetointegrador.favoritos.ImagemFavoritosActivity
 import com.wdretzer.nasaprojetointegrador.homeplanetas.HomePlanetas
-import com.wdretzer.nasaprojetointegrador.imagensnasa.ImagensFavoritas
 import com.wdretzer.nasaprojetointegrador.perfil.Perfil
 import com.wdretzer.nasaprojetointegrador.pesquisaimg.PesquisaImagens
 
@@ -37,7 +37,7 @@ class InicioGuia : AppCompatActivity() {
         }
 
         buttonImgFav.setOnClickListener {
-            val intent = Intent(this, ImagensFavoritas::class.java)
+            val intent = Intent(this, ImagemFavoritosActivity::class.java)
             startActivity(intent)
         }
 

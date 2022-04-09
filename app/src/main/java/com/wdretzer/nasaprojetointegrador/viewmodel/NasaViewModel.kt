@@ -14,12 +14,11 @@ class NasaViewModel(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
+    fun addOrRemoveFavourite(item: NasaItens) =
+        repository.addOrRemoveFavourite(item).flowOn(dispatcher).asLiveData()
+
     fun request(search: String, page: Int) =
         repository.requestData(search, page).flowOn(dispatcher).asLiveData()
 
-    fun addOrRemoveFavourite(item: NasaItens) = repository.addOrRemoveFavourite(item).flowOn(dispatcher).asLiveData()
     fun getFavourite() = repository.getFavourite().flowOn(dispatcher).asLiveData()
-
-
-    //fun getFavouriteImg() = repository.getFavouriteImg().flowOn(dispatcher).asLiveData()
 }

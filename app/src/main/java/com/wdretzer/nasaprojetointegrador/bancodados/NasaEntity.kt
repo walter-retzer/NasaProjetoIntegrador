@@ -5,61 +5,37 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import com.google.gson.Gson
-import com.wdretzer.nasaprojetointegrador.data.DataItens
-import com.wdretzer.nasaprojetointegrador.data.NasaNextPage
+import com.wdretzer.nasaprojetointegrador.data.ItensData
+import com.wdretzer.nasaprojetointegrador.data.Links
 
 
 @Entity(tableName = "nasaBD")
-data class NasaEntity(
+class NasaEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-
-    @ColumnInfo(defaultValue = "gdgf")
-    val href: String,
-
-    @ColumnInfo(defaultValue = "jdjfj")
-    val version: String,
-
     @ColumnInfo
-    val items: List<DataItens> ,
-
+    val href: String = " ",
     @ColumnInfo
-    val links: List<NasaNextPage> ,
-
-//    @ColumnInfo
-//    val metadata: NasaMetadata = NasaMetadata(0)
-
+    val data: List<ItensData>,
+    @ColumnInfo
+    val links: List<Links>,
 )
 
 
+// Classe TypeConvert para converter as listas para dentro do Banco de Dados do Room
 class Converters {
 
+    // Funções para converter as Listas da Classe Itens Data
     @TypeConverter
-    fun listToJsonString(value: List<DataItens>?): String = Gson().toJson(value)
+    fun listToJsonString(value: List<ItensData>?): String = Gson().toJson(value)
 
     @TypeConverter
-    fun jsonStringToList(value: String) = Gson().fromJson(value, Array<DataItens>::class.java).toList()
+    fun jsonStringToList(value: String) = Gson().fromJson(value, Array<ItensData>::class.java).toList()
 
+    // Funções para converter as Listas da Classe Links
+    @TypeConverter
+    fun listToJsonString2(value: List<Links>?): String = Gson().toJson(value)
 
     @TypeConverter
-    fun listToJsonString2(value: List<NasaNextPage>?): String = Gson().toJson(value)
-
-    @TypeConverter
-    fun jsonStringToList2(value: String) = Gson().fromJson(value, Array<NasaNextPage>::class.java).toList()
+    fun jsonStringToList2(value: String) = Gson().fromJson(value, Array<Links>::class.java).toList()
 }
-
-//data class StatesHolder(
-//    val stateItensList: List<DataItens>
-//)
-//
-//class Converters {
-//
-//    @TypeConverter
-//    fun fromStatesHolder(sh: StatesHolder): String {
-//        return Gson().toJson(sh)
-//    }
-//    @TypeConverter
-//    fun toStatesHolder(sh: String): StatesHolder {
-//        return Gson().fromJson(sh,StatesHolder::class.java)
-//    }
-//}
