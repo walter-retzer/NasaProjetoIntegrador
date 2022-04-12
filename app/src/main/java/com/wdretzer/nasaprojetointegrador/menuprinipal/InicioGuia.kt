@@ -2,7 +2,7 @@ package com.wdretzer.nasaprojetointegrador.menuprinipal
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.favoritos.ImagemFavoritosActivity
@@ -12,10 +12,10 @@ import com.wdretzer.nasaprojetointegrador.pesquisaimg.PesquisaImagens
 
 class InicioGuia : AppCompatActivity() {
 
-    private val buttonPlanetas: Button by lazy { findViewById(R.id.btn_planetas) }
-    private val buttonPesquisaImg: Button by lazy { findViewById(R.id.btn_pesquisa_imagens) }
-    private val buttonImgFav: Button by lazy { findViewById(R.id.btn_img_favoritas) }
-    private val buttonPerfil: Button by lazy { findViewById(R.id.btn_perfil) }
+    private val buttonPlanetas: RelativeLayout by lazy { findViewById(R.id.animmation1) }
+    private val buttonPesquisaImg: RelativeLayout by lazy { findViewById(R.id.animmation2) }
+    private val buttonImgFav: RelativeLayout by lazy { findViewById(R.id.animmation3) }
+    private val buttonPerfil: RelativeLayout by lazy { findViewById(R.id.animmation4) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

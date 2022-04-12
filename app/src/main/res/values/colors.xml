@@ -14,7 +14,12 @@
     <color name="laranja_light">#f9683a</color>
     <color name="laranja_dark">#870000</color>
     <color name="cinza">#37474f</color>
-    <color name="cinza_l">#78909c</color>
+    <color name="cinza_ll">#62727b</color>
+    <color name="cinza_n">#34515e</color>
+    <color name="cinza_l">#607d8b</color>
+    <color name="cinza_d">#78909c</color>
+    <color name="brown_d">#3CF1EBF1</color>
+    <color name="brown_l">#725b53</color>
     <color name="red">#e53935</color>
     <color name="grey">#212121</color>
     <color name="blue">#4A27F4</color>

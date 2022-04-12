@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/stars"
+    android:background="@drawable/new_background"
     tools:context=".cadastro.CadastroUsuarioFacebook">
 
     <ProgressBar
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
-        android:background="@color/black"
+        android:background="@android:color/transparent"
         android:text="@string/cabecalho_login"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -39,7 +39,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="25dp"
-        android:background="@color/black"
+        android:background="@android:color/transparent"
         android:text="@string/cadastro_facebook_conta"
         android:textAlignment="center"
         android:textColor="@color/white"
