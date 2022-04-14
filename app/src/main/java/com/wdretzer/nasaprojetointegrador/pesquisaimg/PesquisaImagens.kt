@@ -18,6 +18,7 @@ import com.google.mlkit.nl.translate.TranslatorOptions
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.imagensnasa.ImgensNasa
 
+
 class PesquisaImagens : AppCompatActivity() {
 
     private val buttonPlanetas: Button by lazy { findViewById(R.id.btn_searchImagens) }
@@ -54,7 +55,11 @@ class PesquisaImagens : AppCompatActivity() {
                         Toast.makeText(this, "Pesquisando imagens...", Toast.LENGTH_SHORT).show()
                     }
                     .addOnFailureListener {
-                        Toast.makeText(this, "Error no item pesquisado, digite novamente, por favor.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            "Error no item pesquisado, digite novamente, por favor.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 translator.translate(textSearch.text.toString())
                     .addOnSuccessListener {
@@ -83,7 +88,6 @@ class PesquisaImagens : AppCompatActivity() {
     private fun sendToImagensNasa(search: String) {
         val intent = Intent(this, ImgensNasa::class.java).apply {
             putExtra("Search", search)
-
         }
         startActivity(intent)
     }

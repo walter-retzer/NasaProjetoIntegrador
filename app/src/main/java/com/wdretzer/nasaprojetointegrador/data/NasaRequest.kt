@@ -12,7 +12,7 @@ data class NasaReturn(
     val href: String,
     val version: String,
     val items: List<NasaItens>,
-    val links: List<NasaNextPage>,
+    val links: List<NasaNextPage>? = null,
     val metadata: NasaMetadata,
     val isFavourite: Boolean = false
 )

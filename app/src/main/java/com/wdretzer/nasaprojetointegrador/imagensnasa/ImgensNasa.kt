@@ -37,6 +37,7 @@ class ImgensNasa : AppCompatActivity() {
     private val recycler: RecyclerView
         get() = findViewById(R.id.nasa_recycler)
     private var adp = ImagensAdpter(::saveFavourite) {}
+
     var page = 1
     var totalImagens: Int = 0
     var nextPage: Boolean = false
@@ -57,6 +58,7 @@ class ImgensNasa : AppCompatActivity() {
         val bundle: Bundle? = intent.extras
         if (bundle != null) {
             setSearchText = bundle.getString("Search").toString()
+            Toast.makeText(this, "Bundle = ${setSearchText}", Toast.LENGTH_LONG).show()
         }
 
         buttonHomePlanets.setOnClickListener { sendToHomePlanets() }
@@ -109,12 +111,11 @@ class ImgensNasa : AppCompatActivity() {
                     keyword = keywords.toString(),
                     search = setSearchText
                 )
-                Toast.makeText(this, "Imagem selecionada!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Imagem selecionada!", Toast.LENGTH_SHORT).show()
             }
         }
         recycler.adapter = adp
     }
-
 
     private fun saveFavourite(item: NasaItens) {
         viewModelNasa.addOrRemoveFavourite(item).observe(this) {
@@ -171,7 +172,6 @@ class ImgensNasa : AppCompatActivity() {
             })
     }
 
-
     private fun sendToDetalheImage(
         description: String? = null,
         imagem: String? = null,
@@ -191,7 +191,6 @@ class ImgensNasa : AppCompatActivity() {
         startActivity(intent)
     }
 
-
     private fun sendToHomePlanets() {
         val intent = Intent(this, InicioGuia::class.java)
         startActivity(intent)
@@ -203,7 +202,9 @@ class ImgensNasa : AppCompatActivity() {
     }
 
     private fun sendToFavoritos() {
-        val intent = Intent(this, ImagemFavoritosActivity::class.java)
+        val intent = Intent(this, ImagemFavoritosActivity::class.java).apply {
+            putExtra("Search", setSearchText)
+        }
         startActivity(intent)
     }
 

@@ -20,31 +20,28 @@ class NasaRepository(
 
     private val dao = DataBaseFactory.getDataBase().nasaDao()
 
+    //Função para receber os dados da API:
     fun requestData(search: String, page: Int) = flow<DataResult<NasaRequest>> {
-
-        val localItens = dao.listAll()
         val response: NasaRequest = api.getDataNasa(search, page)
-
         emit(DataResult.Success(response))
-
     }.updateStatus().flowOn(dispatcher)
 
 
+    //Função para verificar se tem um item favoritado pelo usuario e comparar com a lista recebida pela API:
     fun itemFav(item: List<NasaItens>) = flow {
-
         val localItens = dao.listAll()
-        val novaLista =  item.map { itNasaItens ->
+        val novaLista = item.map { itNasaItens ->
             if (localItens.filter {
                     it.links.first().href == itNasaItens.links.first().href
                 }.getOrNull(0) != null)
-                    itNasaItens.copy(isFavourite = true)
+                itNasaItens.copy(isFavourite = true)
             else itNasaItens
         }
-
         emit(novaLista)
     }.flowOn(dispatcher)
 
 
+    //Função para pegar os dados do item Favoritado:
     fun getFavourite() = flow<MutableList<NasaItens>> {
         val localItens = dao.listAll().map {
             NasaItens(it)
@@ -53,6 +50,7 @@ class NasaRepository(
     }.flowOn(dispatcher)
 
 
+    //Função para Remover ou Favoritar um item:
     fun addOrRemoveFavourite(item: NasaItens) = flow {
         try {
             val numeroRegistro = dao.countApiId(listOf(item.data.first()))
@@ -63,8 +61,9 @@ class NasaRepository(
                 emit(DataResult.Success(item.copy(isFavourite = false)))
             } else {
 
+                // Realiza a tradução do título para armazenar no banco de dados:
                 val titleEng = item.data.first().title
-                var teste: String = ""
+                var titlePt = "Title"
                 val translationConfigs = TranslatorOptions.Builder()
                     .setSourceLanguage(TranslateLanguage.ENGLISH)
                     .setTargetLanguage(TranslateLanguage.PORTUGUESE)
@@ -73,15 +72,20 @@ class NasaRepository(
 
                 translator.translate(titleEng)
                     .addOnSuccessListener {
-                        teste   = it
+                        titlePt = it
                     }
 
-                kotlinx.coroutines.delay(200L)
+                //Delay para que possa ser completada a tradução do Título:
+                kotlinx.coroutines.delay(1000L)
 
-                item.data.map {
-                    it.title = teste
+                //Passa o título traduzido para a variavel title:
+                if (titlePt != "Title") {
+                    item.data.map {
+                        it.title = titlePt
+                    }
                 }
 
+                //Insere a lista no Banco de Dados:
                 dao.insert(item.toNasaEntity())
                 emit(DataResult.Success(item.copy(isFavourite = true)))
             }
@@ -90,6 +94,7 @@ class NasaRepository(
             emit(DataResult.Error(IllegalStateException()))
         }
     }.updateStatus().flowOn(dispatcher)
+
 
     companion object {
         val instance: NasaRepository by lazy { NasaRepository() }

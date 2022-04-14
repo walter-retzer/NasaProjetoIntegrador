@@ -3,6 +3,7 @@ package com.wdretzer.nasaprojetointegrador.favoritos
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,12 +14,12 @@ import com.wdretzer.nasaprojetointegrador.data.DataResult
 import com.wdretzer.nasaprojetointegrador.data.NasaItens
 import com.wdretzer.nasaprojetointegrador.imagensnasa.ImgensNasa
 import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
+import com.wdretzer.nasaprojetointegrador.perfil.Perfil
 import com.wdretzer.nasaprojetointegrador.pesquisaimg.PesquisaImagens
 import com.wdretzer.nasaprojetointegrador.viewmodel.NasaViewModel
 
 
 class ImagemFavoritosActivity : AppCompatActivity() {
-
 
     private val buttonHomePlanets: ImageView by lazy { findViewById(R.id.inicio_fav) }
     private val buttonPesquisaImagens: ImageView by lazy { findViewById(R.id.pesquisar_img_fav) }
@@ -41,15 +42,19 @@ class ImagemFavoritosActivity : AppCompatActivity() {
         val bundle: Bundle? = intent.extras
         if (bundle != null) {
             setSearch = bundle.getString("Search").toString()
+            Toast.makeText(this, "Bundle = ${setSearch}", Toast.LENGTH_LONG).show()
         }
 
         showFavourite()
-        buttonPesquisaImagens.setOnClickListener { sendToImagensNasa(setSearch) }
+        buttonPesquisaImagens.setOnClickListener { sendToSearchImage() }
         buttonHomePlanets.setOnClickListener { sendToHomePlanets() }
+        buttonMenuPerfil.setOnClickListener { sendToPerfil() }
     }
 
     override fun onBackPressed() {
-        val intent = Intent(this, PesquisaImagens::class.java)
+        val intent = Intent(this, ImgensNasa::class.java).apply {
+            putExtra("Search", setSearch)
+        }
         startActivity(intent)
     }
 
@@ -65,15 +70,19 @@ class ImagemFavoritosActivity : AppCompatActivity() {
         viewModelNasa.addOrRemoveFavourite(item).observe(this) {
             if (it is DataResult.Success) {
                 adp.updateItem(item)
-                startActivity(Intent(this, ImagemFavoritosActivity::class.java))
-                finish()
+                sendToImagensFavoritos()
             }
         }
     }
 
-    private fun sendToImagensNasa(search: String) {
-        val intent = Intent(this, ImgensNasa::class.java).apply {
-            putExtra("Search", search)
+    private fun sendToSearchImage() {
+        val intent = Intent(this, PesquisaImagens::class.java)
+        startActivity(intent)
+    }
+
+    private fun sendToImagensFavoritos() {
+        val intent = Intent(this, ImagemFavoritosActivity::class.java).apply {
+            putExtra("Search", setSearch)
         }
         startActivity(intent)
     }
@@ -83,8 +92,9 @@ class ImagemFavoritosActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun sendToSearchImage() {
-        val intent = Intent(this, PesquisaImagens::class.java)
+    private fun sendToPerfil() {
+        val intent = Intent(this, Perfil::class.java)
         startActivity(intent)
     }
+
 }
