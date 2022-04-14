@@ -59,6 +59,7 @@
     </FrameLayout>
 
 
+
     <ImageView
         android:id="@+id/menu_bottom"
         android:layout_width="match_parent"
@@ -72,47 +73,47 @@
 
 
     <ImageView
-        android:id="@+id/inicio"
+        android:id="@+id/menu_planetas"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:elevation="3dp"
         android:src="@drawable/icon_menu_planetas"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/baixar"
+        app:layout_constraintEnd_toStartOf="@+id/menu_pesquisa_img"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
-        android:id="@+id/baixar"
+        android:id="@+id/menu_pesquisa_img"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:elevation="3dp"
         android:src="@drawable/icon_telescope"
-        app:layout_constraintEnd_toStartOf="@+id/favoritar"
-        app:layout_constraintStart_toEndOf="@+id/inicio"
+        app:layout_constraintEnd_toStartOf="@+id/menu_favoritos"
+        app:layout_constraintStart_toEndOf="@+id/menu_planetas"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
-        android:id="@+id/favoritar"
+        android:id="@+id/menu_favoritos"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:elevation="3dp"
         android:src="@drawable/icon_heart_black"
-        app:layout_constraintEnd_toStartOf="@+id/compartilhar"
-        app:layout_constraintStart_toEndOf="@+id/baixar"
+        app:layout_constraintEnd_toStartOf="@+id/menu_perfil"
+        app:layout_constraintStart_toEndOf="@+id/menu_pesquisa_img"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
-        android:id="@+id/compartilhar"
+        android:id="@+id/menu_perfil"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:elevation="3dp"
         android:src="@drawable/icon_perfil_cosmonalta"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/favoritar"
+        app:layout_constraintStart_toEndOf="@+id/menu_favoritos"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

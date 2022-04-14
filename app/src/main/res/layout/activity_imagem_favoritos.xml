@@ -31,59 +31,68 @@
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/inicio_fav"
+        app:layout_constraintBottom_toTopOf="@+id/menu_bottom_fav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titulo_detalhe_imagem"
         tools:itemCount="8"
         tools:listitem="@layout/item_planeta_imagem" />
 
+
+    <ImageView
+        android:id="@+id/menu_bottom_fav"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/background_menu_imagens"
+        android:elevation="3dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
     <ImageView
         android:id="@+id/inicio_fav"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/card_background_fav"
-        android:padding="5dp"
-        android:src="@drawable/inicio"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="3dp"
+        android:src="@drawable/icon_menu_planetas"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/baixar"
+        app:layout_constraintEnd_toStartOf="@+id/pesquisar_img_fav"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
-        android:id="@+id/baixar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/card_background_fav"
-        android:padding="5dp"
-        android:src="@drawable/baixar"
-        app:layout_constraintEnd_toStartOf="@+id/favoritar"
+        android:id="@+id/pesquisar_img_fav"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="3dp"
+        android:src="@drawable/icon_telescope"
+        app:layout_constraintEnd_toStartOf="@+id/favoritar_fav"
         app:layout_constraintStart_toEndOf="@+id/inicio_fav"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
-        android:id="@+id/favoritar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/card_background_fav"
-        android:padding="5dp"
-        android:src="@drawable/favoritar"
-        app:layout_constraintEnd_toStartOf="@+id/compartilhar"
-        app:layout_constraintStart_toEndOf="@+id/baixar"
+        android:id="@+id/favoritar_fav"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="3dp"
+        android:src="@drawable/icon_heart_black"
+        app:layout_constraintEnd_toStartOf="@+id/perfil_fav"
+        app:layout_constraintStart_toEndOf="@+id/pesquisar_img_fav"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
-        android:id="@+id/compartilhar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/card_background_fav"
-        android:padding="5dp"
-        android:src="@drawable/compartilhar"
+        android:id="@+id/perfil_fav"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="3dp"
+        android:src="@drawable/icon_perfil_cosmonalta"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/favoritar"
+        app:layout_constraintStart_toEndOf="@+id/favoritar_fav"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

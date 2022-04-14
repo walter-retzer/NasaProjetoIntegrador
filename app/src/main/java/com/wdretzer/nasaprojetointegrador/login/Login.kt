@@ -1,14 +1,25 @@
 package com.wdretzer.nasaprojetointegrador.login
 
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.cadastro.CadastroUsuario
-import com.wdretzer.nasaprojetointegrador.cadastro.CadastroUsuarioFacebook
-import com.wdretzer.nasaprojetointegrador.cadastro.CadastroUsuarioGoogle
 import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
+import com.wdretzer.nasaprojetointegrador.util.GoogleLogInActivityContract
+import java.security.MessageDigest
 
 class Login : AppCompatActivity() {
 
@@ -17,12 +28,37 @@ class Login : AppCompatActivity() {
     private val buttonGoogle: Button by lazy { findViewById(R.id.btn_google) }
     private val buttonFacebook: Button by lazy { findViewById(R.id.btn_facebook) }
 
+    private val googleSignInRequest = registerForActivityResult(
+        GoogleLogInActivityContract(),
+        ::loginGoogle
+    )
+
+    private val googleSignInOptions: GoogleSignInOptions
+        get() = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("935404978331-0bi6cc9t0f7jbmvl57mirm5tid5m16nj.apps.googleusercontent.com")
+            .requestEmail()
+            .requestProfile()
+            .build()
+
+    private val loginManager = LoginManager.getInstance()
+    private val callbackManager = CallbackManager.Factory.create()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
         getSupportActionBar()?.hide()
+
+        val info: PackageInfo = getPackageManager().getPackageInfo(
+            "com.wdretzer.nasaprojetointegrador",
+            PackageManager.GET_SIGNATURES
+        )
+        for (signature in info.signatures) {
+            val md: MessageDigest = MessageDigest.getInstance("SHA")
+            md.update(signature.toByteArray())
+            Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT))
+        }
 
         buttonLogin.setOnClickListener {
             val intent = Intent(this, InicioGuia::class.java)
@@ -34,15 +70,50 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         }
 
-        buttonGoogle.setOnClickListener {
-            val intent = Intent(this, CadastroUsuarioGoogle::class.java)
-            startActivity(intent)
-        }
+        buttonGoogle.setOnClickListener { googleSignInRequest.launch(googleSignInOptions) }
 
         buttonFacebook.setOnClickListener {
-            val intent = Intent(this, CadastroUsuarioFacebook::class.java)
-            startActivity(intent)
+            loginFacebook()
         }
 
+        registerFacebbokCallback()
+
+    }
+
+    private fun registerFacebbokCallback() {
+        loginManager.registerCallback(callbackManager, object : FacebookCallback<LoginResult>{
+            override fun onCancel() {
+            }
+
+            override fun onError(error: FacebookException) {
+                Toast.makeText(this@Login, "Deu erro!!", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onSuccess(result: LoginResult) {
+                val token = result.accessToken.token
+                Toast.makeText(this@Login, "Deu certo!! Token: $token", Toast.LENGTH_LONG).show()
+            }
+
+        })
+    }
+
+    private fun loginFacebook() {
+        loginManager.logInWithReadPermissions(
+            this,
+            callbackManager,
+            permissions
+        )
+    }
+
+    private fun loginGoogle(result: GoogleLogInActivityContract.Result) {
+        //viewModelLogin.loginGoogle(result)
+        if(result is GoogleLogInActivityContract.Result.Success){
+            val token = result.googleSignInAccount.idToken
+            Toast.makeText(this, "Meu token é: $token", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    companion object {
+        private val permissions = listOf("public_profile", "email")
     }
 }

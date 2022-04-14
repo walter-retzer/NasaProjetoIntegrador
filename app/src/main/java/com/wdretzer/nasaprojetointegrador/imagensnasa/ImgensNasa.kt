@@ -3,6 +3,7 @@ package com.wdretzer.nasaprojetointegrador.imagensnasa
 import android.content.Intent
 import android.os.Bundle
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -14,11 +15,20 @@ import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.data.DataResult
 import com.wdretzer.nasaprojetointegrador.data.NasaItens
 import com.wdretzer.nasaprojetointegrador.data.NasaRequest
+import com.wdretzer.nasaprojetointegrador.favoritos.ImagemFavoritosActivity
+import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
+import com.wdretzer.nasaprojetointegrador.perfil.Perfil
+import com.wdretzer.nasaprojetointegrador.pesquisaimg.PesquisaImagens
 import com.wdretzer.nasaprojetointegrador.recyclerview.ImagensAdpter
 import com.wdretzer.nasaprojetointegrador.viewmodel.NasaViewModel
 
 
 class ImgensNasa : AppCompatActivity() {
+
+    private val buttonHomePlanets: ImageView by lazy { findViewById(R.id.menu_planetas) }
+    private val buttonPesquisaImagens: ImageView by lazy { findViewById(R.id.menu_pesquisa_img) }
+    private val buttonMenuFavoritos: ImageView by lazy { findViewById(R.id.menu_favoritos) }
+    private val buttonMenuPerfil: ImageView by lazy { findViewById(R.id.menu_perfil) }
 
     private val totalItens: TextView by lazy { findViewById(R.id.text_img_encontradas) }
     private val viewModelNasa: NasaViewModel by viewModels()
@@ -48,6 +58,11 @@ class ImgensNasa : AppCompatActivity() {
         if (bundle != null) {
             setSearchText = bundle.getString("Search").toString()
         }
+
+        buttonHomePlanets.setOnClickListener { sendToHomePlanets() }
+        buttonPesquisaImagens.setOnClickListener { sendToSearchImage() }
+        buttonMenuFavoritos.setOnClickListener { sendToFavoritos() }
+        buttonMenuPerfil.setOnClickListener { sendToPerfil() }
 
         chamadas(setSearchText, page)
         recyclerView()
@@ -101,79 +116,99 @@ class ImgensNasa : AppCompatActivity() {
     }
 
 
-
     private fun saveFavourite(item: NasaItens) {
-    viewModelNasa.addOrRemoveFavourite(item).observe(this)
-    {
-
-        if (it is DataResult.Success) {
-            adp.updateItem(it.dataResult)
-        }
-    }
-}
-
-fun oberservarNasa(result: DataResult<NasaRequest>) {
-    when (result) {
-
-        is DataResult.Loading -> {
-            loading.isVisible = result.isLoading
-        }
-
-        is DataResult.Error -> {
-            Toast.makeText(this, "Falha em encontrar as imagens!", Toast.LENGTH_LONG).show()
-        }
-
-        is DataResult.Success -> {
-            adp.updateList(result.dataResult.collection.items)
-
-            nextPage = result.dataResult.collection.links != null
-
-            totalItens.text =
-                "${result.dataResult.collection.metadata.totalHits} Imagens Encontradas!"
-
-            totalImagens += (result.dataResult.collection.items.size)
-            Toast.makeText(this, "Há $totalImagens imagens disponíveis!!", Toast.LENGTH_LONG)
-                .show()
-        }
-    }
-}
-
-private fun setScrollView() {
-    recycler
-        .addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                val target = recyclerView.layoutManager as LinearLayoutManager
-                val totalCountItens = target.itemCount
-                val lastItemVisible = target.findLastVisibleItemPosition()
-
-                val lastItem = (lastItemVisible + 10 >= totalCountItens)
-
-                if ((totalCountItens > 0 && lastItem) && (nextPage && loading.isVisible.not())) {
-                    chamadas(setSearchText, ++page)
-                }
+        viewModelNasa.addOrRemoveFavourite(item).observe(this) {
+            if (it is DataResult.Success) {
+                adp.updateItem(it.dataResult)
             }
-        })
-}
-
-
-private fun sendToDetalheImage(
-    description: String? = null,
-    imagem: String? = null,
-    date: String? = null,
-    creator: String? = null,
-    keyword: String? = null,
-    search: String = ""
-) {
-    val intent = Intent(this, DetalheImagem::class.java).apply {
-        putExtra("Detalhe", description)
-        putExtra("Imagem", imagem)
-        putExtra("Date", date)
-        putExtra("Criador", creator)
-        putExtra("Keyword", keyword)
-        putExtra("Search", search)
+        }
     }
-    startActivity(intent)
-}
+
+    fun oberservarNasa(result: DataResult<NasaRequest>) {
+        when (result) {
+
+            is DataResult.Loading -> {
+                loading.isVisible = result.isLoading
+            }
+
+            is DataResult.Error -> {
+                Toast.makeText(this, "Falha em encontrar as imagens!", Toast.LENGTH_LONG).show()
+            }
+
+            is DataResult.Success -> {
+                viewModelNasa.itemFav(result.dataResult.collection.items).observe(this) {
+                    adp.updateList(it)
+                }
+
+                nextPage = result.dataResult.collection.links != null
+
+                totalItens.text =
+                    "${result.dataResult.collection.metadata.totalHits} Imagens Encontradas!"
+
+                totalImagens += (result.dataResult.collection.items.size)
+                Toast.makeText(this, "Há $totalImagens imagens disponíveis!!", Toast.LENGTH_LONG)
+                    .show()
+            }
+        }
+    }
+
+    private fun setScrollView() {
+        recycler
+            .addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    val target = recyclerView.layoutManager as LinearLayoutManager
+                    val totalCountItens = target.itemCount
+                    val lastItemVisible = target.findLastVisibleItemPosition()
+
+                    val lastItem = (lastItemVisible + 10 >= totalCountItens)
+
+                    if ((totalCountItens > 0 && lastItem) && (nextPage && loading.isVisible.not())) {
+                        chamadas(setSearchText, ++page)
+                    }
+                }
+            })
+    }
+
+
+    private fun sendToDetalheImage(
+        description: String? = null,
+        imagem: String? = null,
+        date: String? = null,
+        creator: String? = null,
+        keyword: String? = null,
+        search: String = ""
+    ) {
+        val intent = Intent(this, DetalheImagem::class.java).apply {
+            putExtra("Detalhe", description)
+            putExtra("Imagem", imagem)
+            putExtra("Date", date)
+            putExtra("Criador", creator)
+            putExtra("Keyword", keyword)
+            putExtra("Search", search)
+        }
+        startActivity(intent)
+    }
+
+
+    private fun sendToHomePlanets() {
+        val intent = Intent(this, InicioGuia::class.java)
+        startActivity(intent)
+    }
+
+    private fun sendToSearchImage() {
+        val intent = Intent(this, PesquisaImagens::class.java)
+        startActivity(intent)
+    }
+
+    private fun sendToFavoritos() {
+        val intent = Intent(this, ImagemFavoritosActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun sendToPerfil() {
+        val intent = Intent(this, Perfil::class.java)
+        startActivity(intent)
+    }
 }

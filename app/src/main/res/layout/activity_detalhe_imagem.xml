@@ -11,9 +11,9 @@
         android:id="@+id/titulo_detalhe_imagem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
-        android:layout_marginStart="25dp"
         android:background="@drawable/background_text_splash"
         android:padding="10dp"
         android:text="Detalhe da Imagem"
@@ -30,131 +30,145 @@
         android:layout_width="350dp"
         android:layout_height="300dp"
         android:layout_marginTop="15dp"
-        android:backgroundTint="@color/cinza"
         android:background="@drawable/card_background_fav"
+        android:backgroundTint="@color/cinza"
         android:padding="5dp"
-        android:src="@drawable/rover"
         android:scaleType="fitXY"
+        android:src="@drawable/rover"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titulo_detalhe_imagem" />
 
-    <TextView
-        android:id="@+id/descricao_detalhe_img"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginStart="25dp"
-        android:text="Descrição: "
-        android:textColor="@color/white"
-        android:textSize="20sp"
+        android:layout_height="250dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/menu_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_detalhe_imagem" />
+        app:layout_constraintTop_toBottomOf="@id/img_detalhe_imagem">
 
-    <TextView
-        android:id="@+id/data_detalhe_img"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginStart="25dp"
-        android:text="Data: "
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descricao_detalhe_img" />
 
-    <TextView
-        android:id="@+id/criador_detalhe_img"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginStart="25dp"
-        android:text="Criadores: "
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/data_detalhe_img" />
+        <!--Scrollable content here-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/keyword_detalhe_img"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginStart="25dp"
-        android:text="Palavras Chaves: "
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/criador_detalhe_img" />
+            <TextView
+                android:id="@+id/descricao_detalhe_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:padding="10dp"
+                android:text="Descrição: "
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/teste_translate"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:layout_marginEnd="25dp"-->
-<!--        android:layout_marginStart="25dp"-->
-<!--        android:text="tradutor: "-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textSize="20sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/keyword_detalhe_img" />-->
+            <TextView
+                android:id="@+id/data_detalhe_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:padding="10dp"
+                android:text="Data: "
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/criador_detalhe_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:padding="10dp"
+                android:text="Criadores: "
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/keyword_detalhe_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:padding="10dp"
+                android:text="Palavras Chaves: "
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <ImageView
-        android:id="@+id/inicio"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/card_background_fav"
-        android:padding="5dp"
-        android:src="@drawable/inicio"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/baixar"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <ImageView
-        android:id="@+id/baixar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/card_background_fav"
-        android:padding="5dp"
-        android:src="@drawable/baixar"
-        app:layout_constraintEnd_toStartOf="@+id/favoritar"
-        app:layout_constraintStart_toEndOf="@+id/inicio"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <ImageView
-        android:id="@+id/favoritar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/card_background_fav"
-        android:padding="5dp"
-        android:src="@drawable/favoritar"
-        app:layout_constraintEnd_toStartOf="@+id/compartilhar"
-        app:layout_constraintStart_toEndOf="@+id/baixar"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <ImageView
-        android:id="@+id/compartilhar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/card_background_fav"
-        android:padding="5dp"
-        android:src="@drawable/compartilhar"
+        android:id="@+id/menu_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/background_menu_imagens"
+        android:elevation="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/favoritar"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/menu_detalhe_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="3dp"
+        android:src="@drawable/icon_menu_planetas"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/pesquisa_detalhe_img"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/pesquisa_detalhe_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="3dp"
+        android:src="@drawable/icon_telescope"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/salvar_detalhe_img"
+        app:layout_constraintStart_toEndOf="@+id/menu_detalhe_img" />
+
+    <ImageView
+        android:id="@+id/salvar_detalhe_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="3dp"
+        android:src="@drawable/icon_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/compartilhar_detalhe_img"
+        app:layout_constraintStart_toEndOf="@+id/pesquisa_detalhe_img" />
+
+    <ImageView
+        android:id="@+id/compartilhar_detalhe_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="3dp"
+        android:src="@drawable/icon_share"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/salvar_detalhe_img" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

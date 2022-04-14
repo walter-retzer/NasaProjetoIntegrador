@@ -21,4 +21,6 @@ class NasaViewModel(
         repository.requestData(search, page).flowOn(dispatcher).asLiveData()
 
     fun getFavourite() = repository.getFavourite().flowOn(dispatcher).asLiveData()
+
+    fun itemFav(item: List<NasaItens>) = repository.itemFav(item).flowOn(dispatcher).asLiveData()
 }

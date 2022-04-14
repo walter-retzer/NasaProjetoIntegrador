@@ -15,13 +15,17 @@ import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.wdretzer.nasaprojetointegrador.R
-import com.wdretzer.nasaprojetointegrador.favoritos.ImagemFavoritosActivity
+import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
+import com.wdretzer.nasaprojetointegrador.pesquisaimg.PesquisaImagens
 
 
 class DetalheImagem : AppCompatActivity() {
 
     var strTranslate: String = ""
-    private val buttonMenu: ImageView by lazy { findViewById(R.id.favoritar) }
+    private val buttonMenuPlanets: ImageView by lazy { findViewById(R.id.menu_detalhe_img) }
+    private val buttonPesquisaImagem: ImageView by lazy { findViewById(R.id.pesquisa_detalhe_img) }
+
+
     private val imagemDetalhe: ImageView by lazy { findViewById(R.id.img_detalhe_imagem) }
     private val textoDetalhe: TextView by lazy { findViewById(R.id.descricao_detalhe_img) }
     private val dataDetalhe: TextView by lazy { findViewById(R.id.data_detalhe_img) }
@@ -78,7 +82,9 @@ class DetalheImagem : AppCompatActivity() {
                     .into(imagemDetalhe)
             }
         }
-        buttonMenu.setOnClickListener { sendToImagensNasa(setSearch) }
+
+        buttonMenuPlanets.setOnClickListener { sendToHomePlanets() }
+        buttonPesquisaImagem.setOnClickListener { sendToSearchImage() }
     }
 
     private fun translate(str: String, type: String) {
@@ -107,11 +113,13 @@ class DetalheImagem : AppCompatActivity() {
             }
     }
 
-    private fun sendToImagensNasa(search: String) {
+    private fun sendToHomePlanets() {
+        val intent = Intent(this, InicioGuia::class.java)
+        startActivity(intent)
+    }
 
-        val intent = Intent(this, ImagemFavoritosActivity::class.java).apply {
-            putExtra("Search", search)
-        }
+    private fun sendToSearchImage() {
+        val intent = Intent(this, PesquisaImagens::class.java)
         startActivity(intent)
     }
 }

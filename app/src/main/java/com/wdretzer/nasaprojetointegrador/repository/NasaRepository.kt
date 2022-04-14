@@ -25,9 +25,24 @@ class NasaRepository(
         val localItens = dao.listAll()
         val response: NasaRequest = api.getDataNasa(search, page)
 
-        emit(DataResult.Success(response.copy(collection = response.collection.copy(isFavourite = true))))
+        emit(DataResult.Success(response))
 
     }.updateStatus().flowOn(dispatcher)
+
+
+    fun itemFav(item: List<NasaItens>) = flow {
+
+        val localItens = dao.listAll()
+        val novaLista =  item.map { itNasaItens ->
+            if (localItens.filter {
+                    it.links.first().href == itNasaItens.links.first().href
+                }.getOrNull(0) != null)
+                    itNasaItens.copy(isFavourite = true)
+            else itNasaItens
+        }
+
+        emit(novaLista)
+    }.flowOn(dispatcher)
 
 
     fun getFavourite() = flow<MutableList<NasaItens>> {
@@ -45,6 +60,7 @@ class NasaRepository(
 
             if (itemExist) {
                 dao.deleteByApiId(listOf(item.data.first()))
+                emit(DataResult.Success(item.copy(isFavourite = false)))
             } else {
 
                 val titleEng = item.data.first().title
@@ -67,9 +83,8 @@ class NasaRepository(
                 }
 
                 dao.insert(item.toNasaEntity())
+                emit(DataResult.Success(item.copy(isFavourite = true)))
             }
-
-            emit(DataResult.Success(item.copy(isFavourite = true,)))
 
         } catch (e: Exception) {
             emit(DataResult.Error(IllegalStateException()))

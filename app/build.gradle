@@ -6,6 +6,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('D:\\Docs_Area\\AndroidStudio\\NasaProjetoIntegrador\\debug-key.keystore')
+            storePassword '123456'
+            keyAlias 'debug'
+            keyPassword '123456'
+        }
+    }
     compileSdk 32
 
     defaultConfig {
@@ -19,6 +27,9 @@ android {
     }
 
     buildTypes {
+        debug{
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -34,6 +45,17 @@ android {
 }
 
 dependencies {
+
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    //Facebook
+    implementation 'com.facebook.android:facebook-android-sdk:12.0.0'
+
+    //Play Services Google
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
 
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-alpha01"
