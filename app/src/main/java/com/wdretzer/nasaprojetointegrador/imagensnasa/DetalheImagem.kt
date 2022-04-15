@@ -1,12 +1,16 @@
 package com.wdretzer.nasaprojetointegrador.imagensnasa
 
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.icu.text.SimpleDateFormat
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.os.Handler
 import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageView
@@ -14,6 +18,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
@@ -21,14 +27,21 @@ import com.google.mlkit.nl.translate.TranslatorOptions
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
 import com.wdretzer.nasaprojetointegrador.pesquisaimg.PesquisaImagens
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
+import java.util.*
 
 
 class DetalheImagem : AppCompatActivity() {
 
     var strTranslate: String = ""
+    private val animationView: LottieAnimationView by lazy { findViewById(R.id.lottie) }
     private val buttonMenuPlanets: ImageView by lazy { findViewById(R.id.menu_detalhe_img) }
     private val buttonPesquisaImagem: ImageView by lazy { findViewById(R.id.pesquisa_detalhe_img) }
     private val buttonShareImage: ImageView by lazy { findViewById(R.id.compartilhar_detalhe_img) }
+    private val buttonSaveImage: ImageView by lazy { findViewById(R.id.salvar_detalhe_img) }
     private val imagemDetalhe: ImageView by lazy { findViewById(R.id.img_detalhe_imagem) }
     private val textoDetalhe: TextView by lazy { findViewById(R.id.descricao_detalhe_img) }
     private val dataDetalhe: TextView by lazy { findViewById(R.id.data_detalhe_img) }
@@ -38,6 +51,7 @@ class DetalheImagem : AppCompatActivity() {
     private var setTitle: String = ""
     private var setImg: String = ""
 
+    @SuppressLint("SimpleDateFormat")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,15 +102,14 @@ class DetalheImagem : AppCompatActivity() {
                     .load(it)
                     .error(R.drawable.icon_error)
                     .into(imagemDetalhe)
-
             }
         }
 
         buttonMenuPlanets.setOnClickListener { sendToHomePlanets() }
         buttonPesquisaImagem.setOnClickListener { sendToSearchImage() }
         buttonShareImage.setOnClickListener { shareImage() }
+        buttonSaveImage.setOnClickListener { saveImage() }
     }
-
 
     private fun translate(str: String, type: String) {
         val translationConfigs = TranslatorOptions.Builder()
@@ -145,4 +158,56 @@ class DetalheImagem : AppCompatActivity() {
         intent.putExtra(Intent.EXTRA_STREAM, bitMapUri)
         startActivity(Intent.createChooser(intent, "Enviar Imagem!"))
     }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun saveImage() {
+        val file = getDisc()
+
+        if (!file.exists() && !file.mkdirs()) {
+            file.mkdir()
+        }
+
+        val simpleDateFormat = SimpleDateFormat("ddMMyyyyHHmmss")
+        val date = simpleDateFormat.format(Date())
+        val name = "IMG" + date + ".jpg"
+        val fileName = file.absolutePath + "/" + name
+        val newFile = File(fileName)
+
+        try {
+            val draw = imagemDetalhe.drawable as BitmapDrawable
+            val bitmap = draw.bitmap
+            val fileOutPutStream = FileOutputStream(newFile)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutPutStream)
+
+            // Iniciando a Animação de salvar:
+            animationView.isVisible = true
+            animationView.loop(true)
+            animationView.playAnimation()
+            Handler().postDelayed({
+                animationView.pauseAnimation()
+                animationView.isVisible = false
+                Toast.makeText(this, "Imagem Salva na Galeria!", Toast.LENGTH_SHORT).show()
+            }, 3000)
+            
+            fileOutPutStream.flush()
+            fileOutPutStream.close()
+
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+            Toast.makeText(this, "Arquivo Inexistente!", Toast.LENGTH_SHORT).show()
+
+        } catch (e: IOException) {
+            e.printStackTrace()
+            Toast.makeText(this, "Falha ao Salvar a Imagem!", Toast.LENGTH_SHORT).show()
+        }
+
+
+
+    }
+
+    private fun getDisc(): File {
+        val file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+        return File(file, "NASA_APP_IMAGES")
+    }
+
 }

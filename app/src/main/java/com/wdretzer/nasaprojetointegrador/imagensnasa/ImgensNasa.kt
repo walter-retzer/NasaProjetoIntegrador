@@ -29,8 +29,8 @@ class ImgensNasa : AppCompatActivity() {
     private val buttonPesquisaImagens: ImageView by lazy { findViewById(R.id.menu_pesquisa_img) }
     private val buttonMenuFavoritos: ImageView by lazy { findViewById(R.id.menu_favoritos) }
     private val buttonMenuPerfil: ImageView by lazy { findViewById(R.id.menu_perfil) }
-
     private val totalItens: TextView by lazy { findViewById(R.id.text_img_encontradas) }
+
     private val viewModelNasa: NasaViewModel by viewModels()
     private val loading: FrameLayout
         get() = findViewById(R.id.loading)
