@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.favoritos.ImagemFavoritosActivity
 import com.wdretzer.nasaprojetointegrador.homeplanetas.HomePlanetas
+import com.wdretzer.nasaprojetointegrador.login.Login
 import com.wdretzer.nasaprojetointegrador.perfil.PerfilCompleto
 import com.wdretzer.nasaprojetointegrador.pesquisaimg.PesquisaImagens
 
@@ -46,5 +47,10 @@ class InicioGuia : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, Login::class.java)
+        startActivity(intent)
     }
 }

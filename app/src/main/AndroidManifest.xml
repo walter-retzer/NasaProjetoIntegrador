@@ -51,7 +51,7 @@
         <activity
             android:name=".perfil.Perfil"
             android:exported="true"
-            android:windowSoftInputMode="stateVisible|adjustResize|adjustPan" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".detalheplaneta.DetalhePlaneta"
             android:exported="true" />

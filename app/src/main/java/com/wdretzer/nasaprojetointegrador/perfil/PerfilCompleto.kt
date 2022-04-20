@@ -10,6 +10,7 @@ import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
 import com.wdretzer.nasaprojetointegrador.util.SharedPrefNasa
 
+
 class PerfilCompleto : AppCompatActivity() {
 
     val sharedPref: SharedPrefNasa = SharedPrefNasa.instance
@@ -36,6 +37,10 @@ class PerfilCompleto : AppCompatActivity() {
             astronautaPerfil.text = sharedPref.readString("Astronauta")
         } catch (e: IllegalArgumentException) {
             Toast.makeText(this, "Edite o Nome do seu Astronauta!", Toast.LENGTH_SHORT).show()
+        }
+
+        if (sharedPref.readString("Astronauta").isEmpty()){
+            astronautaPerfil.text = "Nome do Astronauta"
         }
 
         buttonEditPerfil.setOnClickListener {

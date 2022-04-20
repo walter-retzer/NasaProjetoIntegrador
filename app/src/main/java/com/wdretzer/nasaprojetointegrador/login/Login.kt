@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
 import android.util.Base64
 import android.util.Log
 import android.widget.Button
@@ -72,13 +73,8 @@ class Login : AppCompatActivity() {
         }
 
         buttonGoogle.setOnClickListener { googleSignInRequest.launch(googleSignInOptions) }
-
-        buttonFacebook.setOnClickListener {
-            loginFacebook()
-        }
-
+        buttonFacebook.setOnClickListener { loginFacebook() }
         registerFacebbokCallback()
-
     }
 
     private fun registerFacebbokCallback() {
@@ -98,8 +94,8 @@ class Login : AppCompatActivity() {
                 val token = result.accessToken.token
                 Toast.makeText(this@Login, "Deu certo!! Token Facebook: $token", Toast.LENGTH_LONG)
                     .show()
+                sendToInicioGuia()
             }
-
         })
     }
 
@@ -115,15 +111,22 @@ class Login : AppCompatActivity() {
         if (result is GoogleLogInActivityContract.Result.Success) {
             val token = result.googleSignInAccount.idToken
             Toast.makeText(this, "Deu certo!! Token Google: $token", Toast.LENGTH_LONG).show()
+            sendToInicioGuia()
         }
 
         if (result is GoogleLogInActivityContract.Result.Error) {
             Toast.makeText(this, "Deu erro ao fazer login com o Google", Toast.LENGTH_LONG).show()
         }
-
     }
 
     companion object {
         private val permissions = listOf("public_profile", "email")
+    }
+
+    private fun sendToInicioGuia() {
+        Handler().postDelayed({
+            val intent = Intent(this, InicioGuia::class.java)
+            startActivity(intent)
+        }, 4000)
     }
 }

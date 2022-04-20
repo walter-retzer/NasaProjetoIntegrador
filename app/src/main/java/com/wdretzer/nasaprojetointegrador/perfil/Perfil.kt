@@ -61,6 +61,11 @@ class Perfil : AppCompatActivity() {
                 .show()
         }
 
+        nomeAstronauta.setSelection(nomeAstronauta.text.length)
+        if (sharedPref.readString("Astronauta").isEmpty()) {
+            nomeAstronauta.setHint("Nome do Astronauta")
+        }
+
         val adapter = AdapterPerfil(listaPerfil = listDados) {
             perfilImg = it.imagemPerfil
             avatar.setImageResource(it.imagemPerfil)
