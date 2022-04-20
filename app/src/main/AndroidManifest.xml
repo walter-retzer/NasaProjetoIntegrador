@@ -18,6 +18,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NasaProjetoIntegrador">
+        <activity
+            android:name=".perfil.PerfilCompleto"
+            android:exported="true" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -47,7 +50,8 @@
             android:exported="true" />
         <activity
             android:name=".perfil.Perfil"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="stateVisible|adjustResize|adjustPan" />
         <activity
             android:name=".detalheplaneta.DetalhePlaneta"
             android:exported="true" />

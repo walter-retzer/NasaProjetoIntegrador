@@ -21,6 +21,7 @@ import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
 import com.wdretzer.nasaprojetointegrador.util.GoogleLogInActivityContract
 import java.security.MessageDigest
 
+
 class Login : AppCompatActivity() {
 
     private val buttonLogin: Button by lazy { findViewById(R.id.btn_login) }
@@ -81,17 +82,22 @@ class Login : AppCompatActivity() {
     }
 
     private fun registerFacebbokCallback() {
-        loginManager.registerCallback(callbackManager, object : FacebookCallback<LoginResult>{
+        loginManager.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onCancel() {
             }
 
             override fun onError(error: FacebookException) {
-                Toast.makeText(this@Login, "Deu erro!!", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@Login,
+                    "Deu erro ao fazer login com o Facebook!!",
+                    Toast.LENGTH_LONG
+                ).show()
             }
 
             override fun onSuccess(result: LoginResult) {
                 val token = result.accessToken.token
-                Toast.makeText(this@Login, "Deu certo!! Token: $token", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@Login, "Deu certo!! Token Facebook: $token", Toast.LENGTH_LONG)
+                    .show()
             }
 
         })
@@ -106,11 +112,15 @@ class Login : AppCompatActivity() {
     }
 
     private fun loginGoogle(result: GoogleLogInActivityContract.Result) {
-        //viewModelLogin.loginGoogle(result)
-        if(result is GoogleLogInActivityContract.Result.Success){
+        if (result is GoogleLogInActivityContract.Result.Success) {
             val token = result.googleSignInAccount.idToken
-            Toast.makeText(this, "Meu token é: $token", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Deu certo!! Token Google: $token", Toast.LENGTH_LONG).show()
         }
+
+        if (result is GoogleLogInActivityContract.Result.Error) {
+            Toast.makeText(this, "Deu erro ao fazer login com o Google", Toast.LENGTH_LONG).show()
+        }
+
     }
 
     companion object {

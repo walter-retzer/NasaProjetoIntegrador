@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.favoritos.ImagemFavoritosActivity
 import com.wdretzer.nasaprojetointegrador.homeplanetas.HomePlanetas
-import com.wdretzer.nasaprojetointegrador.perfil.Perfil
+import com.wdretzer.nasaprojetointegrador.perfil.PerfilCompleto
 import com.wdretzer.nasaprojetointegrador.pesquisaimg.PesquisaImagens
 
 class InicioGuia : AppCompatActivity() {
@@ -42,7 +42,7 @@ class InicioGuia : AppCompatActivity() {
         }
 
         buttonPerfil.setOnClickListener {
-            val intent = Intent(this, Perfil::class.java)
+            val intent = Intent(this, PerfilCompleto::class.java)
             startActivity(intent)
         }
 

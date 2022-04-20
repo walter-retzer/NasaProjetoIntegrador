@@ -3,7 +3,6 @@ package com.wdretzer.nasaprojetointegrador.favoritos
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +13,7 @@ import com.wdretzer.nasaprojetointegrador.data.DataResult
 import com.wdretzer.nasaprojetointegrador.data.NasaItens
 import com.wdretzer.nasaprojetointegrador.imagensnasa.ImgensNasa
 import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
-import com.wdretzer.nasaprojetointegrador.perfil.Perfil
+import com.wdretzer.nasaprojetointegrador.perfil.PerfilCompleto
 import com.wdretzer.nasaprojetointegrador.pesquisaimg.PesquisaImagens
 import com.wdretzer.nasaprojetointegrador.viewmodel.NasaViewModel
 
@@ -42,7 +41,7 @@ class ImagemFavoritosActivity : AppCompatActivity() {
         val bundle: Bundle? = intent.extras
         if (bundle != null) {
             setSearch = bundle.getString("Search").toString()
-            Toast.makeText(this, "Bundle = ${setSearch}", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this, "Bundle = ${setSearch}", Toast.LENGTH_LONG).show()
         }
 
         showFavourite()
@@ -52,10 +51,15 @@ class ImagemFavoritosActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val intent = Intent(this, ImgensNasa::class.java).apply {
-            putExtra("Search", setSearch)
+        if(setSearch != ""){
+            val intent = Intent(this, ImgensNasa::class.java).apply {
+                putExtra("Search", setSearch)
+            }
+            startActivity(intent)
+        } else {
+            val intent = Intent(this, InicioGuia::class.java)
+            startActivity(intent)
         }
-        startActivity(intent)
     }
 
     private fun showFavourite() {
@@ -93,7 +97,7 @@ class ImagemFavoritosActivity : AppCompatActivity() {
     }
 
     private fun sendToPerfil() {
-        val intent = Intent(this, Perfil::class.java)
+        val intent = Intent(this, PerfilCompleto::class.java)
         startActivity(intent)
     }
 

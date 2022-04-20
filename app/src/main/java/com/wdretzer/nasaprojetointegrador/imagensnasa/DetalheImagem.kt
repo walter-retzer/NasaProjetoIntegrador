@@ -159,6 +159,7 @@ class DetalheImagem : AppCompatActivity() {
         startActivity(Intent.createChooser(intent, "Enviar Imagem!"))
     }
 
+    @SuppressLint("SimpleDateFormat")
     @RequiresApi(Build.VERSION_CODES.N)
     private fun saveImage() {
         val file = getDisc()
@@ -188,7 +189,7 @@ class DetalheImagem : AppCompatActivity() {
                 animationView.isVisible = false
                 Toast.makeText(this, "Imagem Salva na Galeria!", Toast.LENGTH_SHORT).show()
             }, 3000)
-            
+
             fileOutPutStream.flush()
             fileOutPutStream.close()
 
@@ -200,8 +201,6 @@ class DetalheImagem : AppCompatActivity() {
             e.printStackTrace()
             Toast.makeText(this, "Falha ao Salvar a Imagem!", Toast.LENGTH_SHORT).show()
         }
-
-
 
     }
 

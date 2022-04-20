@@ -17,7 +17,7 @@ import com.wdretzer.nasaprojetointegrador.data.NasaItens
 import com.wdretzer.nasaprojetointegrador.data.NasaRequest
 import com.wdretzer.nasaprojetointegrador.favoritos.ImagemFavoritosActivity
 import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
-import com.wdretzer.nasaprojetointegrador.perfil.Perfil
+import com.wdretzer.nasaprojetointegrador.perfil.PerfilCompleto
 import com.wdretzer.nasaprojetointegrador.pesquisaimg.PesquisaImagens
 import com.wdretzer.nasaprojetointegrador.recyclerview.ImagensAdpter
 import com.wdretzer.nasaprojetointegrador.viewmodel.NasaViewModel
@@ -58,7 +58,7 @@ class ImgensNasa : AppCompatActivity() {
         val bundle: Bundle? = intent.extras
         if (bundle != null) {
             setSearchText = bundle.getString("Search").toString()
-            Toast.makeText(this, "Bundle = ${setSearchText}", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this, "Bundle = ${setSearchText}", Toast.LENGTH_LONG).show()
         }
 
         buttonHomePlanets.setOnClickListener { sendToHomePlanets() }
@@ -209,7 +209,7 @@ class ImgensNasa : AppCompatActivity() {
     }
 
     private fun sendToPerfil() {
-        val intent = Intent(this, Perfil::class.java)
+        val intent = Intent(this, PerfilCompleto::class.java)
         startActivity(intent)
     }
 }

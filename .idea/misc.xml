@@ -39,10 +39,12 @@
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_inicio_guia.xml" value="0.264" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_main.xml" value="0.24010416666666667" />
-        <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_perfil.xml" value="0.1" />
+        <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_perfil.xml" value="0.264" />
+        <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_perfil_completo.xml" value="0.1956521739130435" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_pesquisa_imagens.xml" value="0.2" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_splash.xml" value="0.21829710144927536" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_start.xml" value="0.25416666666666665" />
+        <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/item_perfil.xml" value="0.4" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/item_planeta_imagem.xml" value="0.4" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/provider_paths.xml" value="0.25416666666666665" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/screen_planetas.xml" value="0.16" />
@@ -66,7 +68,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

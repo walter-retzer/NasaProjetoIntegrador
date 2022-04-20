@@ -23,4 +23,8 @@
     <string name="facebook_app_id">732755544805236</string>
     <string name="facebook_client_token">84b49535e773b819818998c43fe070bd</string>
 
+    <!-- Strings used Shared Preferences -->
+    <string name="sharedpref">sharedpref_nasa</string>
+    <string name="contact_fav_key">contact_fav_key_%1$d</string>
+
 </resources>
