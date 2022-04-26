@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "935404978331",
+    "project_id": "nasaprojetointeg-1649855069362",
+    "storage_bucket": "nasaprojetointeg-1649855069362.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935404978331:android:2f4346e8137c810e7c463e",
+        "android_client_info": {
+          "package_name": "com.wdretzer.nasaprojetointegrador"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935404978331-0bi6cc9t0f7jbmvl57mirm5tid5m16nj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqinv1a_3s1Pxi3F8tVNlInyf22JAE65k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935404978331-0bi6cc9t0f7jbmvl57mirm5tid5m16nj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

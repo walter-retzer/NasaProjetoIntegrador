@@ -3,6 +3,9 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+
+    //Google Service
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -45,6 +48,16 @@ android {
 }
 
 dependencies {
+
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:29.3.1')
+
+    // Add the dependency for the Firebase SDK for Google Analytics
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    // Firebase Authtencation
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.3'
 
     //Facebook
     implementation 'com.facebook.android:facebook-android-sdk:12.0.0'

@@ -10,6 +10,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.detalheplaneta.DetalhePlaneta
 
+
 class FragmentPlanet : Fragment(R.layout.screen_planetas) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -23,6 +24,7 @@ class FragmentPlanet : Fragment(R.layout.screen_planetas) {
         }
     }
 }
+
 
 class FragmentPlanet1 : Fragment(R.layout.screen_planetas2) {
 
@@ -51,5 +53,6 @@ class FragmentPlanet1 : Fragment(R.layout.screen_planetas2) {
 //    .load("https://www.ufmg.br/espacodoconhecimento/wp-content/uploads/2021/08/7-1.gif")
 
 }
+
 
 class FragmentPlanet2 : Fragment(R.layout.screen_planetas3)
