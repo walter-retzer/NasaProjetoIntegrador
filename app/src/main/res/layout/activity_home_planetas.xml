@@ -1,73 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    android:layout_height="wrap_content"
+    android:background="@drawable/new_star_background"
+    tools:context=".homeplanetas.HomePlanetas">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/planeta"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:context=".homeplanetas.HomePlanetas">
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_item_plhome"
+        android:padding="10dp"
+        android:text="PLANETAS"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/imagem"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/planeta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/background_item_plhome"
-            android:padding="10dp"
-            android:text="PLANETAS"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/imagem"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/imagem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_item_plhome_black"
+        android:padding="10dp"
+        android:text="SISTEMA SOLAR"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/favoritos"
+        app:layout_constraintStart_toEndOf="@+id/planeta"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/imagem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/background_item_plhome_black"
-            android:padding="10dp"
-            android:text="SISTEMA SOLAR"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/favoritos"
-            app:layout_constraintStart_toEndOf="@+id/planeta"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/favoritos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_item_plhome_black"
+        android:padding="10dp"
+        android:text="CURIOSIDADES"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imagem"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/favoritos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/background_item_plhome_black"
-            android:padding="10dp"
-            android:text="CURIOSIDADES"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imagem"
-            app:layout_constraintTop_toTopOf="parent" />
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager_planetas"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/planeta" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/view_pager_planetas"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/planeta" />
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.core.widget.NestedScrollView>
+    <!--</androidx.core.widget.NestedScrollView>-->

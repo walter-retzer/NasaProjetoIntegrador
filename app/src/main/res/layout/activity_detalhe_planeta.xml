@@ -11,9 +11,9 @@
         android:id="@+id/titulo_detalhe_planeta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
-        android:layout_marginStart="25dp"
         android:background="@drawable/background_text_splash"
         android:padding="10dp"
         android:text="Informações do Planeta"
@@ -31,6 +31,7 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/card_background_fav"
         android:padding="5dp"
+        android:scaleType="fitXY"
         android:src="@drawable/marte"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,9 +41,9 @@
         android:id="@+id/descricao_sistema_solar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
-        android:layout_marginStart="25dp"
         android:padding="10dp"
         android:text="@string/marte_decricao"
         android:textAlignment="center"
@@ -51,6 +52,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_detalhe_planeta" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
