@@ -8,16 +8,21 @@ import android.os.Handler
 import android.util.Base64
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.cadastro.CadastroUsuario
+import com.wdretzer.nasaprojetointegrador.dialogfragments.DialogFragmentCadastro
 import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
 import com.wdretzer.nasaprojetointegrador.util.GoogleLogInActivityContract
 import java.security.MessageDigest
@@ -29,6 +34,18 @@ class Login : AppCompatActivity() {
     private val buttonCadastrar: Button by lazy { findViewById(R.id.btn_cadastrar) }
     private val buttonGoogle: Button by lazy { findViewById(R.id.btn_google) }
     private val buttonFacebook: Button by lazy { findViewById(R.id.btn_facebook) }
+
+    private val textEmail: EditText
+        get() = findViewById(R.id.input_email_login)
+
+    private val textPassword: EditText
+        get() = findViewById(R.id.input_password_login)
+
+    private val progressBar: FrameLayout
+        get() = findViewById(R.id.progress_bar_login)
+
+    private lateinit var auth: FirebaseAuth
+    val dialogCorrect = DialogFragmentCadastro()
 
     private val googleSignInRequest = registerForActivityResult(
         GoogleLogInActivityContract(),
@@ -52,6 +69,80 @@ class Login : AppCompatActivity() {
         // Desabilita a Action Bar que exibe o nome do Projeto:
         getSupportActionBar()?.hide()
 
+        auth = FirebaseAuth.getInstance()
+        buttonLogin.setOnClickListener { checkDados() }
+        buttonCadastrar.setOnClickListener { sendToCadastroUsuario() }
+        buttonGoogle.setOnClickListener { googleSignInRequest.launch(googleSignInOptions) }
+        buttonFacebook.setOnClickListener { loginFacebook() }
+        registerFacebbokCallback()
+    }
+
+    private fun checkDados() {
+
+        progressBar.isVisible = true
+
+        if ((textEmail.text?.isEmpty() == true) || (textPassword.text?.isEmpty() == true)) {
+            Toast.makeText(this, "Há Campos não Preenchidos!", Toast.LENGTH_LONG).show()
+            progressBar.isVisible = false
+
+        } else if (textPassword.text.length <= 5 && textEmail.text?.isNotEmpty() == true) {
+            Toast.makeText(this, "A Senha deve conter 6 Números!", Toast.LENGTH_LONG).show()
+            progressBar.isVisible = false
+
+        } else if ((!textEmail.text.toString().contains("@") ||
+                    !textEmail.text.toString().contains(".") ||
+                    !android.util.Patterns.EMAIL_ADDRESS.matcher(textEmail.text.toString())
+                        .matches())
+        ) {
+            Toast.makeText(this, "O Email digitado não é válido!", Toast.LENGTH_LONG).show()
+            progressBar.isVisible = false
+
+        } else {
+            buttonLogin.isVisible = false
+            checkLoginUser()
+        }
+    }
+
+
+    private fun checkLoginUser() {
+        auth.signInWithEmailAndPassword(
+            textEmail.text.toString(),
+            textPassword.text.toString()
+        )
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Toast.makeText(this, "Autenticando Login...", Toast.LENGTH_LONG).show()
+                    Handler().postDelayed({
+                        sendToInicioGuia()
+                        dialogCorrect.show(supportFragmentManager, dialogCorrect.tag)
+                        progressBar.isVisible = false
+                        buttonLogin.isVisible = true
+                    }, 4000)
+
+                } else {
+                    Toast.makeText(this, "Login não realizado! Check seu e-mail e senha!", Toast.LENGTH_LONG).show()
+                    progressBar.isVisible = false
+                    buttonLogin.isVisible = true
+                }
+            }
+    }
+
+
+    private fun sendToInicioGuia() {
+        Handler().postDelayed({
+            val intent = Intent(this, InicioGuia::class.java)
+            startActivity(intent)
+        }, 4000)
+    }
+
+
+    private fun sendToCadastroUsuario() {
+        val intent = Intent(this, CadastroUsuario::class.java)
+        startActivity(intent)
+    }
+
+
+    private fun keyHashFacebook() {
         val info: PackageInfo = getPackageManager().getPackageInfo(
             "com.wdretzer.nasaprojetointegrador",
             PackageManager.GET_SIGNATURES
@@ -61,21 +152,8 @@ class Login : AppCompatActivity() {
             md.update(signature.toByteArray())
             Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT))
         }
-
-        buttonLogin.setOnClickListener {
-            val intent = Intent(this, InicioGuia::class.java)
-            startActivity(intent)
-        }
-
-        buttonCadastrar.setOnClickListener {
-            val intent = Intent(this, CadastroUsuario::class.java)
-            startActivity(intent)
-        }
-
-        buttonGoogle.setOnClickListener { googleSignInRequest.launch(googleSignInOptions) }
-        buttonFacebook.setOnClickListener { loginFacebook() }
-        registerFacebbokCallback()
     }
+
 
     private fun registerFacebbokCallback() {
         loginManager.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
@@ -99,6 +177,7 @@ class Login : AppCompatActivity() {
         })
     }
 
+
     private fun loginFacebook() {
         loginManager.logInWithReadPermissions(
             this,
@@ -106,6 +185,7 @@ class Login : AppCompatActivity() {
             permissions
         )
     }
+
 
     private fun loginGoogle(result: GoogleLogInActivityContract.Result) {
         if (result is GoogleLogInActivityContract.Result.Success) {
@@ -121,12 +201,5 @@ class Login : AppCompatActivity() {
 
     companion object {
         private val permissions = listOf("public_profile", "email")
-    }
-
-    private fun sendToInicioGuia() {
-        Handler().postDelayed({
-            val intent = Intent(this, InicioGuia::class.java)
-            startActivity(intent)
-        }, 4000)
     }
 }

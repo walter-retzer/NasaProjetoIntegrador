@@ -7,27 +7,17 @@
     android:background="@drawable/new_star_background"
     tools:context=".login.Login">
 
-    <ProgressBar
-        android:id="@+id/progress_bar_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/texto_cabecalho_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:background="@android:color/transparent"
+        android:elevation="3dp"
         android:text="@string/cabecalho_login"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="24sp"
-        android:elevation="3dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,9 +31,9 @@
         android:layout_marginTop="19dp"
         android:layout_marginEnd="25dp"
         android:background="@android:color/transparent"
+        android:elevation="2dp"
         android:text="@string/descricao_login"
         android:textAlignment="center"
-        android:elevation="2dp"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="normal"
@@ -77,8 +67,8 @@
         android:textColorHint="@color/black"
         app:boxStrokeColor="@color/blue"
         app:endIconMode="clear_text"
-        app:hintTextColor="@color/blue"
         app:endIconTint="@color/black"
+        app:hintTextColor="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/texto_descricao_login"
@@ -87,12 +77,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_email_login"
-            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textEmailAddress"
-            android:maxLength="50" />
-
+            android:maxLength="50"
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -120,10 +109,9 @@
             android:id="@+id/input_password_login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/black"
             android:inputType="numberPassword"
-            android:maxLength="8" />
-
+            android:maxLength="6"
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -152,12 +140,12 @@
         android:drawableStart="@drawable/icon_google"
         android:text="@string/google"
         android:textAllCaps="false"
-        android:textColorHint="@color/black"
         android:textColor="@color/black"
+        android:textColorHint="@color/black"
         app:icon="@drawable/icon_google"
+        app:iconGravity="start"
         app:iconTint="#ffffff"
         app:iconTintMode="multiply"
-        app:iconGravity="start"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/border_login" />
 
@@ -173,9 +161,9 @@
         android:textAllCaps="false"
         android:textColor="@color/black"
         app:icon="@drawable/icon_facebook"
+        app:iconGravity="start"
         app:iconTint="#ffffff"
         app:iconTintMode="multiply"
-        app:iconGravity="start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/border_login" />
 
@@ -221,5 +209,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linhaLogin" />
 
+    <FrameLayout
+        android:id="@+id/progress_bar_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent"
+        android:padding="16dp"
+        android:visibility="gone"
+        android:elevation="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

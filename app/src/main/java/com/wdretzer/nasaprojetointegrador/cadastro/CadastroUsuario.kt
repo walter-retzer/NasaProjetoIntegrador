@@ -84,6 +84,7 @@ class CadastroUsuario : AppCompatActivity() {
                         .matches())
         ) {
 
+            btnCadastrar.isVisible = false
             auth.createUserWithEmailAndPassword(
                 textoEmail.text.toString(),
                 textoSenha.text.toString()
@@ -141,7 +142,7 @@ class CadastroUsuario : AppCompatActivity() {
                     if (it.isSuccessful) {
                         Toast.makeText(
                             this@CadastroUsuario,
-                            "O cadastro do Explorador Astronauta ${auth.currentUser?.displayName} foi atualizado!!",
+                            "Astronauta: ${auth.currentUser?.displayName} incluido(a) no cadastro!",
                             Toast.LENGTH_LONG
                         ).show()
 
@@ -161,5 +162,6 @@ class CadastroUsuario : AppCompatActivity() {
             }
         }
         progressBar.isVisible = false
+        btnCadastrar.isVisible = true
     }
 }

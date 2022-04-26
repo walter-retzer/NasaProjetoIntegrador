@@ -80,7 +80,6 @@
             android:inputType="textEmailAddress"
             android:maxLength="50"
             android:textColor="@color/black" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -111,9 +110,7 @@
             android:inputType="textPersonName"
             android:maxLength="25"
             android:textColor="@color/black" />
-
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/cadastro_password"
@@ -143,9 +140,7 @@
             android:inputType="numberPassword"
             android:maxLength="6"
             android:textColor="@color/black" />
-
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/cadastro_check_password"
@@ -175,7 +170,6 @@
             android:inputType="numberPassword"
             android:maxLength="6"
             android:textColor="@color/black" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -201,6 +195,7 @@
         android:backgroundTint="@android:color/transparent"
         android:padding="16dp"
         android:visibility="gone"
+        android:elevation="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
