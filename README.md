@@ -78,4 +78,3 @@ Consumindo API da NASA para exibir imagens do Sistema Solar utilizando Retrofit,
 ![Screen](screen/20_perfil.png)
 
 ![Screen](screen/21_perfil.png)
-
