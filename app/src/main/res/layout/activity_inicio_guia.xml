@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/top_background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/top_background">
+
+        <TextView
+            android:id="@+id/tituloMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/background_text_splash"
+            android:padding="10dp"
+            android:text="Menu Principal"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <RelativeLayout
+            android:id="@+id/animmation1"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/card_background_menu"
+            android:elevation="-3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tituloMenu">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/background_text_menu"
+                android:gravity="center_horizontal"
+                android:padding="5dp"
+                android:text="Sistema Solar"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_main"
+                android:layout_width="290dp"
+                android:layout_height="280dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="fitXY"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="planet-exploration.json"
+                app:lottie_loop="true"
+                app:lottie_speed="2" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/animmation2"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/card_background_menu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/animmation1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/background_text_menu"
+                android:gravity="center_horizontal"
+                android:padding="5dp"
+                android:text="Pesquisar Imagens"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_main2"
+                android:layout_width="280dp"
+                android:layout_height="270dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="30dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="fitXY"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="looking-at-stars.json"
+                app:lottie_loop="true"
+                app:lottie_speed="1" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/animmation3"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/card_background_menu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/animmation2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/background_text_menu"
+                android:gravity="center_horizontal"
+                android:padding="5dp"
+                android:text="Imagens Favoritas"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_main3"
+                android:layout_width="wrap_content"
+                android:layout_height="280dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="fitXY"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="heart_fav.json"
+                app:lottie_loop="true"
+                app:lottie_speed="1" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/animmation4"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/card_background_menu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/animmation3">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/background_text_menu"
+                android:gravity="center_horizontal"
+                android:padding="5dp"
+                android:text="Perfil do Astronauta"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_main4"
+                android:layout_width="260dp"
+                android:layout_height="250dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="50dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="fitXY"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="navis-loader.json"
+                app:lottie_loop="true"
+                app:lottie_speed="2" />
+        </RelativeLayout>
+
+<!--        <View-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="25dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/animmation4"></View>-->
+
+        <!--    <ImageView-->
+        <!--        android:id="@+id/menu_planeta"-->
+        <!--        android:layout_width="170dp"-->
+        <!--        android:layout_height="170dp"-->
+        <!--        android:layout_marginTop="30dp"-->
+        <!--        android:background="@drawable/card_background_fav"-->
+        <!--        android:backgroundTint="@color/cinza"-->
+        <!--        android:padding="5dp"-->
+        <!--        android:scaleType="fitXY"-->
+        <!--        android:src="@drawable/sistem_solar"-->
+        <!--        app:layout_constraintEnd_toStartOf="@+id/menu_search"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/tituloMenu" />-->
+
+        <!--    <ImageView-->
+        <!--        android:id="@+id/menu_search"-->
+        <!--        android:layout_width="170dp"-->
+        <!--        android:layout_height="170dp"-->
+        <!--        android:layout_marginTop="30dp"-->
+        <!--        android:background="@drawable/card_background_fav"-->
+        <!--        android:backgroundTint="@color/cinza"-->
+        <!--        android:padding="5dp"-->
+        <!--        android:scaleType="fitXY"-->
+        <!--        android:src="@drawable/search_photos"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent"-->
+        <!--        app:layout_constraintStart_toEndOf="@+id/menu_planeta"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/tituloMenu" />-->
+
+        <!--    <androidx.appcompat.widget.AppCompatButton-->
+        <!--        android:id="@+id/btn_planetas"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="30dp"-->
+        <!--        android:layout_marginStart="50dp"-->
+        <!--        android:layout_marginTop="5dp"-->
+        <!--        android:layout_marginEnd="50dp"-->
+        <!--        android:background="@drawable/button"-->
+        <!--        android:padding="5dp"-->
+        <!--        android:text="Sistema Solar"-->
+        <!--        android:textColor="@color/white"-->
+        <!--        app:layout_constraintEnd_toEndOf="@+id/menu_planeta"-->
+        <!--        app:layout_constraintStart_toStartOf="@+id/menu_planeta"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/menu_planeta" />-->
+
+        <!--    <androidx.appcompat.widget.AppCompatButton-->
+        <!--        android:id="@+id/btn_pesquisa_imagens"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="30dp"-->
+        <!--        android:layout_marginStart="50dp"-->
+        <!--        android:layout_marginTop="5dp"-->
+        <!--        android:layout_marginEnd="50dp"-->
+        <!--        android:background="@drawable/button"-->
+        <!--        android:padding="5dp"-->
+        <!--        android:text="Pesquisar Imagens"-->
+        <!--        android:textColor="@color/white"-->
+        <!--        app:layout_constraintEnd_toEndOf="@+id/menu_search"-->
+        <!--        app:layout_constraintStart_toStartOf="@+id/menu_search"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/menu_search" />-->
+
+        <!--    <ImageView-->
+        <!--        android:id="@+id/menu_img_favoritas"-->
+        <!--        android:layout_width="170dp"-->
+        <!--        android:layout_height="170dp"-->
+        <!--        android:layout_marginTop="80dp"-->
+        <!--        android:background="@drawable/card_background_fav"-->
+        <!--        android:backgroundTint="@color/cinza"-->
+        <!--        android:padding="5dp"-->
+        <!--        android:scaleType="fitXY"-->
+        <!--        android:src="@drawable/fav2"-->
+        <!--        app:layout_constraintEnd_toEndOf="@+id/menu_planeta"-->
+        <!--        app:layout_constraintStart_toStartOf="@+id/menu_planeta"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/menu_planeta" />-->
+
+        <!--    <androidx.appcompat.widget.AppCompatButton-->
+        <!--        android:id="@+id/btn_img_favoritas"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="30dp"-->
+        <!--        android:layout_marginStart="50dp"-->
+        <!--        android:layout_marginTop="5dp"-->
+        <!--        android:layout_marginEnd="50dp"-->
+        <!--        android:background="@drawable/button"-->
+        <!--        android:padding="5dp"-->
+        <!--        android:text="Imagens Favoritas"-->
+        <!--        android:textColor="@color/white"-->
+        <!--        app:layout_constraintEnd_toEndOf="@+id/menu_img_favoritas"-->
+        <!--        app:layout_constraintStart_toStartOf="@+id/menu_img_favoritas"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/menu_img_favoritas" />-->
+
+        <!--    <ImageView-->
+        <!--        android:id="@+id/menu_perfil"-->
+        <!--        android:layout_width="170dp"-->
+        <!--        android:layout_height="170dp"-->
+        <!--        android:layout_marginStart="25dp"-->
+        <!--        android:layout_marginTop="20dp"-->
+        <!--        android:layout_marginEnd="25dp"-->
+        <!--        android:background="@drawable/card_background_fav"-->
+        <!--        android:backgroundTint="@color/cinza"-->
+        <!--        android:padding="5dp"-->
+        <!--        android:scaleType="fitXY"-->
+        <!--        android:src="@drawable/perfil1"-->
+        <!--        app:layout_constraintBottom_toBottomOf="@+id/menu_img_favoritas"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent"-->
+        <!--        app:layout_constraintStart_toEndOf="@+id/menu_img_favoritas" />-->
+
+        <!--    <androidx.appcompat.widget.AppCompatButton-->
+        <!--        android:id="@+id/btn_perfil"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="30dp"-->
+        <!--        android:layout_marginStart="50dp"-->
+        <!--        android:layout_marginTop="5dp"-->
+        <!--        android:layout_marginEnd="50dp"-->
+        <!--        android:background="@drawable/button"-->
+        <!--        android:padding="5dp"-->
+        <!--        android:text="Perfil do Astronauta"-->
+        <!--        android:textColor="@color/white"-->
+        <!--        app:layout_constraintEnd_toEndOf="@+id/menu_perfil"-->
+        <!--        app:layout_constraintStart_toStartOf="@+id/menu_perfil"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/menu_perfil" />-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
