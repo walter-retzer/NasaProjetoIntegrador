@@ -29,6 +29,10 @@ Consumindo API da NASA para exibir imagens do Sistema Solar utilizando Retrofit,
 
 ![Screen](screen/08_planetas.png)
 
+## TELA DE DETALHE DE CADA PLANETA
+
+![Screen](screen/16_detalhe_planeta.png)
+
 ## TELA DE INFORMAÇÃO DO SISTEMA SOLAR
 
 ![Screen](screen/09_sistema_solar.png)
@@ -49,6 +53,29 @@ Consumindo API da NASA para exibir imagens do Sistema Solar utilizando Retrofit,
 
 ![Screen](screen/14_imagens.png)
 
+![Screen](screen/19_imagem_favoritada.png)
+
 ## TELA DE IMAGENS FAVORITAS
 
 ![Screen](screen/15_favoritas.png)
+
+## TELA DE DETALHE DA IMAGEM
+
+![Screen](screen/16_detalhe_imagem.png)
+
+![Screen](screen/17_salvar_imagem.png)
+
+### Salvando uma imagem
+
+![Screen](screen/18_imagem_salva.png)
+
+### Compartilhando uma imagem
+
+![Screen](screen/22_compartilhar.png)
+
+## TELA DE PERFIL DO USUÁRIO
+
+![Screen](screen/20_perfil.png)
+
+![Screen](screen/21_perfil.png)
+
