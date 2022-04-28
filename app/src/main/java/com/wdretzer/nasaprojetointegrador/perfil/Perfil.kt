@@ -24,6 +24,9 @@ class Perfil : AppCompatActivity() {
     private var perfilImg: Int? = null
 
     val listDados = mutableListOf<DadosPerfil>(
+        DadosPerfil(imagemPerfil = R.drawable.perfil13, stateImg = false),
+        DadosPerfil(imagemPerfil = R.drawable.perfil14, stateImg = false),
+        DadosPerfil(imagemPerfil = R.drawable.perfil15, stateImg = false),
         DadosPerfil(imagemPerfil = R.drawable.perfil1, stateImg = false),
         DadosPerfil(imagemPerfil = R.drawable.perfil2, stateImg = false),
         DadosPerfil(imagemPerfil = R.drawable.perfil3, stateImg = false),
@@ -36,7 +39,8 @@ class Perfil : AppCompatActivity() {
         DadosPerfil(imagemPerfil = R.drawable.perfil10, stateImg = false),
         DadosPerfil(imagemPerfil = R.drawable.perfil11, stateImg = false),
         DadosPerfil(imagemPerfil = R.drawable.perfil12, stateImg = false),
-    )
+
+        )
 
     val sharedPref: SharedPrefNasa = SharedPrefNasa.instance
 

@@ -39,7 +39,7 @@ class PerfilCompleto : AppCompatActivity() {
             Toast.makeText(this, "Edite o Nome do seu Astronauta!", Toast.LENGTH_SHORT).show()
         }
 
-        if (sharedPref.readString("Astronauta").isEmpty()){
+        if (sharedPref.readString("Astronauta").isEmpty()) {
             astronautaPerfil.text = "Nome do Astronauta"
         }
 

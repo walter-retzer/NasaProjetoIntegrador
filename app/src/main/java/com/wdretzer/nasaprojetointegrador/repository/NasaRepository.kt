@@ -64,6 +64,7 @@ class NasaRepository(
                 // Realiza a tradução do título para armazenar no banco de dados:
                 val titleEng = item.data.first().title
                 var titlePt = "Title"
+
                 val translationConfigs = TranslatorOptions.Builder()
                     .setSourceLanguage(TranslateLanguage.ENGLISH)
                     .setTargetLanguage(TranslateLanguage.PORTUGUESE)

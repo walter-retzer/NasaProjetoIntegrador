@@ -112,6 +112,7 @@ class DetalheImagem : AppCompatActivity() {
     }
 
     private fun translate(str: String, type: String) {
+
         val translationConfigs = TranslatorOptions.Builder()
             .setSourceLanguage(TranslateLanguage.ENGLISH)
             .setTargetLanguage(TranslateLanguage.PORTUGUESE)
@@ -208,5 +209,4 @@ class DetalheImagem : AppCompatActivity() {
         val file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
         return File(file, "NASA_APP_IMAGES")
     }
-
 }

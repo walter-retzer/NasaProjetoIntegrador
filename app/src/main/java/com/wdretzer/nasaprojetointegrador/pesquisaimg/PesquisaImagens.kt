@@ -24,9 +24,11 @@ class PesquisaImagens : AppCompatActivity() {
     private val buttonPlanetas: Button by lazy { findViewById(R.id.btn_searchImagens) }
     private val animationView: LottieAnimationView by lazy { findViewById(R.id.lottie) }
     private val img: ImageView by lazy { findViewById(R.id.search_imagem) }
-    private val textSearch: TextInputEditText by lazy { findViewById(R.id.input_search_img) }
     private val textView: TextView by lazy { findViewById(R.id.tituloMenuImagens) }
+    private val textSearch: TextInputEditText
+        get() = findViewById(R.id.input_search_img)
     private var searchWords: String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +36,11 @@ class PesquisaImagens : AppCompatActivity() {
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
         getSupportActionBar()?.hide()
+        translateTextSearch()
+    }
 
-        textSearch.text.toString()
 
+    private fun translateTextSearch() {
         val translationConfigs = TranslatorOptions.Builder()
             .setSourceLanguage(TranslateLanguage.PORTUGUESE)
             .setTargetLanguage(TranslateLanguage.ENGLISH)
@@ -50,6 +54,7 @@ class PesquisaImagens : AppCompatActivity() {
             }
 
             if (textSearch.text?.isNotEmpty() == true) {
+
                 translator.downloadModelIfNeeded()
                     .addOnSuccessListener {
                         Toast.makeText(this, "Pesquisando imagens...", Toast.LENGTH_SHORT).show()
@@ -61,26 +66,33 @@ class PesquisaImagens : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
+
                 translator.translate(textSearch.text.toString())
                     .addOnSuccessListener {
                         textView.setText(it)
                         searchWords = it
+
+                        img.visibility = View.INVISIBLE
+                        animationView.isVisible = true
+                        animationView.loop(true)
+                        animationView.playAnimation()
+
+                        // Iniciando a Tela com as Imagens Pesquisadas:
+                        Handler().postDelayed({
+                            animationView.pauseAnimation()
+                            sendToImagensNasa(searchWords)
+                            img.visibility = View.VISIBLE
+                        }, 6000)
+
                     }
                     .addOnFailureListener {
                         it.printStackTrace()
+                        Toast.makeText(
+                            this,
+                            "Tente novamente, falha com a conexão da internet!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-
-                img.visibility = View.INVISIBLE
-                animationView.isVisible = true
-                animationView.loop(true)
-                animationView.playAnimation()
-
-                // Iniciando as Telas de Boas Vindas:
-                Handler().postDelayed({
-                    animationView.pauseAnimation()
-                    sendToImagensNasa(searchWords)
-                    img.visibility = View.VISIBLE
-                }, 6000)
             }
         }
     }
