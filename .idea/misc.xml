@@ -18,6 +18,7 @@
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/drawable/background_dialog.xml" value="0.24027777777777778" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/drawable/background_item_plhome.xml" value="0.12962962962962962" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/drawable/background_item_plhome_black.xml" value="0.12962962962962962" />
+        <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/drawable/background_item_plhome_cinza.xml" value="0.24027777777777778" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/drawable/background_item_plhome_focus.xml" value="0.2703125" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/drawable/background_login.xml" value="0.16944444444444445" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/drawable/background_menu_imagens.xml" value="0.2703125" />
@@ -32,7 +33,7 @@
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_cadastro_usuario_facebook.xml" value="0.16530797101449277" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_cadastro_usuario_google.xml" value="0.25416666666666665" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_detalhe_imagem.xml" value="0.1" />
-        <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_detalhe_planeta.xml" value="0.25416666666666665" />
+        <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_detalhe_planeta.xml" value="0.16" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_home_planetas.xml" value="0.264" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_imagem_favoritos.xml" value="0.24139492753623187" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_imagens_favoritas.xml" value="0.25416666666666665" />
@@ -52,7 +53,7 @@
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/provider_paths.xml" value="0.25416666666666665" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/screen_planetas.xml" value="0.264" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/screen_planetas2.xml" value="0.264" />
-        <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/screen_planetas3.xml" value="0.2" />
+        <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/screen_planetas3.xml" value="0.16" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/tela_boas_vindasv1.xml" value="0.264" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/tela_boas_vindasv2.xml" value="0.21829710144927536" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/tela_boas_vindasv3.xml" value="0.21829710144927536" />
@@ -71,7 +72,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/new_star_background"
+    android:background="@drawable/simple_background"
     android:fillViewport="true"
     tools:context=".homeplanetas.FragmentPlanet">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingBottom="?attr/actionBarSize"
-        tools:context=".homeplanetas.HomePlanetas">
+        android:paddingBottom="?attr/actionBarSize">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imagem_planeta1"

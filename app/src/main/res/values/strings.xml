@@ -29,5 +29,7 @@
     <string name="contact_fav_key">contact_fav_key_%1$d</string>
     <string name="tamanho_planetas">Tamanho dos Planetas, A Terra não é tão grande assim, perto dos gigantes que formam o Sistema Solar, o nosso planeta aparece na quinta posição entre as maiores, que é liderada por Júpiter</string>
     <string name="rotation">Movimento de Rotação do Planeta Terra com o Sol</string>
+    <string name="rovers">Continue sua exploração! Conheça os Rovers de Marte!</string>
+    <string name="luas_saturno">Saturno é o planeta com o maior número de luas do Sistema Solar, possuindo 82 luas no total.</string>
 
 </resources>

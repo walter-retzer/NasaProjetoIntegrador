@@ -1,56 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/simple_background"
+    android:fillViewport="true"
     tools:context=".detalheplaneta.DetalhePlaneta">
 
-    <TextView
-        android:id="@+id/titulo_detalhe_planeta"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/background_text_splash"
-        android:padding="10dp"
-        android:text="Informações do Planeta"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:context=".detalheplaneta.DetalhePlaneta">
 
-    <ImageView
-        android:id="@+id/img_detalhe_planeta"
-        android:layout_width="350dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/card_background_fav"
-        android:padding="5dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/marte"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titulo_detalhe_planeta" />
+        <TextView
+            android:id="@+id/titulo_detalhe_planeta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/background_text_splash"
+            android:padding="10dp"
+            android:text="Planeta Marte"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/descricao_sistema_solar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="25dp"
-        android:padding="10dp"
-        android:text="@string/marte_decricao"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_detalhe_planeta" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_detalhe_planeta"
+            android:layout_width="350dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="12dp"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titulo_detalhe_planeta"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+            app:srcCompat="@drawable/marte"
+            app:strokeColor="@color/cinza"
+            app:strokeWidth="3dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/descricao_marte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text=" "
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_detalhe_planeta" />
+
+        <TextView
+            android:id="@+id/titulo_info_extra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/background_item_plhome_cinza"
+            android:padding="10dp"
+            android:text="Informações Extras"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descricao_marte" />
+
+        <TextView
+            android:id="@+id/info_extra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Informações Extras: "
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titulo_info_extra" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imagem_extra1"
+            android:layout_width="175dp"
+            android:layout_height="175dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/transparent"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toStartOf="@+id/imagem_extra2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_extra"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+            app:srcCompat="@drawable/rover1"
+            app:strokeColor="@color/cinza"
+            app:strokeWidth="3dp" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imagem_extra2"
+            android:layout_width="175dp"
+            android:layout_height="175dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/transparent"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imagem_extra1"
+            app:layout_constraintTop_toBottomOf="@+id/info_extra"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+            app:srcCompat="@drawable/rover1"
+            app:strokeColor="@color/cinza"
+            app:strokeWidth="3dp" />
+
+        <TextView
+            android:id="@+id/titulo_pesquisa_extra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/background_item_plhome_cinza"
+            android:padding="10dp"
+            android:text="Exploração Extra"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imagem_extra2" />
+
+        <TextView
+            android:id="@+id/pesquisa_extra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:padding="5dp"
+            android:text="Exploração Extra: "
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titulo_pesquisa_extra" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

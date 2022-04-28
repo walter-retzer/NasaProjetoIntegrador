@@ -49,6 +49,9 @@ android {
 
 dependencies {
 
+    //FireBase RealTime DataBase
+    implementation 'com.google.firebase:firebase-database-ktx:20.0.4'
+
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:29.3.1')
 
