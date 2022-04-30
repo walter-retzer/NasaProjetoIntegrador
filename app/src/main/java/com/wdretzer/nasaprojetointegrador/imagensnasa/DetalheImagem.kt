@@ -36,7 +36,6 @@ import java.util.*
 
 class DetalheImagem : AppCompatActivity() {
 
-    var strTranslate: String = ""
     private val animationView: LottieAnimationView by lazy { findViewById(R.id.lottie) }
     private val buttonMenuPlanets: ImageView by lazy { findViewById(R.id.menu_detalhe_img) }
     private val buttonPesquisaImagem: ImageView by lazy { findViewById(R.id.pesquisa_detalhe_img) }
@@ -50,6 +49,8 @@ class DetalheImagem : AppCompatActivity() {
     private var setSearch: String = ""
     private var setTitle: String = ""
     private var setImg: String = ""
+    var strTranslate: String = ""
+
 
     @SuppressLint("SimpleDateFormat")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -60,9 +61,19 @@ class DetalheImagem : AppCompatActivity() {
         // Desabilita a Action Bar que exibe o nome do Projeto:
         getSupportActionBar()?.hide()
 
+        checkBundle()
+        buttonMenuPlanets.setOnClickListener { sendToHomePlanets() }
+        buttonPesquisaImagem.setOnClickListener { sendToSearchImage() }
+        buttonShareImage.setOnClickListener { shareImage() }
+        buttonSaveImage.setOnClickListener { saveImage() }
+    }
+
+
+    @SuppressLint("SimpleDateFormat")
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun checkBundle() {
         keywordsDetalhe.visibility = View.GONE
         criadoresDetalhe.visibility = View.GONE
-
         val bundle: Bundle? = intent.extras
         if (bundle != null) {
             val setText = bundle.getString("Detalhe")
@@ -78,8 +89,10 @@ class DetalheImagem : AppCompatActivity() {
             }
 
             setKeywords?.let {
-                keywordsDetalhe.visibility = View.VISIBLE
-                translate(it, "Keyword")
+                if (it != "FAIL") {
+                    keywordsDetalhe.visibility = View.VISIBLE
+                    translate(it, "Keyword")
+                }
             }
 
             setDate?.let {
@@ -104,12 +117,8 @@ class DetalheImagem : AppCompatActivity() {
                     .into(imagemDetalhe)
             }
         }
-
-        buttonMenuPlanets.setOnClickListener { sendToHomePlanets() }
-        buttonPesquisaImagem.setOnClickListener { sendToSearchImage() }
-        buttonShareImage.setOnClickListener { shareImage() }
-        buttonSaveImage.setOnClickListener { saveImage() }
     }
+
 
     private fun translate(str: String, type: String) {
 
@@ -138,15 +147,18 @@ class DetalheImagem : AppCompatActivity() {
             }
     }
 
+
     private fun sendToHomePlanets() {
         val intent = Intent(this, InicioGuia::class.java)
         startActivity(intent)
     }
 
+
     private fun sendToSearchImage() {
         val intent = Intent(this, PesquisaImagens::class.java)
         startActivity(intent)
     }
+
 
     private fun shareImage() {
         val bitmapDrawable = imagemDetalhe.drawable as BitmapDrawable
@@ -160,6 +172,7 @@ class DetalheImagem : AppCompatActivity() {
         startActivity(Intent.createChooser(intent, "Enviar Imagem!"))
     }
 
+
     @SuppressLint("SimpleDateFormat")
     @RequiresApi(Build.VERSION_CODES.N)
     private fun saveImage() {
@@ -171,7 +184,7 @@ class DetalheImagem : AppCompatActivity() {
 
         val simpleDateFormat = SimpleDateFormat("ddMMyyyyHHmmss")
         val date = simpleDateFormat.format(Date())
-        val name = "IMG" + date + ".jpg"
+        val name = "IMG$date.jpg"
         val fileName = file.absolutePath + "/" + name
         val newFile = File(fileName)
 
@@ -204,6 +217,7 @@ class DetalheImagem : AppCompatActivity() {
         }
 
     }
+
 
     private fun getDisc(): File {
         val file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)

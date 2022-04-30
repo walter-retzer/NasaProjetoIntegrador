@@ -13,6 +13,9 @@ class FragmentPlanet1 : Fragment(R.layout.screen_planetas2) {
     private val sistemaSolar: ShapeableImageView?
         get() = view?.findViewById(R.id.sistema_solar)
 
+    private val sistemaSolar2: ShapeableImageView?
+        get() = view?.findViewById(R.id.sistema_solar2)
+
     private val sistemaSolar3: ShapeableImageView?
         get() = view?.findViewById(R.id.sistema_solar3)
 

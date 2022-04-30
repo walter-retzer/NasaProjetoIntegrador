@@ -43,6 +43,7 @@ class ImgensNasa : AppCompatActivity() {
     var imagem: String? = null
     var date: String? = null
     var criadores: String? = null
+    var keywords1: List<String> = mutableListOf()
     var keywords: String? = null
     var setSearchText: String = ""
 
@@ -93,10 +94,14 @@ class ImgensNasa : AppCompatActivity() {
                 criadores = creators
             }
 
-            keywordsApi.let { keyword ->
-                keywords = keyword
-                    .filter { filtro -> filtro != "}" }
-                    .joinToString(", ")
+            if (keywordsApi != null){
+                keywordsApi?.let { keyword ->
+                    keywords = keyword
+                        .filter { filtro -> filtro != "}" }
+                        .joinToString(", ")
+                }
+            } else {
+                keywords = "FAIL"
             }
 
             imagemApi.let { img ->

@@ -106,7 +106,7 @@ class ImagensViewHolder(
 
         Glide.with(imagemPlanetas.context)
             .load(item.links.first().href)
-            .placeholder(R.drawable.astronauta_inicio)
+            .placeholder(R.drawable.new_star_background)
             .error(R.drawable.icon_error)
             .into(imagemPlanetas)
 
@@ -114,8 +114,9 @@ class ImagensViewHolder(
         item.links.first().href.let {
             Glide.with(imagemPlanetas.context)
                 .load(it)
+                .placeholder(R.drawable.new_star_background)
+                .error(R.drawable.icon_error)
                 .into(imagemPlanetas)
         }
     }
 }
-

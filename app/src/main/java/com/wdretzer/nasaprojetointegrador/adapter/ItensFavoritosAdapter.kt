@@ -75,7 +75,13 @@ class FavouriteViewHolder(
     fun bind(itensFav: NasaItens) {
 
         textFav.text = itensFav.data.first().title
-        Glide.with(imagemFav.context).load(itensFav.links.first().href).into(imagemFav)
+
+        Glide.with(imagemFav.context)
+            .load(itensFav.links.first().href)
+            .placeholder(R.drawable.new_star_background)
+            .error(R.drawable.icon_error)
+            .into(imagemFav)
+
         favourite.setImageResource(if (itensFav.isFavourite) R.drawable.icon_heart else R.drawable.icon_heart_fav)
 
         favourite.setOnClickListener {

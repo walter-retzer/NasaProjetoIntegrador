@@ -1,22 +1,32 @@
 package com.wdretzer.nasaprojetointegrador.pesquisaimg
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.icu.text.SimpleDateFormat
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.os.Handler
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.storage.FirebaseStorage
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.imagensnasa.ImgensNasa
+import java.io.*
+import java.util.*
 
 
 class PesquisaImagens : AppCompatActivity() {
@@ -30,6 +40,7 @@ class PesquisaImagens : AppCompatActivity() {
     private var searchWords: String = ""
 
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pesquisa_imagens)
@@ -40,6 +51,7 @@ class PesquisaImagens : AppCompatActivity() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun translateTextSearch() {
         val translationConfigs = TranslatorOptions.Builder()
             .setSourceLanguage(TranslateLanguage.PORTUGUESE)
@@ -54,6 +66,8 @@ class PesquisaImagens : AppCompatActivity() {
             }
 
             if (textSearch.text?.isNotEmpty() == true) {
+
+                uploadToFirebase(saveFile())
 
                 translator.downloadModelIfNeeded()
                     .addOnSuccessListener {
@@ -97,11 +111,76 @@ class PesquisaImagens : AppCompatActivity() {
         }
     }
 
+
     private fun sendToImagensNasa(search: String) {
         val intent = Intent(this, ImgensNasa::class.java).apply {
             putExtra("Search", search)
         }
         startActivity(intent)
+    }
+
+
+    @SuppressLint("SimpleDateFormat")
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun uploadToFirebase(uri: Uri) {
+
+        val firebaseStorage = FirebaseStorage.getInstance()
+        val storage = firebaseStorage.getReference("Pesquisa")
+        val fileReference = storage.child("search.txt")
+
+        uri.apply {
+            fileReference
+                .putFile(this)
+                .addOnSuccessListener {
+                    Toast.makeText(this@PesquisaImagens, "Arquivo Enviado ao Firebase Storage!", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this@PesquisaImagens, "Arquivo Não Enviado ao Firebase Storage!", Toast.LENGTH_SHORT).show()
+                }
+        }
+    }
+
+
+    @SuppressLint("SimpleDateFormat")
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun saveFile(): Uri {
+        val file = getDisc()
+
+        if (!file.exists() && !file.mkdirs()) {
+            file.mkdir()
+        }
+
+        val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy_HH.mm.ss")
+        val date = simpleDateFormat.format(Date())
+        val name = "search.txt"
+        val fileName = file.absolutePath + "/" + name
+        val newFile = File(fileName)
+
+        try {
+
+            val fileWriter = FileWriter(newFile, true)
+            newFile.appendText("Data: $date; Palavra Pesquisada: " + textSearch.text.toString() + "; \n")
+            fileWriter.flush()
+            fileWriter.close()
+
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+            Toast.makeText(this, "Arquivo para o Firebase Storage Inexistente!", Toast.LENGTH_SHORT).show()
+
+        } catch (e: IOException) {
+            e.printStackTrace()
+            Toast.makeText(this, "Falha ao Salvar o Arquivo!", Toast.LENGTH_SHORT).show()
+
+        }
+
+        return Uri.parse(newFile.toUri().toString())
+
+    }
+
+
+    private fun getDisc(): File {
+        val file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+        return File(file, "NASA_SEARCH")
     }
 
 }

@@ -50,6 +50,9 @@ android {
 
 dependencies {
 
+    //Firebase Storage
+    implementation 'com.google.firebase:firebase-storage-ktx:20.0.1'
+
     //FireBase RealTime DataBase
     implementation 'com.google.firebase:firebase-database-ktx:20.0.4'
 

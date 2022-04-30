@@ -39,7 +39,7 @@ data class ItensData(
     val dateCreated: String,
     @SerializedName("secondary_creator")
     val creators: String? = null,
-    val keywords: List<String>
+    val keywords: List<String>? = null
 )
 
 // Classe que contém o link da imagem gerada pela API NASA:
