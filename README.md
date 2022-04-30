@@ -1,7 +1,15 @@
 # NasaProjetoIntegrador
-Aplicativo Desenvolvido para a prática da Linguagem Kotlin com o Tema NASA voltado para o público infantil com o intuito de levar um pouco sobrer astronomia as crianças. 
+Aplicativo Desenvolvido para a prática da Linguagem Kotlin com o Tema NASA voltado para o público infantil com o intuito de levar um pouco sobre astronomia as crianças. 
 
-Consumindo API da NASA para exibir imagens do Sistema Solar utilizando Retrofit, Banco de Dados com a biblioteca ROOM, Shared Preferences para armazenar o nome e imagem do Avatar do Perfil do Astronauta, Firebase Authentication para Cadastro de Usuário e Autenticação de Login do Usuário, Tela de Abertura e demais Telas com animações utilizando a biblioteca Lottie.
+Linguagem Kotlin utilizando:
+Retrofit, Courotines e Flow para consumir a API da NASA de modo exibir imagens do Sistema Solar;
+Aplicação da Arquiteura MVVM ao projeto utilizando viewModels;
+Banco de Dados com a biblioteca ROOM para armazenar as imagens favoritas;
+Firebase Authentication para Cadastro de Usuário e Autenticação de Login do Usuário;
+Firebase Realtime Database para atualização das informações dos planetas e para atualização do conteúdo das curiosidades do Sistema Solar;
+Firebase Storage para o armazenamneto do texto pesquisado pelo Usuário para encontrar as imagens da API da NASA;
+Tela de Abertura e demais Telas com animações utilizando a biblioteca Lottie;
+Shared Preferences para armazenar o nome e imagem do Avatar do Perfil do Astronauta; 
 
 ## TELA DE ABERTURA DO APLICATIVO
 
