@@ -65,9 +65,11 @@ class CadastroUsuario : AppCompatActivity() {
 
         } else if (textoSenha.text?.toString() != textoSenhaConfirma.text?.toString()) {
             Toast.makeText(this, "Verifique as Senhas Digitadas!", Toast.LENGTH_LONG).show()
+            progressBar.isVisible = false
 
         } else if (textoSenha.text.length <= 5 || textoSenhaConfirma.text.length <= 5) {
             Toast.makeText(this, "As Senhas devem conter 6 Números!", Toast.LENGTH_LONG).show()
+            progressBar.isVisible = false
 
         } else if ((!textoEmail.text.toString().contains("@") ||
                     !textoEmail.text.toString().contains(".") ||

@@ -26,7 +26,7 @@ Linguagem Kotlin utilizando:
 
 ## TELA DE LOGIN
 
-![Screen](screen/05_tela de login.png)
+![Screen](screen/05_tela_login.png)
 
 ## TELA DE MENU PRINCIPAL
 
@@ -36,7 +36,9 @@ Linguagem Kotlin utilizando:
 
 ## TELA DE INFORMAÇÕES DOS PLANETAS
 
-![Screen](screen/08_planetas.png)
+![Screen](screen/23_detalhe_planeta.jpg)
+
+![Screen](screen/24_detalhe_planeta.jpg)
 
 ## TELA DE DETALHE DE CADA PLANETA
 
@@ -44,11 +46,25 @@ Linguagem Kotlin utilizando:
 
 ## TELA DE INFORMAÇÃO DO SISTEMA SOLAR
 
-![Screen](screen/09_sistema_solar.png)
+![Screen](screen/09_sistema_solar.jpg)
+
+![Screen](screen/09A_sistema_solar.jpg)
 
 ## TELA DE CURIOSIDADES
 
-![Screen](screen/10_curiosidades.png)
+![Screen](screen/10_curiosidades.jpg)
+
+![Screen](screen/10A_curiosidades.jpg)
+
+![Screen](screen/10B_curiosidades.jpg)
+
+![Screen](screen/10C_curiosidades.jpg)
+
+![Screen](screen/10D_curiosidades.jpg)
+
+![Screen](screen/10E_curiosidades.jpg)
+
+![Screen](screen/10F_curiosidades.jpg)
 
 ## TELA DE PESQUISA DE IMAGENS DA NASA
 
@@ -72,9 +88,9 @@ Linguagem Kotlin utilizando:
 
 ![Screen](screen/16_detalhe_imagem.png)
 
-![Screen](screen/17_salvar_imagem.png)
-
 ### Salvando uma imagem
+
+![Screen](screen/17_salvar_imagem.png)
 
 ![Screen](screen/18_imagem_salva.png)
 

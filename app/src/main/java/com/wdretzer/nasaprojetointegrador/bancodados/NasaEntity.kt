@@ -9,7 +9,7 @@ import com.wdretzer.nasaprojetointegrador.data.ItensData
 import com.wdretzer.nasaprojetointegrador.data.Links
 
 
-@Entity(tableName = "nasaBD")
+@Entity(tableName = "nasaApp")
 class NasaEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
