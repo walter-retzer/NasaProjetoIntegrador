@@ -19,7 +19,11 @@ import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.cadastro.CadastroUsuario
 import com.wdretzer.nasaprojetointegrador.dialogfragments.DialogFragmentCadastro
@@ -45,6 +49,8 @@ class Login : AppCompatActivity() {
         get() = findViewById(R.id.progress_bar_login)
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var analytics: FirebaseAnalytics
+
     val dialogCorrect = DialogFragmentCadastro()
 
     private val googleSignInRequest = registerForActivityResult(
@@ -70,6 +76,7 @@ class Login : AppCompatActivity() {
         getSupportActionBar()?.hide()
 
         auth = FirebaseAuth.getInstance()
+        analytics = Firebase.analytics
         buttonLogin.setOnClickListener { checkDados() }
         buttonCadastrar.setOnClickListener { sendToCadastroUsuario() }
         buttonGoogle.setOnClickListener { googleSignInRequest.launch(googleSignInOptions) }
@@ -105,6 +112,11 @@ class Login : AppCompatActivity() {
 
 
     private fun checkLoginUser() {
+
+        analytics.logEvent(FirebaseAnalytics.Event.LOGIN){
+            param(FirebaseAnalytics.Param.METHOD, "login")
+        }
+
         auth.signInWithEmailAndPassword(
             textEmail.text.toString(),
             textPassword.text.toString()
@@ -179,6 +191,11 @@ class Login : AppCompatActivity() {
 
 
     private fun loginFacebook() {
+
+        analytics.logEvent(FirebaseAnalytics.Event.LOGIN){
+            param(FirebaseAnalytics.Param.METHOD, "facebook")
+        }
+
         loginManager.logInWithReadPermissions(
             this,
             callbackManager,
@@ -188,6 +205,11 @@ class Login : AppCompatActivity() {
 
 
     private fun loginGoogle(result: GoogleLogInActivityContract.Result) {
+
+        analytics.logEvent(FirebaseAnalytics.Event.LOGIN){
+            param(FirebaseAnalytics.Param.METHOD, "google")
+        }
+
         if (result is GoogleLogInActivityContract.Result.Success) {
             val token = result.googleSignInAccount.idToken
             Toast.makeText(this, "Deu certo!! Token Google: $token", Toast.LENGTH_LONG).show()

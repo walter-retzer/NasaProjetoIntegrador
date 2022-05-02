@@ -5,26 +5,36 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.splashscreen.SplashActivity
 
 
-class StartActivity : AppCompatActivity() {
+class StartActivity : AppCompatActivity(R.layout.activity_start) {
+
+    var mMediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.wdretzer.nasaprojetointegrador.R.layout.activity_start)
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
         getSupportActionBar()?.hide()
 
-        val song: MediaPlayer = MediaPlayer.create(this, com.wdretzer.nasaprojetointegrador.R.raw.cosmos)
-        song.isLooping = true
-        //song.start()
+        //mMediaPkayer is your variable
+        if (mMediaPlayer == null) {
+            mMediaPlayer = MediaPlayer.create(
+                this,
+                R.raw.song_foguete
+            ) //raw is the folder where you have the audio files or sounds
+            mMediaPlayer!!.isLooping = true //to repeat again n again
+            mMediaPlayer!!.start() //to start the sound
+
+        } else mMediaPlayer!!.start()
 
         // Iniciando as Telas de Boas Vindas:
         Handler().postDelayed({
+            mMediaPlayer!!.stop()
             val intent = Intent(this, SplashActivity::class.java)
             startActivity(intent)
-        }, 6000)
+        }, 30000)
     }
 }
