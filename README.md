@@ -8,7 +8,9 @@ Linguagem Kotlin utilizando:
 - Firebase Authentication para Cadastro de Usuário e Autenticação de Login do Usuário;
 - Firebase Realtime Database para atualização das informações dos planetas e para atualização do conteúdo das curiosidades do Sistema Solar;
 - Firebase Storage para o armazenamneto do texto pesquisado pelo Usuário para encontrar as imagens da API da NASA;
-- Firebase Cloud Messaging utilizado puh notification para os usuários do aplicativo;
+- Firebase Cloud Messaging utilizado para disparo de push notification aos usuários do aplicativo;
+- Firebase Analytics para a verificação de eventos da tela de Login do aplicativo;
+- Firebase Crashlytics para monitoramento de falhas do aplicativo;
 - Tela de Abertura e demais Telas com animações utilizando a biblioteca Lottie;
 - Shared Preferences para armazenar o nome e imagem do Avatar do Perfil do Astronauta; 
 
@@ -38,15 +40,15 @@ Linguagem Kotlin utilizando:
 
 ![Screen](screen/07_menu_principal.png)
 
+## TELA DOS PLANETAS
+
+![Screen](screen/08_planetas.png)
+
 ## TELA DE INFORMAÇÕES DOS PLANETAS
 
 ![Screen](screen/23_detalhe_planeta.jpg)
 
 ![Screen](screen/24_detalhe_planeta.jpg)
-
-## TELA DE DETALHE DE CADA PLANETA
-
-![Screen](screen/16_detalhe_planeta.png)
 
 ## TELA DE INFORMAÇÃO DO SISTEMA SOLAR
 
@@ -56,7 +58,7 @@ Linguagem Kotlin utilizando:
 
 ## TELA DE CURIOSIDADES
 
-![Screen](screen/10_curiosidades.jpg)
+![Screen](screen/10_curiosidade.jpg)
 
 ![Screen](screen/10A_curiosidades.jpg)
 
