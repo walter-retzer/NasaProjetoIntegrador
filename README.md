@@ -28,6 +28,10 @@ Linguagem Kotlin utilizando:
 
 ![Screen](screen/05_tela_login.png)
 
+## TELA DE CADASTRO
+
+![Screen](screen/05A_tela_login.png)
+
 ## TELA DE MENU PRINCIPAL
 
 ![Screen](screen/06_menu_principal.png)
