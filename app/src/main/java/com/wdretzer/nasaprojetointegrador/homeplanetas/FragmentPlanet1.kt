@@ -24,6 +24,7 @@ class FragmentPlanet1 : Fragment(R.layout.screen_planetas2) {
 
         Glide.with(this)
             .asGif()
+            //.load("https://media2.giphy.com/media/h8sRbOtj55JACfGn8R/200.gif")
             .load("https://thumbs.gfycat.com/HomelyDesertedEnglishsetter-size_restricted.gif")
             .into(sistemaSolar!!)
 

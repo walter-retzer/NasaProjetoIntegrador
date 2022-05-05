@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text"
-            android:maxLength="25"
+            android:maxLength="35"
             android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>

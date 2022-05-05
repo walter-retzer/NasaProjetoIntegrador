@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
@@ -41,7 +42,7 @@ class DetalheImagem : AppCompatActivity() {
     private val buttonPesquisaImagem: ImageView by lazy { findViewById(R.id.pesquisa_detalhe_img) }
     private val buttonShareImage: ImageView by lazy { findViewById(R.id.compartilhar_detalhe_img) }
     private val buttonSaveImage: ImageView by lazy { findViewById(R.id.salvar_detalhe_img) }
-    private val imagemDetalhe: ImageView by lazy { findViewById(R.id.img_detalhe_imagem) }
+    private val imagemDetalhe: ShapeableImageView by lazy { findViewById(R.id.img_detalhe_imagem) }
     private val textoDetalhe: TextView by lazy { findViewById(R.id.descricao_detalhe_img) }
     private val dataDetalhe: TextView by lazy { findViewById(R.id.data_detalhe_img) }
     private val criadoresDetalhe: TextView by lazy { findViewById(R.id.criador_detalhe_img) }

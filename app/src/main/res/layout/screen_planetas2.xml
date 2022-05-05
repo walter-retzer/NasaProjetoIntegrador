@@ -18,9 +18,9 @@
             android:id="@+id/text_sistema_solar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginEnd="15dp"
             android:padding="5dp"
             android:text="@string/descricao_solar"
             android:textAlignment="center"
@@ -45,8 +45,8 @@
             android:id="@+id/descricao_sistema_solar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:padding="5dp"
             android:text="@string/descricao_solar2"
             android:textAlignment="center"
@@ -70,8 +70,8 @@
             android:id="@+id/descricao_sistema_solar2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:padding="5dp"
             android:text="@string/tamanho_planetas"
             android:textAlignment="center"
@@ -95,14 +95,94 @@
             android:id="@+id/descricao_sistema_solar3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:padding="10dp"
             android:text="@string/rotation"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/info_extra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/background_item_plhome_cinza"
+            android:padding="10dp"
+            android:text="Planetas Anões"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/info_extra2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Muito ouvimos falar sobre Plutão, que já foi considerado o nono planeta do Sistema Solar e hoje é classificado como um planeta anão.
+Planetas anões são aqueles cujas massas são muito pequenas, de forma que eles não são os astros dominantes em suas órbitas e possuem luas que têm massa de valor muito próximo."
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/sistema_solar4"
+            android:layout_width="350dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/planetas_anoes"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+            app:srcCompat="@drawable/mercurio"
+            app:strokeColor="@color/cinza"
+            app:strokeWidth="5dp" />
+
+        <TextView
+            android:id="@+id/info_extra3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Atualmente, reconhecemos quatro planetas anões em nosso Sistema Solar, além de Plutão: Ceres, Haumea, Makemake e Éris."
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/titulo_pesquisa_extra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/background_item_plhome_cinza"
+            android:padding="10dp"
+            android:text="Exploração Extra"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/pesquisa_extra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:padding="5dp"
+            android:text="Continue sua exploração! Conheça algumas imagens dos Planetas Anões! Vá ao Menu Principal e no Item Pesquisar Imagens,
+pesquise por Imagens utilizando o nome: Planetas Anões"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titulo_pesquisa_extra_terra" />
 
     </LinearLayout>
 

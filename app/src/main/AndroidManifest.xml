@@ -20,6 +20,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NasaProjetoIntegrador">
+        <activity
+            android:name=".detalheplaneta.DetalhePlanetaTerra"
+            android:exported="true" />
+        <activity
+            android:name=".detalheplaneta.DetalhePlanetaNetuno"
+            android:exported="true" />
+        <activity
+            android:name=".detalheplaneta.DetalhePlanetaUrano"
+            android:exported="true" />
+        <activity
+            android:name=".detalheplaneta.DetalhePlanetaVenus"
+            android:exported="true" />
+        <activity
+            android:name=".detalheplaneta.DetalhePlanetaMercurio"
+            android:exported="true" />
+        <activity
+            android:name=".detalheplaneta.DetalhePlanetaJupiter"
+            android:exported="true" />
+        <activity
+            android:name=".detalheplaneta.DetalhePlanetaSaturno"
+            android:exported="true" />
 
         <service
             android:name=".util.FirebaseMessageService"
@@ -71,7 +92,7 @@
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".detalheplaneta.DetalhePlaneta"
+            android:name=".detalheplaneta.DetalhePlanetaMarte"
             android:exported="true" />
         <activity
             android:name=".pesquisaimg.PesquisaImagens"

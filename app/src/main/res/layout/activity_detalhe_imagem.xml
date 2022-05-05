@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/simple_background"
     tools:context=".imagensnasa.DetalheImagem">
 
     <TextView
@@ -24,20 +24,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img_detalhe_imagem"
         android:layout_width="350dp"
         android:layout_height="300dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/card_background_fav"
-        android:backgroundTint="@color/cinza"
+        android:background="@android:color/transparent"
         android:padding="5dp"
         android:scaleType="fitXY"
-        android:src="@drawable/rover"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titulo_detalhe_imagem" />
+        app:layout_constraintTop_toBottomOf="@+id/titulo_detalhe_imagem"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+        app:srcCompat="@drawable/rover"
+        app:strokeColor="@color/cinza"
+        app:strokeWidth="3dp" />
 
     <ScrollView
         android:layout_width="match_parent"

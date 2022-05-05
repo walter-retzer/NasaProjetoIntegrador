@@ -35,6 +35,6 @@ class StartActivity : AppCompatActivity(R.layout.activity_start) {
             mMediaPlayer!!.stop()
             val intent = Intent(this, SplashActivity::class.java)
             startActivity(intent)
-        }, 30000)
+        }, 3000)
     }
 }

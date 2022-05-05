@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/simple_background"
+    android:fillViewport="true"
+    tools:context=".detalheplaneta.DetalhePlanetaJupiter">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".detalheplaneta.DetalhePlanetaJupiter">
+
+        <TextView
+            android:id="@+id/titulo_detalhe_jupiter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/background_text_splash"
+            android:padding="10dp"
+            android:text="Planeta Jupiter"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_detalhe_jupiter"
+            android:layout_width="350dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="12dp"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titulo_detalhe_jupiter"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+            app:srcCompat="@drawable/planet_jupiter"
+            app:strokeColor="@color/cinza"
+            app:strokeWidth="3dp" />
+
+        <TextView
+            android:id="@+id/descricao_jupiter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text=" "
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_detalhe_jupiter" />
+
+        <TextView
+            android:id="@+id/info_extra_jupiter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/background_item_plhome_cinza"
+            android:padding="10dp"
+            android:text="Informações Extras"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descricao_jupiter" />
+
+        <TextView
+            android:id="@+id/info_extra2_jupiter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Informações Extras: "
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_extra_jupiter" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imagem_jupiter_extra1"
+            android:layout_width="175dp"
+            android:layout_height="175dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/transparent"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toStartOf="@+id/imagem_jupiter_extra2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_extra2_jupiter"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+            app:srcCompat="@drawable/planet_jupiter"
+            app:strokeColor="@color/cinza"
+            app:strokeWidth="3dp" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imagem_jupiter_extra2"
+            android:layout_width="175dp"
+            android:layout_height="175dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/transparent"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imagem_jupiter_extra1"
+            app:layout_constraintTop_toBottomOf="@+id/info_extra2_jupiter"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+            app:srcCompat="@drawable/planet_jupiter"
+            app:strokeColor="@color/cinza"
+            app:strokeWidth="3dp" />
+
+        <TextView
+            android:id="@+id/titulo_pesquisa_extra_jupiter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/background_item_plhome_cinza"
+            android:padding="10dp"
+            android:text="Exploração Extra"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imagem_jupiter_extra2" />
+
+        <TextView
+            android:id="@+id/pesquisa_extra_jupiter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:padding="5dp"
+            android:text="Exploração Extra: "
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titulo_pesquisa_extra_jupiter" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
