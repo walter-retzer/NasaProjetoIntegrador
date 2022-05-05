@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
@@ -64,78 +65,99 @@ class FragmentPlanet2 : Fragment(R.layout.screen_planetas3) {
     }
 
     private fun curiosity01() {
-        stateClick = (!stateClick!!)
 
-        if (stateClick == true) {
+        try {
+            stateClick = (!stateClick!!)
 
-            Glide.with(this)
-                .load(itemUpdate?.imagemResposta1)
-                .placeholder(R.drawable.interrogation)
-                .error(R.drawable.icon_error)
-                .into(imagemResposta1!!)
+            if (stateClick == true) {
 
-            textoResposta1?.text = itemUpdate?.resposta1
+                Glide.with(this)
+                    .load(itemUpdate?.imagemResposta1)
+                    .placeholder(R.drawable.interrogation)
+                    .error(R.drawable.icon_error)
+                    .into(imagemResposta1!!)
 
-        } else {
+                textoResposta1?.text = itemUpdate?.resposta1
 
-            Glide.with(this)
-                .load(R.drawable.interrogation)
-                .placeholder(R.drawable.interrogation)
-                .error(R.drawable.icon_error)
-                .into(imagemResposta1!!)
+            } else {
 
-            textoResposta1?.text = "Resposta: *******"
+                Glide.with(this)
+                    .load(R.drawable.interrogation)
+                    .placeholder(R.drawable.interrogation)
+                    .error(R.drawable.icon_error)
+                    .into(imagemResposta1!!)
+
+                textoResposta1?.text = "Resposta: *******"
+            }
+
+        } catch (e: Exception){
+            Toast.makeText(context, "Erro na requisição Firebase! Pergunta1", Toast.LENGTH_LONG).show()
         }
+
     }
 
     private fun curiosity02() {
-        stateClick2 = (!stateClick2!!)
 
-        if (stateClick2 == true) {
+        try {
+            stateClick2 = (!stateClick2!!)
 
-            Glide.with(this)
-                .load(itemUpdate?.imagemResposta2)
-                .placeholder(R.drawable.interrogation)
-                .error(R.drawable.icon_error)
-                .into(imagemResposta2!!)
+            if (stateClick2 == true) {
 
-            textoResposta2?.text = itemUpdate?.resposta2
+                Glide.with(this)
+                    .load(itemUpdate?.imagemResposta2)
+                    .placeholder(R.drawable.interrogation)
+                    .error(R.drawable.icon_error)
+                    .into(imagemResposta2!!)
 
-        } else {
+                textoResposta2?.text = itemUpdate?.resposta2
 
-            Glide.with(this)
-                .load(R.drawable.interrogation)
-                .placeholder(R.drawable.interrogation)
-                .error(R.drawable.icon_error)
-                .into(imagemResposta2!!)
+            } else {
 
-            textoResposta2?.text = "Resposta: *******"
+                Glide.with(this)
+                    .load(R.drawable.interrogation)
+                    .placeholder(R.drawable.interrogation)
+                    .error(R.drawable.icon_error)
+                    .into(imagemResposta2!!)
+
+                textoResposta2?.text = "Resposta: *******"
+            }
+
+        } catch (e: Exception){
+            Toast.makeText(context, "Erro na requisição Firebase! Pergunta2", Toast.LENGTH_LONG).show()
         }
+
     }
 
     private fun curiosity03() {
-        stateClick3 = (!stateClick3!!)
 
-        if (stateClick3 == true) {
+        try {
+            stateClick3 = (!stateClick3!!)
 
-            Glide.with(this)
-                .load(itemUpdate?.imagemResposta3)
-                .placeholder(R.drawable.interrogation)
-                .error(R.drawable.icon_error)
-                .into(imagemResposta3!!)
+            if (stateClick3 == true) {
 
-            textoResposta3?.text = itemUpdate?.resposta3
+                Glide.with(this)
+                    .load(itemUpdate?.imagemResposta3)
+                    .placeholder(R.drawable.interrogation)
+                    .error(R.drawable.icon_error)
+                    .into(imagemResposta3!!)
 
-        } else {
+                textoResposta3?.text = itemUpdate?.resposta3
 
-            Glide.with(this)
-                .load(R.drawable.interrogation)
-                .placeholder(R.drawable.interrogation)
-                .error(R.drawable.icon_error)
-                .into(imagemResposta3!!)
+            } else {
 
-            textoResposta3?.text = "Resposta: *******"
+                Glide.with(this)
+                    .load(R.drawable.interrogation)
+                    .placeholder(R.drawable.interrogation)
+                    .error(R.drawable.icon_error)
+                    .into(imagemResposta3!!)
+
+                textoResposta3?.text = "Resposta: *******"
+            }
+        } catch (e: Exception){
+            Toast.makeText(context, "Erro na requisição Firebase! Pergunta3", Toast.LENGTH_LONG).show()
         }
+
+
     }
 
     private fun getInfo() {
@@ -144,18 +166,22 @@ class FragmentPlanet2 : Fragment(R.layout.screen_planetas3) {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                val matches = dataSnapshot.getValue<HashMap<String, RealTimeFirebase>>()
-                matches?.let {
-                    val item = it.values
+                try {
+                    val matches = dataSnapshot.getValue<HashMap<String, RealTimeFirebase>>()
+                    matches?.let {
+                        val item = it.values
 
-                    item.map {
-                        itemUpdate = it
+                        item.map {
+                            itemUpdate = it
+                        }
                     }
-                }
+                    textoPergunta1?.text = itemUpdate?.pergunta1
+                    textoPergunta2?.text = itemUpdate?.pergunta2
+                    textoPergunta3?.text = itemUpdate?.pergunta3
 
-                textoPergunta1?.text = itemUpdate?.pergunta1
-                textoPergunta2?.text = itemUpdate?.pergunta2
-                textoPergunta3?.text = itemUpdate?.pergunta3
+                } catch (e: Exception){
+                    Toast.makeText(context, "Erro na requisição Firebase!", Toast.LENGTH_LONG).show()
+                }
 
             }
 

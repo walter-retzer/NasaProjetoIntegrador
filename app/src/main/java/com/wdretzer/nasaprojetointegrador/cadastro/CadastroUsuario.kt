@@ -7,17 +7,24 @@ import android.os.Handler
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.ktx.Firebase
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.dialogfragments.DialogFragmentCadastro
 import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
+import com.wdretzer.nasaprojetointegrador.util.SharedPrefNasa
 
 
 class CadastroUsuario : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var analytics: FirebaseAnalytics
 
+    val sharedPref: SharedPrefNasa = SharedPrefNasa.instance
     val dialogCorrect = DialogFragmentCadastro()
 
     private val btnCadastrar: Button
@@ -46,9 +53,9 @@ class CadastroUsuario : AppCompatActivity() {
         getSupportActionBar()?.hide()
 
         auth = FirebaseAuth.getInstance()
+        analytics = Firebase.analytics
 
         btnCadastrar.setOnClickListener { cadastrarDados() }
-
     }
 
     private fun cadastrarDados() {
@@ -79,37 +86,38 @@ class CadastroUsuario : AppCompatActivity() {
             Toast.makeText(this, "O Email digitado não é válido!", Toast.LENGTH_LONG).show()
             progressBar.isVisible = false
 
-        } else if ((textoSenha.text?.toString() == textoSenhaConfirma.text?.toString())
-            && (textoEmail.text.toString().contains("@") ||
-                    textoEmail.text.toString().contains(".") ||
-                    android.util.Patterns.EMAIL_ADDRESS.matcher(textoEmail.text.toString())
-                        .matches())
+        } else if ((textoSenha.text?.toString() == textoSenhaConfirma.text?.toString()) &&
+            (textoEmail.text.toString().contains("@") ||
+            textoEmail.text.toString().contains(".") ||
+            android.util.Patterns.EMAIL_ADDRESS.matcher(textoEmail.text.toString()).matches())
         ) {
 
             btnCadastrar.isVisible = false
             auth.createUserWithEmailAndPassword(
                 textoEmail.text.toString(),
                 textoSenha.text.toString()
+
             ).addOnCompleteListener {
                 if (it.isSuccessful) {
                     Toast.makeText(this, "Cadastro Realizado com Sucesso!", Toast.LENGTH_LONG)
                         .show()
 
+                    Handler().postDelayed({
+                        userAuth()
+                    }, 5000)
+
+                    Handler().postDelayed({
+                        checkUser()
+                    }, 10000)
+
                 } else {
                     Toast.makeText(this, "Deu erro ao Fazer o Cadastro!!", Toast.LENGTH_LONG)
                         .show()
+                    progressBar.isVisible = false
+                    btnCadastrar.isVisible = true
                 }
             }
-
-            Handler().postDelayed({
-                userAuth()
-            }, 5000)
-
-            Handler().postDelayed({
-                checkUser()
-            }, 10000)
         }
-
     }
 
     private fun userAuth() {
@@ -121,6 +129,10 @@ class CadastroUsuario : AppCompatActivity() {
                 if (it.isSuccessful) {
                     Toast.makeText(this, "Autenticando Login...", Toast.LENGTH_LONG).show()
 
+                    analytics.logEvent(FirebaseAnalytics.Event.LOGIN){
+                        param(FirebaseAnalytics.Param.METHOD, "login")
+                    }
+
                     Handler().postDelayed({
                         dialogCorrect.show(supportFragmentManager, dialogCorrect.tag)
                     }, 3000)
@@ -128,6 +140,7 @@ class CadastroUsuario : AppCompatActivity() {
                 } else {
                     Toast.makeText(this, "Não foi possível realizar o Login!", Toast.LENGTH_LONG)
                         .show()
+
                 }
             }
     }
@@ -136,9 +149,13 @@ class CadastroUsuario : AppCompatActivity() {
         if (auth.currentUser != null) {
             auth.currentUser?.apply {
                 updateProfile(userProfileChangeRequest {
+
+                    saveNamePerfil(textoNome.text.toString())
+
                     displayName = textoNome.text.toString()
                     photoUri =
                         Uri.parse("https://img.freepik.com/free-vector/cute-astronaut-jumping-with-metal-hands-cartoon-vector-icon-illustration-science-technology-icon-concept-isolated-premium-vector-flat-cartoon-style_138676-4189.jpg?t=st=1650992946~exp=1650993546~hmac=5f1baeadf83b886a56d751df0bce8ebc501b4ccc661e192158703c34e2d8d019&w=740")
+
                 }).addOnCompleteListener {
 
                     if (it.isSuccessful) {
@@ -166,4 +183,10 @@ class CadastroUsuario : AppCompatActivity() {
         progressBar.isVisible = false
         btnCadastrar.isVisible = true
     }
+
+    fun saveNamePerfil(name: String) {
+        sharedPref.saveString("Astronauta", name)
+    }
+
+
 }

@@ -3,6 +3,7 @@ package com.wdretzer.nasaprojetointegrador.detalheplaneta
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
@@ -52,40 +53,46 @@ class DetalhePlaneta : AppCompatActivity() {
         ref.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var itemUpdate: RealTimeFirebase? = null
-                val matches = dataSnapshot.getValue<HashMap<String, RealTimeFirebase>>()
-                matches?.let {
-                    val item = it.values
 
-                    item.map {
-                        itemUpdate = it
+                try {
+                    var itemUpdate: RealTimeFirebase? = null
+                    val matches = dataSnapshot.getValue<HashMap<String, RealTimeFirebase>>()
+                    matches?.let {
+                        val item = it.values
+
+                        item.map {
+                            itemUpdate = it
+                        }
                     }
+
+                    Glide.with(this@DetalhePlaneta)
+                        .asGif()
+                        .load(itemUpdate?.imagemMarte)
+                        .placeholder(R.drawable.marte)
+                        .error(R.drawable.icon_error)
+                        .into(imagemMarte)
+
+                    Glide.with(this@DetalhePlaneta)
+                        .asGif()
+                        .load(itemUpdate?.imagemExtraMarte1)
+                        .placeholder(R.drawable.rover1)
+                        .error(R.drawable.icon_error)
+                        .into(imagemExtraMarte1)
+
+                    Glide.with(this@DetalhePlaneta)
+                        .asGif()
+                        .load(itemUpdate?.imagemExtraMarte2)
+                        .placeholder(R.drawable.rover1)
+                        .error(R.drawable.icon_error)
+                        .into(imagemExtraMarte2)
+
+                    detalheMarte.text = itemUpdate?.detalheMarte
+                    extraMarte.text = itemUpdate?.extraMarte
+                    keywordsMarte.text = itemUpdate?.keywordsMarte
+
+                } catch (e: Exception){
+                    Toast.makeText(this@DetalhePlaneta, "Erro na requisição Firebase!", Toast.LENGTH_LONG).show()
                 }
-
-                Glide.with(this@DetalhePlaneta)
-                    .asGif()
-                    .load(itemUpdate?.imagemMarte)
-                    .placeholder(R.drawable.marte)
-                    .error(R.drawable.icon_error)
-                    .into(imagemMarte)
-
-                Glide.with(this@DetalhePlaneta)
-                    .asGif()
-                    .load(itemUpdate?.imagemExtraMarte1)
-                    .placeholder(R.drawable.rover1)
-                    .error(R.drawable.icon_error)
-                    .into(imagemExtraMarte1)
-
-                Glide.with(this@DetalhePlaneta)
-                    .asGif()
-                    .load(itemUpdate?.imagemExtraMarte2)
-                    .placeholder(R.drawable.rover1)
-                    .error(R.drawable.icon_error)
-                    .into(imagemExtraMarte2)
-
-                detalheMarte.text = itemUpdate?.detalheMarte
-                extraMarte.text = itemUpdate?.extraMarte
-                keywordsMarte.text = itemUpdate?.keywordsMarte
             }
 
             override fun onCancelled(error: DatabaseError) {

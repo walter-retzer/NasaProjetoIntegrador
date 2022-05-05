@@ -7,10 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Base64
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.FrameLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.facebook.CallbackManager
@@ -27,6 +24,7 @@ import com.google.firebase.ktx.Firebase
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.cadastro.CadastroUsuario
 import com.wdretzer.nasaprojetointegrador.dialogfragments.DialogFragmentCadastro
+import com.wdretzer.nasaprojetointegrador.dialogfragments.ForgotPasswordDialogFragment
 import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
 import com.wdretzer.nasaprojetointegrador.util.GoogleLogInActivityContract
 import java.security.MessageDigest
@@ -42,6 +40,9 @@ class Login : AppCompatActivity() {
     private val textEmail: EditText
         get() = findViewById(R.id.input_email_login)
 
+    private val forgotPassword: TextView
+        get() = findViewById(R.id.texto_reset_password)
+
     private val textPassword: EditText
         get() = findViewById(R.id.input_password_login)
 
@@ -52,6 +53,7 @@ class Login : AppCompatActivity() {
     private lateinit var analytics: FirebaseAnalytics
 
     val dialogCorrect = DialogFragmentCadastro()
+    val dialogForgetPassword = ForgotPasswordDialogFragment()
 
     private val googleSignInRequest = registerForActivityResult(
         GoogleLogInActivityContract(),
@@ -81,8 +83,20 @@ class Login : AppCompatActivity() {
         buttonCadastrar.setOnClickListener { sendToCadastroUsuario() }
         buttonGoogle.setOnClickListener { googleSignInRequest.launch(googleSignInOptions) }
         buttonFacebook.setOnClickListener { loginFacebook() }
+        forgotPassword.setOnClickListener {  dialogForgetPassword.show(supportFragmentManager, dialogForgetPassword.tag) }
         registerFacebbokCallback()
     }
+
+    private fun resetePasswodFirebase(){
+        auth.sendPasswordResetEmail(textEmail.text.toString()).addOnCompleteListener {
+            if (it.isSuccessful){
+
+            }else{
+
+            }
+        }
+    }
+
 
     private fun checkDados() {
 
