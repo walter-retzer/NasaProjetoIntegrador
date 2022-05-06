@@ -55,6 +55,7 @@ class Login : AppCompatActivity() {
     val dialogCorrect = DialogFragmentCadastro()
     val dialogForgetPassword = ForgotPasswordDialogFragment()
 
+
     private val googleSignInRequest = registerForActivityResult(
         GoogleLogInActivityContract(),
         ::loginGoogle
@@ -85,16 +86,6 @@ class Login : AppCompatActivity() {
         buttonFacebook.setOnClickListener { loginFacebook() }
         forgotPassword.setOnClickListener {  dialogForgetPassword.show(supportFragmentManager, dialogForgetPassword.tag) }
         registerFacebbokCallback()
-    }
-
-    private fun resetePasswodFirebase(){
-        auth.sendPasswordResetEmail(textEmail.text.toString()).addOnCompleteListener {
-            if (it.isSuccessful){
-
-            }else{
-
-            }
-        }
     }
 
 
@@ -196,8 +187,8 @@ class Login : AppCompatActivity() {
 
             override fun onSuccess(result: LoginResult) {
                 val token = result.accessToken.token
-                Toast.makeText(this@Login, "Deu certo!! Token Facebook: $token", Toast.LENGTH_LONG)
-                    .show()
+//                Toast.makeText(this@Login, "Deu certo!! Token Facebook: $token", Toast.LENGTH_LONG)
+//                    .show()
                 sendToInicioGuia()
             }
         })
@@ -220,17 +211,25 @@ class Login : AppCompatActivity() {
 
     private fun loginGoogle(result: GoogleLogInActivityContract.Result) {
 
+        progressBar.isVisible = true
+
         analytics.logEvent(FirebaseAnalytics.Event.LOGIN){
             param(FirebaseAnalytics.Param.METHOD, "google")
         }
 
         if (result is GoogleLogInActivityContract.Result.Success) {
             val token = result.googleSignInAccount.idToken
-            Toast.makeText(this, "Deu certo!! Token Google: $token", Toast.LENGTH_LONG).show()
-            sendToInicioGuia()
+            //Toast.makeText(this, "Deu certo!! Token Google: $token", Toast.LENGTH_LONG).show()
+            progressBar.isVisible = false
+            dialogCorrect.show(supportFragmentManager, dialogCorrect.tag)
+            Handler().postDelayed({
+                sendToInicioGuia()
+            }, 2000)
+
         }
 
         if (result is GoogleLogInActivityContract.Result.Error) {
+            progressBar.isVisible = false
             Toast.makeText(this, "Deu erro ao fazer login com o Google", Toast.LENGTH_LONG).show()
         }
     }

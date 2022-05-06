@@ -39,6 +39,10 @@ class Perfil : AppCompatActivity() {
         DadosPerfil(imagemPerfil = R.drawable.perfil10, stateImg = false),
         DadosPerfil(imagemPerfil = R.drawable.perfil11, stateImg = false),
         DadosPerfil(imagemPerfil = R.drawable.perfil12, stateImg = false),
+        DadosPerfil(imagemPerfil = R.drawable.perfil16, stateImg = false),
+        DadosPerfil(imagemPerfil = R.drawable.perfil17, stateImg = false),
+        DadosPerfil(imagemPerfil = R.drawable.perfil18, stateImg = false),
+        DadosPerfil(imagemPerfil = R.drawable.perfil19, stateImg = false),
 
         )
 

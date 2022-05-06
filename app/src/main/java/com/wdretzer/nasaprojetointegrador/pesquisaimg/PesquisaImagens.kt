@@ -25,7 +25,10 @@ import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.imagensnasa.ImgensNasa
-import java.io.*
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileWriter
+import java.io.IOException
 import java.util.*
 
 
@@ -132,10 +135,10 @@ class PesquisaImagens : AppCompatActivity() {
             fileReference
                 .putFile(this)
                 .addOnSuccessListener {
-                    Toast.makeText(this@PesquisaImagens, "Arquivo Enviado ao Firebase Storage!", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this@PesquisaImagens, "Arquivo Enviado ao Firebase Storage!", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(this@PesquisaImagens, "Arquivo Não Enviado ao Firebase Storage!", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this@PesquisaImagens, "Arquivo Não Enviado ao Firebase Storage!", Toast.LENGTH_SHORT).show()
                 }
         }
     }
@@ -165,11 +168,11 @@ class PesquisaImagens : AppCompatActivity() {
 
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
-            Toast.makeText(this, "Arquivo para o Firebase Storage Inexistente!", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "Arquivo para o Firebase Storage Inexistente!", Toast.LENGTH_SHORT).show()
 
         } catch (e: IOException) {
             e.printStackTrace()
-            Toast.makeText(this, "Falha ao Salvar o Arquivo!", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "Falha ao Salvar o Arquivo!", Toast.LENGTH_SHORT).show()
 
         }
 

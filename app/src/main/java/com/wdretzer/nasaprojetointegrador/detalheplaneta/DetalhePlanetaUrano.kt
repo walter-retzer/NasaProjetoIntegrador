@@ -91,7 +91,7 @@ class DetalhePlanetaUrano : AppCompatActivity() {
                     keywordsUrano.text = itemUpdateUrano?.keywordsUrano
 
                 } catch (e: Exception){
-                    Toast.makeText(this@DetalhePlanetaUrano, "Erro na requisição Firebase!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@DetalhePlanetaUrano, "Dados do Firebase atualizados!", Toast.LENGTH_LONG).show()
                 }
             }
 

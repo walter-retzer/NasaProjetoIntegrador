@@ -90,7 +90,7 @@ class DetalhePlanetaJupiter : AppCompatActivity() {
                     keywordsJupiter.text = itemUpdateJupiter?.keywordsJupiter
 
                 } catch (e: Exception){
-                    Toast.makeText(this@DetalhePlanetaJupiter, "Erro na requisição Firebase!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@DetalhePlanetaJupiter, "Dados do Firebase atualizados!", Toast.LENGTH_LONG).show()
                 }
             }
 

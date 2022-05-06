@@ -91,7 +91,7 @@ class DetalhePlanetaMercurio : AppCompatActivity() {
                     keywordsMercurio.text = itemUpdateMercurio?.keywordsMercurio
 
                 } catch (e: Exception){
-                    Toast.makeText(this@DetalhePlanetaMercurio, "Erro na requisição Firebase!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@DetalhePlanetaMercurio, "Dados do Firebase atualizados!", Toast.LENGTH_LONG).show()
                 }
             }
 

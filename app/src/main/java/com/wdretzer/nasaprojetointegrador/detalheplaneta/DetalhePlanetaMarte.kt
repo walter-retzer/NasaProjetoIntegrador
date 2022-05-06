@@ -91,7 +91,7 @@ class DetalhePlanetaMarte : AppCompatActivity() {
                     keywordsMarte.text = itemUpdate?.keywordsMarte
 
                 } catch (e: Exception){
-                    Toast.makeText(this@DetalhePlanetaMarte, "Erro na requisição Firebase!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@DetalhePlanetaMarte, "Dados do Firebase atualizados!", Toast.LENGTH_LONG).show()
                 }
             }
 

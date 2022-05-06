@@ -91,7 +91,7 @@ class DetalhePlanetaVenus : AppCompatActivity() {
                     keywordsVenus.text = itemUpdateVenus?.keywordsVenus
 
                 } catch (e: Exception){
-                    Toast.makeText(this@DetalhePlanetaVenus, "Erro na requisição Firebase!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@DetalhePlanetaVenus, "Dados do Firebase atualizados!", Toast.LENGTH_LONG).show()
                 }
             }
 

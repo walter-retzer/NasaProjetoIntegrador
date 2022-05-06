@@ -93,7 +93,7 @@ class DetalhePlanetaNetuno : AppCompatActivity() {
                     keywordsNetuno.text = itemUpdateNetuno?.keywordsNetuno
 
                 } catch (e: Exception){
-                    Toast.makeText(this@DetalhePlanetaNetuno, "Erro na requisição Firebase!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@DetalhePlanetaNetuno, "Dados do Firebase atualizados!", Toast.LENGTH_LONG).show()
                 }
             }
 

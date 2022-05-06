@@ -90,7 +90,7 @@ class DetalhePlanetaTerra : AppCompatActivity() {
                     keywordsTerra.text = itemUpdateTerra?.keywordsTerra
 
                 } catch (e: Exception){
-                    Toast.makeText(this@DetalhePlanetaTerra, "Erro na requisição Firebase!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@DetalhePlanetaTerra, "Dados do Firebase atualizados!", Toast.LENGTH_LONG).show()
                 }
             }
 

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.RelativeLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
@@ -73,7 +72,7 @@ class InicioGuia : AppCompatActivity() {
 
             // Log and toast
             Log.d("TOKEN FIREBASE", token)
-            Toast.makeText(baseContext, "Token Firebase: $token", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(baseContext, "Token Firebase: $token", Toast.LENGTH_SHORT).show()
         })
     }
 }
