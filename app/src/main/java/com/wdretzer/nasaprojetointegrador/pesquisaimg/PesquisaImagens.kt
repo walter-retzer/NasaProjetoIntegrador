@@ -25,6 +25,7 @@ import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.imagensnasa.ImgensNasa
+import com.wdretzer.nasaprojetointegrador.util.SharedPrefNasa
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileWriter
@@ -33,6 +34,11 @@ import java.util.*
 
 
 class PesquisaImagens : AppCompatActivity() {
+
+    val sharedPref: SharedPrefNasa = SharedPrefNasa.instance
+
+//    private val firebaseDB = FirebaseDatabase.getInstance()
+//    private val ref = firebaseDB.getReference("doctors")
 
     private val buttonPlanetas: Button by lazy { findViewById(R.id.btn_searchImagens) }
     private val animationView: LottieAnimationView by lazy { findViewById(R.id.lottie) }
@@ -127,9 +133,16 @@ class PesquisaImagens : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.N)
     private fun uploadToFirebase(uri: Uri) {
 
+        var nameFile = ""
+        try {
+            nameFile = sharedPref.readString("Id")
+        } catch (e: IllegalArgumentException) {
+            Toast.makeText(this, "Erro ao ler o Id", Toast.LENGTH_SHORT).show()
+        }
+
         val firebaseStorage = FirebaseStorage.getInstance()
         val storage = firebaseStorage.getReference("Pesquisa")
-        val fileReference = storage.child("search.txt")
+        val fileReference = storage.child("search_$nameFile.txt")
 
         uri.apply {
             fileReference
@@ -153,9 +166,16 @@ class PesquisaImagens : AppCompatActivity() {
             file.mkdir()
         }
 
+        var nameFile = ""
+        try {
+            nameFile = sharedPref.readString("Id")
+        } catch (e: IllegalArgumentException) {
+            Toast.makeText(this, "Erro ao criar o nome do Arquivo Search!", Toast.LENGTH_SHORT).show()
+        }
+
         val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy_HH.mm.ss")
         val date = simpleDateFormat.format(Date())
-        val name = "search.txt"
+        val name = "search_$nameFile.txt"
         val fileName = file.absolutePath + "/" + name
         val newFile = File(fileName)
 

@@ -20,6 +20,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.cadastro.CadastroUsuario
@@ -27,11 +28,13 @@ import com.wdretzer.nasaprojetointegrador.dialogfragments.DialogFragmentCadastro
 import com.wdretzer.nasaprojetointegrador.dialogfragments.ForgotPasswordDialogFragment
 import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
 import com.wdretzer.nasaprojetointegrador.util.GoogleLogInActivityContract
+import com.wdretzer.nasaprojetointegrador.util.SharedPrefNasa
 import java.security.MessageDigest
 
 
 class Login : AppCompatActivity() {
 
+    val sharedPref: SharedPrefNasa = SharedPrefNasa.instance
     private val buttonLogin: Button by lazy { findViewById(R.id.btn_login) }
     private val buttonCadastrar: Button by lazy { findViewById(R.id.btn_cadastrar) }
     private val buttonGoogle: Button by lazy { findViewById(R.id.btn_google) }
@@ -84,7 +87,12 @@ class Login : AppCompatActivity() {
         buttonCadastrar.setOnClickListener { sendToCadastroUsuario() }
         buttonGoogle.setOnClickListener { googleSignInRequest.launch(googleSignInOptions) }
         buttonFacebook.setOnClickListener { loginFacebook() }
-        forgotPassword.setOnClickListener {  dialogForgetPassword.show(supportFragmentManager, dialogForgetPassword.tag) }
+        forgotPassword.setOnClickListener {
+            dialogForgetPassword.show(
+                supportFragmentManager,
+                dialogForgetPassword.tag
+            )
+        }
         registerFacebbokCallback()
     }
 
@@ -110,7 +118,6 @@ class Login : AppCompatActivity() {
             progressBar.isVisible = false
 
         } else {
-            buttonLogin.isVisible = false
             checkLoginUser()
         }
     }
@@ -118,7 +125,7 @@ class Login : AppCompatActivity() {
 
     private fun checkLoginUser() {
 
-        analytics.logEvent(FirebaseAnalytics.Event.LOGIN){
+        analytics.logEvent(FirebaseAnalytics.Event.LOGIN) {
             param(FirebaseAnalytics.Param.METHOD, "login")
         }
 
@@ -128,7 +135,17 @@ class Login : AppCompatActivity() {
         )
             .addOnCompleteListener {
                 if (it.isSuccessful) {
+
                     Toast.makeText(this, "Autenticando Login...", Toast.LENGTH_LONG).show()
+
+                    if (auth.currentUser != null) {
+                        auth.currentUser?.apply {
+                            updateProfile(userProfileChangeRequest {
+                                saveId("firebase_$uid")
+                            })
+                        }
+                    }
+
                     Handler().postDelayed({
                         sendToInicioGuia()
                         dialogCorrect.show(supportFragmentManager, dialogCorrect.tag)
@@ -137,7 +154,11 @@ class Login : AppCompatActivity() {
                     }, 4000)
 
                 } else {
-                    Toast.makeText(this, "Login não realizado! Check seu e-mail e senha!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this,
+                        "Login não realizado! Check seu e-mail e senha!",
+                        Toast.LENGTH_LONG
+                    ).show()
                     progressBar.isVisible = false
                     buttonLogin.isVisible = true
                 }
@@ -173,6 +194,7 @@ class Login : AppCompatActivity() {
 
 
     private fun registerFacebbokCallback() {
+
         loginManager.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onCancel() {
             }
@@ -183,13 +205,22 @@ class Login : AppCompatActivity() {
                     "Deu erro ao fazer login com o Facebook!!",
                     Toast.LENGTH_LONG
                 ).show()
+                progressBar.isVisible = false
             }
 
             override fun onSuccess(result: LoginResult) {
-                val token = result.accessToken.token
+//                val token = result.accessToken.token
 //                Toast.makeText(this@Login, "Deu certo!! Token Facebook: $token", Toast.LENGTH_LONG)
 //                    .show()
-                sendToInicioGuia()
+
+                saveId("facebook_${result.accessToken.userId}")
+
+                progressBar.isVisible = false
+                dialogCorrect.show(supportFragmentManager, dialogCorrect.tag)
+                Handler().postDelayed({
+                    sendToInicioGuia()
+                }, 2000)
+
             }
         })
     }
@@ -197,7 +228,9 @@ class Login : AppCompatActivity() {
 
     private fun loginFacebook() {
 
-        analytics.logEvent(FirebaseAnalytics.Event.LOGIN){
+        progressBar.isVisible = true
+
+        analytics.logEvent(FirebaseAnalytics.Event.LOGIN) {
             param(FirebaseAnalytics.Param.METHOD, "facebook")
         }
 
@@ -213,12 +246,15 @@ class Login : AppCompatActivity() {
 
         progressBar.isVisible = true
 
-        analytics.logEvent(FirebaseAnalytics.Event.LOGIN){
+        analytics.logEvent(FirebaseAnalytics.Event.LOGIN) {
             param(FirebaseAnalytics.Param.METHOD, "google")
         }
 
         if (result is GoogleLogInActivityContract.Result.Success) {
             val token = result.googleSignInAccount.idToken
+
+            saveId("google_${result.googleSignInAccount.id.toString()}")
+
             //Toast.makeText(this, "Deu certo!! Token Google: $token", Toast.LENGTH_LONG).show()
             progressBar.isVisible = false
             dialogCorrect.show(supportFragmentManager, dialogCorrect.tag)
@@ -234,7 +270,11 @@ class Login : AppCompatActivity() {
         }
     }
 
+    fun saveId(id: String) {
+        sharedPref.saveString("Id", id)
+    }
+
     companion object {
-        private val permissions = listOf("public_profile", "email")
+        private val permissions = listOf("email", "public_profile")
     }
 }

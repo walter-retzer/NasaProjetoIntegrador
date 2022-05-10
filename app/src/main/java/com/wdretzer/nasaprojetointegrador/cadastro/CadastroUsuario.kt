@@ -151,6 +151,7 @@ class CadastroUsuario : AppCompatActivity() {
                 updateProfile(userProfileChangeRequest {
 
                     saveNamePerfil(textoNome.text.toString())
+                    saveId("firebase_$uid")
 
                     displayName = textoNome.text.toString()
                     photoUri =
@@ -161,7 +162,7 @@ class CadastroUsuario : AppCompatActivity() {
                     if (it.isSuccessful) {
                         Toast.makeText(
                             this@CadastroUsuario,
-                            "Astronauta: ${auth.currentUser?.displayName} incluido(a) no cadastro!",
+                            "Astronauta: ${auth.currentUser?.displayName} incluído(a) no Perfil do Usuário!!",
                             Toast.LENGTH_LONG
                         ).show()
 
@@ -188,5 +189,8 @@ class CadastroUsuario : AppCompatActivity() {
         sharedPref.saveString("Astronauta", name)
     }
 
+    fun saveId(id: String) {
+        sharedPref.saveString("Id", id)
+    }
 
 }
