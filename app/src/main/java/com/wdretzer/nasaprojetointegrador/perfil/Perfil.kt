@@ -16,7 +16,6 @@ class Perfil : AppCompatActivity() {
 
     private val buttonSalvarPerfil: TextView by lazy { findViewById(R.id.btn_salvar_perfil) }
     private val nomeAstronauta: EditText by lazy { findViewById(R.id.nome_astronauta) }
-
     private val avatar: ShapeableImageView by lazy { findViewById(R.id.perfil_imagem_avatar) }
     private val recycler: RecyclerView
         get() = findViewById(R.id.perfil_recycler)

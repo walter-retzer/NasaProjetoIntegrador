@@ -36,5 +36,9 @@ class StartActivity : AppCompatActivity(R.layout.activity_start) {
             val intent = Intent(this, SplashActivity::class.java)
             startActivity(intent)
         }, 30000)
+
+//        Timer().schedule(5000) {
+//
+//        }
     }
 }

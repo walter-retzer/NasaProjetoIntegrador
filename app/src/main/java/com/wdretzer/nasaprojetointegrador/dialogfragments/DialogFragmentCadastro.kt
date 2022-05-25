@@ -18,6 +18,6 @@ class DialogFragmentCadastro : BottomSheetDialogFragment() {
     }
 
     companion object {
-        const val TAG = "CorrectPasswordDialog"
+        const val TAG = "DialogSignOut"
     }
 }

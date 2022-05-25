@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/background_text_splash"
         android:backgroundTint="@color/cinza"
@@ -22,8 +22,20 @@
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/delete_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_settings"
+        android:layout_marginEnd="25dp"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/tituloPerfil"
+        app:layout_constraintBottom_toBottomOf="@+id/tituloPerfil"
+        app:layout_constraintTop_toTopOf="@+id/tituloPerfil"/>
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/perfil_imagem_avatar_completo"

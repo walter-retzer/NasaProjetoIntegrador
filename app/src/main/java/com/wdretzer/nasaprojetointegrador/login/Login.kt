@@ -13,28 +13,31 @@ import androidx.core.view.isVisible
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
+import com.facebook.GraphRequest
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.ktx.Firebase
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.cadastro.CadastroUsuario
 import com.wdretzer.nasaprojetointegrador.dialogfragments.DialogFragmentCadastro
+import com.wdretzer.nasaprojetointegrador.dialogfragments.DialogFragmentCadastro.Companion.TAG
 import com.wdretzer.nasaprojetointegrador.dialogfragments.ForgotPasswordDialogFragment
 import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
 import com.wdretzer.nasaprojetointegrador.util.GoogleLogInActivityContract
 import com.wdretzer.nasaprojetointegrador.util.SharedPrefNasa
+import org.json.JSONObject
 import java.security.MessageDigest
 
 
 class Login : AppCompatActivity() {
 
-    val sharedPref: SharedPrefNasa = SharedPrefNasa.instance
     private val buttonLogin: Button by lazy { findViewById(R.id.btn_login) }
     private val buttonCadastrar: Button by lazy { findViewById(R.id.btn_cadastrar) }
     private val buttonGoogle: Button by lazy { findViewById(R.id.btn_google) }
@@ -57,8 +60,10 @@ class Login : AppCompatActivity() {
 
     val dialogCorrect = DialogFragmentCadastro()
     val dialogForgetPassword = ForgotPasswordDialogFragment()
+    val sharedPref: SharedPrefNasa = SharedPrefNasa.instance
 
-
+    private val loginManager = LoginManager.getInstance()
+    private val callbackManager = CallbackManager.Factory.create()
     private val googleSignInRequest = registerForActivityResult(
         GoogleLogInActivityContract(),
         ::loginGoogle
@@ -71,8 +76,6 @@ class Login : AppCompatActivity() {
             .requestProfile()
             .build()
 
-    private val loginManager = LoginManager.getInstance()
-    private val callbackManager = CallbackManager.Factory.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,7 +96,7 @@ class Login : AppCompatActivity() {
                 dialogForgetPassword.tag
             )
         }
-        registerFacebbokCallback()
+        registerFacebookCallback()
     }
 
 
@@ -139,11 +142,8 @@ class Login : AppCompatActivity() {
                     Toast.makeText(this, "Autenticando Login...", Toast.LENGTH_LONG).show()
 
                     if (auth.currentUser != null) {
-                        auth.currentUser?.apply {
-                            updateProfile(userProfileChangeRequest {
-                                saveId("firebase_$uid")
-                            })
-                        }
+                        saveNamePerfil("${auth.currentUser?.displayName}")
+                        saveId("firebase_${auth.currentUser?.uid}")
                     }
 
                     Handler().postDelayed({
@@ -166,37 +166,23 @@ class Login : AppCompatActivity() {
     }
 
 
-    private fun sendToInicioGuia() {
-        Handler().postDelayed({
-            val intent = Intent(this, InicioGuia::class.java)
-            startActivity(intent)
-        }, 4000)
+    // Função para conseguir os dados de nome, email, data de aniversário, gênero.
+    private fun getFacebookData(jsonObject: JSONObject?) {
+        val name = jsonObject?.getString("name").toString()
+        val birthday = jsonObject?.getString("birthday").toString()
+        val gender = jsonObject?.getString("gender").toString()
+        val email = jsonObject?.getString("email").toString()
+
+        saveNamePerfil(name)
     }
 
 
-    private fun sendToCadastroUsuario() {
-        val intent = Intent(this, CadastroUsuario::class.java)
-        startActivity(intent)
-    }
-
-
-    private fun keyHashFacebook() {
-        val info: PackageInfo = getPackageManager().getPackageInfo(
-            "com.wdretzer.nasaprojetointegrador",
-            PackageManager.GET_SIGNATURES
-        )
-        for (signature in info.signatures) {
-            val md: MessageDigest = MessageDigest.getInstance("SHA")
-            md.update(signature.toByteArray())
-            Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT))
-        }
-    }
-
-
-    private fun registerFacebbokCallback() {
+    private fun registerFacebookCallback() {
 
         loginManager.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onCancel() {
+                Toast.makeText(this@Login, "Login Cancelled", Toast.LENGTH_LONG).show()
+                progressBar.isVisible = false
             }
 
             override fun onError(error: FacebookException) {
@@ -209,11 +195,41 @@ class Login : AppCompatActivity() {
             }
 
             override fun onSuccess(result: LoginResult) {
-//                val token = result.accessToken.token
-//                Toast.makeText(this@Login, "Deu certo!! Token Facebook: $token", Toast.LENGTH_LONG)
-//                    .show()
 
+                val token = result.accessToken.token
                 saveId("facebook_${result.accessToken.userId}")
+
+                val graphRequest =
+                    GraphRequest.newMeRequest(result.accessToken) { `object`, response ->
+                        getFacebookData(`object`)
+                    }
+                val parameters = Bundle()
+                parameters.putString("fields", "id,email,birthday,gender,name")
+                graphRequest.parameters = parameters
+                graphRequest.executeAsync()
+
+                val credential = FacebookAuthProvider.getCredential(token)
+                auth.signInWithCredential(credential)
+                    .addOnCompleteListener { task ->
+
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success")
+//                            Toast.makeText(
+//                                baseContext, "Autenticando Login com Facebook!",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.exception)
+                            Toast.makeText(
+                                baseContext, "Falha ao Logar com Facebook!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                        }
+                    }
 
                 progressBar.isVisible = false
                 dialogCorrect.show(supportFragmentManager, dialogCorrect.tag)
@@ -252,8 +268,27 @@ class Login : AppCompatActivity() {
 
         if (result is GoogleLogInActivityContract.Result.Success) {
             val token = result.googleSignInAccount.idToken
+            val nome = result.googleSignInAccount.displayName
 
+            saveNamePerfil("$nome")
             saveId("google_${result.googleSignInAccount.id.toString()}")
+
+            val firebaseCredential = GoogleAuthProvider.getCredential(token, null)
+            auth.signInWithCredential(firebaseCredential)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        // Toast.makeText(this, "signInWithCredential:success", Toast.LENGTH_LONG).show()
+                        Log.d(TAG, "signInWithCredential:success")
+
+
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        // Toast.makeText(this, "signInWithCredential:failure", Toast.LENGTH_LONG).show()
+                        Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    }
+                }
+
 
             //Toast.makeText(this, "Deu certo!! Token Google: $token", Toast.LENGTH_LONG).show()
             progressBar.isVisible = false
@@ -270,11 +305,45 @@ class Login : AppCompatActivity() {
         }
     }
 
+
     fun saveId(id: String) {
         sharedPref.saveString("Id", id)
     }
 
+
+    fun saveNamePerfil(name: String) {
+        sharedPref.saveString("Astronauta", name)
+    }
+
+
+    private fun sendToInicioGuia() {
+        Handler().postDelayed({
+            val intent = Intent(this, InicioGuia::class.java)
+            startActivity(intent)
+        }, 4000)
+    }
+
+
+    private fun sendToCadastroUsuario() {
+        val intent = Intent(this, CadastroUsuario::class.java)
+        startActivity(intent)
+    }
+
+
+    private fun keyHashFacebook() {
+        val info: PackageInfo = getPackageManager().getPackageInfo(
+            "com.wdretzer.nasaprojetointegrador",
+            PackageManager.GET_SIGNATURES
+        )
+        for (signature in info.signatures) {
+            val md: MessageDigest = MessageDigest.getInstance("SHA")
+            md.update(signature.toByteArray())
+            Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT))
+        }
+    }
+
+
     companion object {
-        private val permissions = listOf("email", "public_profile")
+        private val permissions = listOf("email", "public_profile", "user_gender", "user_birthday")
     }
 }

@@ -31,5 +31,7 @@
     <string name="rotation">A imagem acima mostra o movimento de Rotação do Planeta Terra em torno do Sol</string>
     <string name="rovers">Continue sua exploração! Conheça os Rovers de Marte!</string>
     <string name="luas_saturno">Saturno é o planeta com o maior número de luas do Sistema Solar, possuindo 82 luas no total.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

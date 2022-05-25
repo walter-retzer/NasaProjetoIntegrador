@@ -2,11 +2,13 @@ package com.wdretzer.nasaprojetointegrador.perfil
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.imageview.ShapeableImageView
 import com.wdretzer.nasaprojetointegrador.R
+import com.wdretzer.nasaprojetointegrador.dialogfragments.DialogFragmentSignOut
 import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
 import com.wdretzer.nasaprojetointegrador.util.SharedPrefNasa
 
@@ -14,9 +16,11 @@ import com.wdretzer.nasaprojetointegrador.util.SharedPrefNasa
 class PerfilCompleto : AppCompatActivity() {
 
     val sharedPref: SharedPrefNasa = SharedPrefNasa.instance
+    val dialogSignOut = DialogFragmentSignOut()
     private val buttonEditPerfil: TextView by lazy { findViewById(R.id.btn_edit_perfil) }
     private val astronautaPerfil: TextView by lazy { findViewById(R.id.nome_astronauta) }
     private val avatar: ShapeableImageView by lazy { findViewById(R.id.perfil_imagem_avatar_completo) }
+    private val deleteUser: ImageView by lazy { findViewById(R.id.delete_user) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +30,15 @@ class PerfilCompleto : AppCompatActivity() {
         getSupportActionBar()?.hide()
 
         avatar.setStrokeColorResource(R.color.cinza)
+
+        deleteUser.setOnClickListener {
+            dialogSignOut.show(
+                supportFragmentManager,
+                dialogSignOut.tag
+            )
+        }
+
+        buttonEditPerfil.setOnClickListener { sendToEditPerfil() }
 
         try {
             avatar.setImageResource(sharedPref.readString("ImgPerfil").toInt())
@@ -42,10 +55,6 @@ class PerfilCompleto : AppCompatActivity() {
         if (sharedPref.readString("Astronauta").isEmpty()) {
             astronautaPerfil.text = "Nome do Astronauta"
         }
-
-        buttonEditPerfil.setOnClickListener {
-            sendToEditPerfil()
-        }
     }
 
     override fun onBackPressed() {
@@ -57,4 +66,5 @@ class PerfilCompleto : AppCompatActivity() {
         val intent = Intent(this, Perfil::class.java)
         startActivity(intent)
     }
+
 }
