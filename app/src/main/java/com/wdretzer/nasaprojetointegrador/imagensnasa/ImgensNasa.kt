@@ -72,9 +72,10 @@ class ImgensNasa : AppCompatActivity() {
 
     private fun chamadas(search: String, page: Int) {
         viewModelNasa.request(search, page).observe(this, ::oberservarNasa)
-        viewModelNasa.requestRover().observe(this){
+
+        viewModelNasa.requestImagesPerseverance().observe(this) {
             if (it is DataResult.Success) {
-                Toast.makeText(this, "Requisição Rover Completada!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Requisição Perseverance Completada!", Toast.LENGTH_SHORT).show()
             }
 
             if (it is DataResult.Error) {
@@ -83,6 +84,106 @@ class ImgensNasa : AppCompatActivity() {
 
             if (it is DataResult.Empty) {
                 Toast.makeText(this, "Requisição Rover Empty!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModelNasa.requestImagesCuriosity().observe(this) {
+            if (it is DataResult.Success) {
+                Toast.makeText(this, "Requisição Curiosity Completada!", Toast.LENGTH_SHORT).show()
+            }
+
+            if (it is DataResult.Error) {
+                Toast.makeText(this, "Requisição Curiosity Error!", Toast.LENGTH_SHORT).show()
+            }
+
+            if (it is DataResult.Empty) {
+                Toast.makeText(this, "Requisição Curiosity Empty!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModelNasa.requestImagesOpportunity().observe(this) {
+            if (it is DataResult.Success) {
+                Toast.makeText(this, "Requisição Opportunity Completada!", Toast.LENGTH_SHORT).show()
+            }
+
+            if (it is DataResult.Error) {
+                Toast.makeText(this, "Requisição Opportunity Error!", Toast.LENGTH_SHORT).show()
+            }
+
+            if (it is DataResult.Empty) {
+                Toast.makeText(this, "Requisição Opportunity Empty!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModelNasa.requestImagesSpirit().observe(this) {
+            if (it is DataResult.Success) {
+                Toast.makeText(this, "Requisição Spirit Completada!", Toast.LENGTH_SHORT).show()
+            }
+
+            if (it is DataResult.Error) {
+                Toast.makeText(this, "Requisição Spirit Error!", Toast.LENGTH_SHORT).show()
+            }
+
+            if (it is DataResult.Empty) {
+                Toast.makeText(this, "Requisição Spirit Empty!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+        viewModelNasa.requestLatestImagesPerseverance().observe(this) {
+            if (it is DataResult.Success) {
+                Toast.makeText(this, "Requisição Perseverance Completada!", Toast.LENGTH_SHORT).show()
+            }
+
+            if (it is DataResult.Error) {
+                Toast.makeText(this, "Requisição Perseverance Error!", Toast.LENGTH_SHORT).show()
+            }
+
+            if (it is DataResult.Empty) {
+                Toast.makeText(this, "Requisição Perseverance Empty!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModelNasa.requestLatestImagesCuriosity().observe(this) {
+            if (it is DataResult.Success) {
+                Toast.makeText(this, "Requisição Curiosity Completada!", Toast.LENGTH_SHORT).show()
+            }
+
+            if (it is DataResult.Error) {
+                Toast.makeText(this, "Requisição Curiosity Error!", Toast.LENGTH_SHORT).show()
+            }
+
+            if (it is DataResult.Empty) {
+                Toast.makeText(this, "Requisição Curiosity Empty!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModelNasa.requestLatestImagesOpportunity().observe(this) {
+            if (it is DataResult.Success) {
+                Toast.makeText(this, "Requisição Opportunity Completada!", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+            if (it is DataResult.Error) {
+                Toast.makeText(this, "Requisição Opportunity Error!", Toast.LENGTH_SHORT).show()
+            }
+
+            if (it is DataResult.Empty) {
+                Toast.makeText(this, "Requisição Opportunity Empty!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModelNasa.requestLatestImagesSpirit().observe(this) {
+            if (it is DataResult.Success) {
+                Toast.makeText(this, "Requisição Spirit Completada!", Toast.LENGTH_SHORT).show()
+            }
+
+            if (it is DataResult.Error) {
+                Toast.makeText(this, "Requisição Spirit Error!", Toast.LENGTH_SHORT).show()
+            }
+
+            if (it is DataResult.Empty) {
+                Toast.makeText(this, "Requisição Spirit Empty!", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -107,7 +208,7 @@ class ImgensNasa : AppCompatActivity() {
                 criadores = creators
             }
 
-            if (keywordsApi != null){
+            if (keywordsApi != null) {
                 keywordsApi.let { keyword ->
                     keywords = keyword
                         .filter { filtro -> filtro != "}" }

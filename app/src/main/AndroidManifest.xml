@@ -21,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NasaProjetoIntegrador">
         <activity
+            android:name=".RoverSearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".detalheplaneta.DetalhePlanetaTerra"
             android:exported="true" />
         <activity

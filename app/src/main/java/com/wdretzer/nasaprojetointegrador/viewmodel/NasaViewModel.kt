@@ -20,7 +20,29 @@ class NasaViewModel(
     fun request(search: String, page: Int) =
         repository.requestData(search, page).flowOn(dispatcher).asLiveData()
 
-    fun requestRover() = repository.requestDataRover().flowOn(dispatcher).asLiveData()
+    fun requestImagesPerseverance() =
+        repository.requestImagesPerseverance().flowOn(dispatcher).asLiveData()
+
+    fun requestImagesCuriosity() =
+        repository.requestLatestImagesCuriosity().flowOn(dispatcher).asLiveData()
+
+    fun requestImagesOpportunity() =
+        repository.requestLatestImagesOpportunity().flowOn(dispatcher).asLiveData()
+
+    fun requestImagesSpirit() =
+        repository.requestLatestImagesSpirit().flowOn(dispatcher).asLiveData()
+
+    fun requestLatestImagesPerseverance() =
+        repository.requestLatestImagesPerseverance().flowOn(dispatcher).asLiveData()
+
+    fun requestLatestImagesCuriosity() =
+        repository.requestLatestImagesCuriosity().flowOn(dispatcher).asLiveData()
+
+    fun requestLatestImagesOpportunity() =
+        repository.requestLatestImagesOpportunity().flowOn(dispatcher).asLiveData()
+
+    fun requestLatestImagesSpirit() =
+        repository.requestLatestImagesSpirit().flowOn(dispatcher).asLiveData()
 
     fun getFavourite() = repository.getFavourite().flowOn(dispatcher).asLiveData()
 

@@ -14,7 +14,11 @@ import kotlinx.coroutines.flow.flowOn
 
 class NasaRepository(
     private val api: Nasa = Nasa.api,
-    private val api2: Rover = Rover.api,
+    private val api2: PerseveranceSearchImages = PerseveranceSearchImages.api,
+    private val api3: PerseveranceLatestImages = PerseveranceLatestImages.api,
+    private val api4: CuriosityLatestImages = CuriosityLatestImages.api,
+    private val api5: OpportunityLatestImages = OpportunityLatestImages.api,
+    private val api6: SpiritLatestImages = SpiritLatestImages.api,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 
 ) {
@@ -29,11 +33,38 @@ class NasaRepository(
 
 
     //Função para receber os dados dos Rovers API:
-    fun requestDataRover() = flow<DataResult<RoverRequest>> {
-        val response: RoverRequest = api2.getDataRover()
+    fun requestImagesPerseverance() = flow<DataResult<RoverRequest>> {
+        val response: RoverRequest = api2.getImagesPerseverance()
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
+
+    //Função para receber os dados dos Rover Perseverance:
+    fun requestLatestImagesPerseverance() = flow<DataResult<RoverRequest>> {
+        val response: RoverRequest = api3.getLatestImagesPerseverance()
+        emit(DataResult.Success(response))
+    }.updateStatus().flowOn(dispatcher)
+
+
+    //Função para receber os dados dos Rover Curiosity:
+    fun requestLatestImagesCuriosity() = flow<DataResult<RoverRequest>> {
+        val response: RoverRequest = api4.getLatestImagesCuriosity()
+        emit(DataResult.Success(response))
+    }.updateStatus().flowOn(dispatcher)
+
+
+    //Função para receber os dados dos Rover Opportunity:
+    fun requestLatestImagesOpportunity() = flow<DataResult<RoverRequest>> {
+        val response: RoverRequest = api5.getLatestImagesOpportunity()
+        emit(DataResult.Success(response))
+    }.updateStatus().flowOn(dispatcher)
+
+
+    //Função para receber os dados dos Rover Spirit:
+    fun requestLatestImagesSpirit() = flow<DataResult<RoverRequest>> {
+        val response: RoverRequest = api6.getLatestImagesSpirit()
+        emit(DataResult.Success(response))
+    }.updateStatus().flowOn(dispatcher)
 
 
     //Função para verificar se tem um item favoritado pelo usuario e comparar com a lista recebida pela API:
