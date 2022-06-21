@@ -13,6 +13,7 @@ object RetrofitFactory {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .baseUrl(
                 if (api == "NASA") "https://images-api.nasa.gov/"
+                else if (api == "ROVER") "https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/"
                 else "https://images-api.nasa.gov/"
             )
             .build()

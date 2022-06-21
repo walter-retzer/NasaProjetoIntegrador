@@ -72,6 +72,19 @@ class ImgensNasa : AppCompatActivity() {
 
     private fun chamadas(search: String, page: Int) {
         viewModelNasa.request(search, page).observe(this, ::oberservarNasa)
+        viewModelNasa.requestRover().observe(this){
+            if (it is DataResult.Success) {
+                Toast.makeText(this, "Requisição Rover Completada!", Toast.LENGTH_SHORT).show()
+            }
+
+            if (it is DataResult.Error) {
+                Toast.makeText(this, "Requisição Rover Error!", Toast.LENGTH_SHORT).show()
+            }
+
+            if (it is DataResult.Empty) {
+                Toast.makeText(this, "Requisição Rover Empty!", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun recyclerView() {
@@ -95,7 +108,7 @@ class ImgensNasa : AppCompatActivity() {
             }
 
             if (keywordsApi != null){
-                keywordsApi?.let { keyword ->
+                keywordsApi.let { keyword ->
                     keywords = keyword
                         .filter { filtro -> filtro != "}" }
                         .joinToString(", ")

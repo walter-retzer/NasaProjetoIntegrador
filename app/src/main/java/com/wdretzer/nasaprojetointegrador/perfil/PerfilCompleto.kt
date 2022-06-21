@@ -1,7 +1,11 @@
 package com.wdretzer.nasaprojetointegrador.perfil
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -32,10 +36,11 @@ class PerfilCompleto : AppCompatActivity() {
         avatar.setStrokeColorResource(R.color.cinza)
 
         deleteUser.setOnClickListener {
-            dialogSignOut.show(
-                supportFragmentManager,
-                dialogSignOut.tag
-            )
+            showDialogDeleteUser()
+//            dialogSignOut.show(
+//                supportFragmentManager,
+//                dialogSignOut.tag
+//            )
         }
 
         buttonEditPerfil.setOnClickListener { sendToEditPerfil() }
@@ -66,5 +71,23 @@ class PerfilCompleto : AppCompatActivity() {
         val intent = Intent(this, Perfil::class.java)
         startActivity(intent)
     }
+
+    private fun showDialogDeleteUser() {
+        val dialog = Dialog(this)
+        dialog.setCancelable(false)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(R.layout.fragment_dialog_delete_user)
+
+        val body = dialog.findViewById(R.id.frag_title) as TextView
+        body.text = "Deseja realmente apagar os dados da sua conta?"
+        val btnApagar = dialog.findViewById(R.id.btn_apagar) as Button
+        val btnCancelar = dialog.findViewById(R.id.btn_cancelar) as TextView
+
+        btnCancelar.setOnClickListener { dialog.dismiss() }
+        btnApagar.setOnClickListener { dialog.dismiss() }
+
+        dialog.show()
+    }
+
 
 }

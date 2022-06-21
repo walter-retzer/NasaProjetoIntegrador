@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.flowOn
 
 class NasaRepository(
     private val api: Nasa = Nasa.api,
+    private val api2: Rover = Rover.api,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 
 ) {
@@ -25,6 +26,14 @@ class NasaRepository(
         val response: NasaRequest = api.getDataNasa(search, page)
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
+
+
+    //Função para receber os dados dos Rovers API:
+    fun requestDataRover() = flow<DataResult<RoverRequest>> {
+        val response: RoverRequest = api2.getDataRover()
+        emit(DataResult.Success(response))
+    }.updateStatus().flowOn(dispatcher)
+
 
 
     //Função para verificar se tem um item favoritado pelo usuario e comparar com a lista recebida pela API:

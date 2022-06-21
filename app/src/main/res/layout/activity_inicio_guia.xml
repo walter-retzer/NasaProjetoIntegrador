@@ -188,5 +188,45 @@
                 app:lottie_speed="3" />
 
         </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/animmation5"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/card_background_menu">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/background_text_menu"
+                android:gravity="center_horizontal"
+                android:padding="5dp"
+                android:text="Rovers de Marte"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imagem_icon_rover"
+                android:layout_width="230dp"
+                android:layout_height="230dp"
+                android:padding="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_alignParentTop="true"
+                android:scaleType="fitXY"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                app:srcCompat="@drawable/icon_rover"
+                app:strokeColor="@android:color/darker_gray"
+                app:strokeWidth="2dp" />
+        </RelativeLayout>
+
     </LinearLayout>
 </ScrollView>
