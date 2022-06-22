@@ -11,7 +11,7 @@ interface PerseveranceSearchImages {
 
     @GET("photos?")
     suspend fun getImagesPerseverance(
-        @Query("earth_date") search: String = "2020-6-3",
+        @Query("earth_date") search: String = "2022-2-15",
         @Query("api_key") page: String = "DEMO_KEY"
     ): RoverRequest
 

@@ -2,18 +2,20 @@ package com.wdretzer.nasaprojetointegrador.data
 
 
 // Modelo de Data Class de Retorno da API Rovers:
-data class RoverRequest(val latest_photos: List<RoverItens>)
+data class RoverRequest(val photos: List<RoverItens>)
+
+// Modelo de Data Class de Retorno da API Rovers para Latest Images:
+data class RoverLatestImages(val latest_photos: List<RoverItens>)
 
 // Classe NasaReturn e suas as variaveis:
 data class RoverItens(
     val id: String,
-    val sol: Int,
+    val sol: Int? = 0,
     val camera: RoverCamera,
     val img_src: String,
     val earth_date: String,
     val rover: RoverInfo
 )
-
 
 data class RoverCamera(
     val id: String,

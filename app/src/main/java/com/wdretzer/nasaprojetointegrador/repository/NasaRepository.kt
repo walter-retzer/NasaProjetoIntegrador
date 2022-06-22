@@ -14,55 +14,85 @@ import kotlinx.coroutines.flow.flowOn
 
 class NasaRepository(
     private val api: Nasa = Nasa.api,
-    private val api2: PerseveranceSearchImages = PerseveranceSearchImages.api,
-    private val api3: PerseveranceLatestImages = PerseveranceLatestImages.api,
+
+
+    private val api2: PerseveranceLatestImages = PerseveranceLatestImages.api,
+    private val api3: PerseveranceSearchImages = PerseveranceSearchImages.api,
+
     private val api4: CuriosityLatestImages = CuriosityLatestImages.api,
-    private val api5: OpportunityLatestImages = OpportunityLatestImages.api,
-    private val api6: SpiritLatestImages = SpiritLatestImages.api,
+    private val api5: CuriositySearchImages = CuriositySearchImages.api,
+
+    private val api6: OpportunityLatestImages = OpportunityLatestImages.api,
+    private val api7: OpportunitySearchImages = OpportunitySearchImages.api,
+
+    private val api8: SpiritLatestImages = SpiritLatestImages.api,
+    private val api9: SpiritSearchImages = SpiritSearchImages.api,
+
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 
 ) {
 
     private val dao = DataBaseFactory.getDataBase().nasaDao()
 
-    //Função para receber os dados da API:
+    //Função para receber os dados da API da Nasa Image:
     fun requestData(search: String, page: Int) = flow<DataResult<NasaRequest>> {
         val response: NasaRequest = api.getDataNasa(search, page)
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
 
-    //Função para receber os dados dos Rovers API:
+    //Função para receber os dados dos Rovers API - Perseverance Search Images earth_date:
     fun requestImagesPerseverance() = flow<DataResult<RoverRequest>> {
-        val response: RoverRequest = api2.getImagesPerseverance()
+        val response: RoverRequest = api3.getImagesPerseverance()
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
 
-    //Função para receber os dados dos Rover Perseverance:
+    //Função para receber os dados dos Rovers API - Curiosity Search Images earth_date:
+    fun requestImagesCuriosity() = flow<DataResult<RoverRequest>> {
+        val response: RoverRequest = api5.getImagesCuriosity()
+        emit(DataResult.Success(response))
+    }.updateStatus().flowOn(dispatcher)
+
+
+    //Função para receber os dados dos Rovers API - Opportunity Search Images earth_date:
+    fun requestImagesOpportunity() = flow<DataResult<RoverRequest>> {
+        val response: RoverRequest = api7.getImagesOpportunity()
+        emit(DataResult.Success(response))
+    }.updateStatus().flowOn(dispatcher)
+
+
+    //Função para receber os dados dos Rovers API - Spirit Search Images earth_date:
+    fun requestImagesSpirit() = flow<DataResult<RoverRequest>> {
+        val response: RoverRequest = api9.getImagesSpirit()
+        emit(DataResult.Success(response))
+    }.updateStatus().flowOn(dispatcher)
+
+
+    //Função para receber as últimas imagens tiradas pelo Rover Perseverance:
     fun requestLatestImagesPerseverance() = flow<DataResult<RoverRequest>> {
-        val response: RoverRequest = api3.getLatestImagesPerseverance()
+        val response: RoverRequest = api2.getLatestImagesPerseverance()
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
 
-    //Função para receber os dados dos Rover Curiosity:
+    //Função para receber as últimas imagens tiradas pelo Rover Curiosity:
     fun requestLatestImagesCuriosity() = flow<DataResult<RoverRequest>> {
         val response: RoverRequest = api4.getLatestImagesCuriosity()
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
 
-    //Função para receber os dados dos Rover Opportunity:
+    //Função para receber as últimas imagens tiradas pelo Rover Opportunity:
     fun requestLatestImagesOpportunity() = flow<DataResult<RoverRequest>> {
-        val response: RoverRequest = api5.getLatestImagesOpportunity()
+        val response: RoverRequest = api6.getLatestImagesOpportunity()
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
 
-    //Função para receber os dados dos Rover Spirit:
+    //Função para receber as últimas imagens tiradas pelo Rover Spirit:
     fun requestLatestImagesSpirit() = flow<DataResult<RoverRequest>> {
-        val response: RoverRequest = api6.getLatestImagesSpirit()
+        val response: RoverRequest = api8.getLatestImagesSpirit()
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 

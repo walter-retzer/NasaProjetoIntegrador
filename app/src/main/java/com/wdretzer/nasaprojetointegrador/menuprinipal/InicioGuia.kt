@@ -15,8 +15,7 @@ import com.wdretzer.nasaprojetointegrador.homeplanetas.HomePlanetas
 import com.wdretzer.nasaprojetointegrador.login.Login
 import com.wdretzer.nasaprojetointegrador.perfil.PerfilCompleto
 import com.wdretzer.nasaprojetointegrador.pesquisaimg.PesquisaImagens
-
-
+import com.wdretzer.nasaprojetointegrador.roversearch.RoverSearchActivity
 
 
 class InicioGuia : AppCompatActivity() {
@@ -25,6 +24,7 @@ class InicioGuia : AppCompatActivity() {
     private val buttonPesquisaImg: RelativeLayout by lazy { findViewById(com.wdretzer.nasaprojetointegrador.R.id.animmation2) }
     private val buttonImgFav: RelativeLayout by lazy { findViewById(com.wdretzer.nasaprojetointegrador.R.id.animmation3) }
     private val buttonPerfil: RelativeLayout by lazy { findViewById(com.wdretzer.nasaprojetointegrador.R.id.animmation4) }
+    private val buttonRover: ShapeableImageView by lazy { findViewById(com.wdretzer.nasaprojetointegrador.R.id.imagem_icon_rover) }
 
     private val imagemRover: ShapeableImageView
         get() = findViewById(R.id.imagem_icon_rover)
@@ -53,6 +53,11 @@ class InicioGuia : AppCompatActivity() {
 
         buttonPesquisaImg.setOnClickListener {
             val intent = Intent(this, PesquisaImagens::class.java)
+            startActivity(intent)
+        }
+
+        buttonRover.setOnClickListener {
+            val intent = Intent(this, RoverSearchActivity::class.java)
             startActivity(intent)
         }
 
