@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.wdretzer.nasaprojetointegrador.R
-import com.wdretzer.nasaprojetointegrador.data.RoverLatestImages
+import com.wdretzer.nasaprojetointegrador.data.RoverRequest
 import com.wdretzer.nasaprojetointegrador.data.extension.DataResult
 import com.wdretzer.nasaprojetointegrador.roverimagens.ImagensRoverAdpter
 import com.wdretzer.nasaprojetointegrador.viewmodel.NasaViewModel
@@ -27,6 +27,8 @@ class RoverSearchActivity : AppCompatActivity() {
         get() = findViewById(R.id.rover_recycler)
     private var adp = ImagensRoverAdpter()
     var nextPage: Boolean = false
+    var sendDateText: String = ""
+    var nameRover: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,97 +38,33 @@ class RoverSearchActivity : AppCompatActivity() {
         // Desabilita a Action Bar que exibe o nome do Projeto:
         supportActionBar?.hide()
 
+        val bundle: Bundle? = intent.extras
+        if (bundle != null) {
+            sendDateText = bundle.getString("DateSearch").toString()
+            nameRover = bundle.getString("NameRover").toString()
+        }
+
         chamadas()
     }
 
 
     private fun chamadas() {
-        viewModelNasa.requestLatestImagesSpirit().observe(this, ::oberservImagesRovers)
+        if (nameRover == "Perseverance") viewModelNasa.requestImagesPerseverance(sendDateText)
+            .observe(this, ::oberservImagesRovers)
 
-        viewModelNasa.requestMissionPerseverance().observe(this) {
-            when (it) {
-                is DataResult.Loading -> {
-                    loading.isVisible = it.isLoading
-                }
+        if (nameRover == "Curiosity") viewModelNasa.requestImagesCuriosity(sendDateText)
+            .observe(this, ::oberservImagesRovers)
 
-                is DataResult.Error -> {
-                    Toast.makeText(this, "Falha em encontrar as imagens!", Toast.LENGTH_LONG).show()
-                }
+        if (nameRover == "Opportunity") viewModelNasa.requestImagesOpportunity(sendDateText)
+            .observe(this, ::oberservImagesRovers)
 
-                is DataResult.Empty -> {
-                    Toast.makeText(this, "Retorno Vazio!", Toast.LENGTH_LONG).show()
-                }
-
-                is DataResult.Success -> {
-                    Toast.makeText(this, "Funionou ${it.dataResult.rover}", Toast.LENGTH_LONG).show()
-                }
-            }
-        }
-
-        viewModelNasa.requestMissionCuriosity().observe(this) {
-            when (it) {
-                is DataResult.Loading -> {
-                    loading.isVisible = it.isLoading
-                }
-
-                is DataResult.Error -> {
-                    Toast.makeText(this, "Falha em encontrar as imagens c!", Toast.LENGTH_LONG).show()
-                }
-
-                is DataResult.Empty -> {
-                    Toast.makeText(this, "Retorno Vazio c!", Toast.LENGTH_LONG).show()
-                }
-
-                is DataResult.Success -> {
-                    Toast.makeText(this, "Funionou c ${it.dataResult.rover}", Toast.LENGTH_LONG).show()
-                }
-            }
-        }
-
-        viewModelNasa.requestMissionOpportunity().observe(this) {
-            when (it) {
-                is DataResult.Loading -> {
-                    loading.isVisible = it.isLoading
-                }
-
-                is DataResult.Error -> {
-                    Toast.makeText(this, "Falha em encontrar as imagens o!", Toast.LENGTH_LONG).show()
-                }
-
-                is DataResult.Empty -> {
-                    Toast.makeText(this, "Retorno Vazio o!", Toast.LENGTH_LONG).show()
-                }
-
-                is DataResult.Success -> {
-                    Toast.makeText(this, "Funionou o ${it.dataResult.rover}", Toast.LENGTH_LONG).show()
-                }
-            }
-        }
-
-        viewModelNasa.requestMissionSpirit().observe(this) {
-            when (it) {
-                is DataResult.Loading -> {
-                    loading.isVisible = it.isLoading
-                }
-
-                is DataResult.Error -> {
-                    Toast.makeText(this, "Falha em encontrar as imagens s!", Toast.LENGTH_LONG).show()
-                }
-
-                is DataResult.Empty -> {
-                    Toast.makeText(this, "Retorno Vazio s!", Toast.LENGTH_LONG).show()
-                }
-
-                is DataResult.Success -> {
-                    Toast.makeText(this, "Funionou s ${it.dataResult.rover}", Toast.LENGTH_LONG).show()
-                }
-            }
-        }
+        if (nameRover == "Spirit") viewModelNasa.requestImagesSpirit(sendDateText)
+            .observe(this, ::oberservImagesRovers)
     }
 
 
     @SuppressLint("SetTextI18n")
-    fun oberservImagesRovers(result: DataResult<RoverLatestImages>) {
+    fun oberservImagesRovers(result: DataResult<RoverRequest>) {
 
         when (result) {
             is DataResult.Loading -> {
@@ -142,11 +80,15 @@ class RoverSearchActivity : AppCompatActivity() {
             }
 
             is DataResult.Success -> {
-                adp.updateList(result.dataResult.latest_photos)
+                adp.updateList(result.dataResult.photos)
                 recycler.adapter = adp
-                Log.d("Lista:", "${result.dataResult.latest_photos}")
-                totalItens.text = "${result.dataResult.latest_photos.size} Imagens Encontradas!"
+                Log.d("Lista:", "${result.dataResult.photos}")
+                totalItens.text = "${result.dataResult.photos.size} Imagens Encontradas!"
             }
         }
+    }
+
+    companion object {
+        const val rover = "Perseverance"
     }
 }

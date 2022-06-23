@@ -5,8 +5,10 @@
       <map>
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/drawable-v24/background_dialog_delete.xml" value="0.19" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/drawable-v24/background_nome_app.xml" value="0.2703125" />
+        <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/drawable-v24/background_text_input.xml" value="0.1915" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/drawable-v24/background_text_menu.xml" value="0.2703125" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/drawable-v24/button.xml" value="0.2703125" />
+        <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/drawable-v24/card_background_image.xml" value="0.17" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/drawable-v24/card_background_menu.xml" value="0.12962962962962962" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/drawable-v24/conteiner_dados_usuario.xml" value="0.2703125" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/drawable-v24/default_dot.xml" value="0.14635416666666667" />
@@ -56,16 +58,19 @@
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_perfil.xml" value="0.264" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_perfil_completo.xml" value="0.264" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_pesquisa_imagens.xml" value="0.2" />
+        <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_rover_request_images.xml" value="0.21342592592592594" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_rover_search.xml" value="0.22592592592592592" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_rovers_mission.xml" value="0.22592592592592592" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_splash.xml" value="0.21829710144927536" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/activity_start.xml" value="0.25416666666666665" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/background_dialog.xml" value="0.22592592592592592" />
+        <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/background_text_input.xml" value="0.22592592592592592" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/fragment_dialog_cadastro.xml" value="0.22592592592592592" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/fragment_dialog_delete_user.xml" value="0.22592592592592592" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/fragment_dialog_sing_out.xml" value="0.22592592592592592" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/fragment_forgot_password_dialog.xml" value="0.22592592592592592" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/fragment_perseverance_mission.xml" value="0.21342592592592594" />
+        <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/fragment_rover_mission.xml" value="0.22592592592592592" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/item_fav_img.xml" value="0.22592592592592592" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/item_perfil.xml" value="0.4" />
         <entry key="..\:/Docs_Area/AndroidStudio/NasaProjetoIntegrador/app/src/main/res/layout/item_planeta_imagem.xml" value="0.4" />

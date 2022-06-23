@@ -1,6 +1,7 @@
 package com.wdretzer.nasaprojetointegrador.roversearch
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -24,6 +26,9 @@ class PerseveranceMissionFragment : Fragment(R.layout.fragment_rover_mission) {
 
     private val loading: FrameLayout?
         get() = view?.findViewById(R.id.loading_rover)
+
+    private val rover: CardView?
+        get() = view?.findViewById(R.id.card_rover)
 
     private val nameRoverPerseverance: TextView?
         get() = view?.findViewById(R.id.nome_rover)
@@ -49,6 +54,9 @@ class PerseveranceMissionFragment : Fragment(R.layout.fragment_rover_mission) {
     private val camerasRoverPerseverance: TextView?
         get() = view?.findViewById(R.id.cameras_data_rover)
 
+    var lastDate: String = ""
+    var firstDate: String = ""
+    var nameRover: String = ""
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,6 +66,18 @@ class PerseveranceMissionFragment : Fragment(R.layout.fragment_rover_mission) {
         imagem?.setImageResource(R.drawable.rover_perseverance)
 
         chamadas()
+        rover?.setOnClickListener { sendToSearchImageRovers() }
+    }
+
+    private fun sendToSearchImageRovers() {
+        activity?.let {
+            val intent = Intent(it, RoverRequestImagesActivity::class.java).apply {
+                putExtra("LastDate", lastDate)
+                putExtra("FirstDate", firstDate)
+                putExtra("NameRover", nameRover)
+            }
+            it.startActivity(intent)
+        }
     }
 
 
@@ -84,6 +104,10 @@ class PerseveranceMissionFragment : Fragment(R.layout.fragment_rover_mission) {
                 }
 
                 is DataResult.Success -> {
+                    nameRover = it.dataResult.rover.name
+                    lastDate = converterDate(it.dataResult.rover.max_date)
+                    firstDate = converterDate(it.dataResult.rover.landing_date)
+
                     nameRoverPerseverance?.text = "Rover ${it.dataResult.rover.name}"
 
                     if (it.dataResult.rover.status == "complete")
