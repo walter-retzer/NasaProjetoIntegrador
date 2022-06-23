@@ -18,6 +18,7 @@ object RetrofitFactory {
                 else if (api == "CURIOSITY") "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/"
                 else if (api == "OPPORTUNITY") "https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/"
                 else if (api == "SPIRIT") "https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/"
+                else if (api == "MISSION") "https://api.nasa.gov/mars-photos/api/v1/rovers/"
                 else "https://images-api.nasa.gov/"
             )
             .build()

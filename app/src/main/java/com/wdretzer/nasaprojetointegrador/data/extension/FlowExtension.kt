@@ -1,6 +1,5 @@
 package com.wdretzer.nasaprojetointegrador.data.extension
 
-import com.wdretzer.nasaprojetointegrador.data.DataResult
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import java.io.IOException

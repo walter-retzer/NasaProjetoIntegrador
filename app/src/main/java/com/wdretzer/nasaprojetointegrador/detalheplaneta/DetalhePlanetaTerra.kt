@@ -43,7 +43,7 @@ class DetalhePlanetaTerra : AppCompatActivity() {
         setContentView(R.layout.activity_detalhe_planeta_terra)
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
         getInfo()
     }
 

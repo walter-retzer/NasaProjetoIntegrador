@@ -29,7 +29,7 @@ import com.wdretzer.nasaprojetointegrador.cadastro.CadastroUsuario
 import com.wdretzer.nasaprojetointegrador.dialogfragments.DialogFragmentCadastro
 import com.wdretzer.nasaprojetointegrador.dialogfragments.DialogFragmentCadastro.Companion.TAG
 import com.wdretzer.nasaprojetointegrador.dialogfragments.ForgotPasswordDialogFragment
-import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
+import com.wdretzer.nasaprojetointegrador.menuprinipal.MenuPrincipalActivity
 import com.wdretzer.nasaprojetointegrador.util.GoogleLogInActivityContract
 import com.wdretzer.nasaprojetointegrador.util.SharedPrefNasa
 import org.json.JSONObject
@@ -82,7 +82,7 @@ class Login : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
 
         auth = FirebaseAuth.getInstance()
         analytics = Firebase.analytics
@@ -318,7 +318,7 @@ class Login : AppCompatActivity() {
 
     private fun sendToInicioGuia() {
         Handler().postDelayed({
-            val intent = Intent(this, InicioGuia::class.java)
+            val intent = Intent(this, MenuPrincipalActivity::class.java)
             startActivity(intent)
         }, 4000)
     }

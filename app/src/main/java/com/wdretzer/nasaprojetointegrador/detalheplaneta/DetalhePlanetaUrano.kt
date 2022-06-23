@@ -44,7 +44,7 @@ class DetalhePlanetaUrano : AppCompatActivity() {
         setContentView(R.layout.activity_detalhe_planeta_urano)
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
         getInfo()
     }
 

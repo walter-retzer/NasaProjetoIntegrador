@@ -8,11 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wdretzer.nasaprojetointegrador.R
-import com.wdretzer.nasaprojetointegrador.adapter.ItensFavoritosAdapter
-import com.wdretzer.nasaprojetointegrador.data.DataResult
 import com.wdretzer.nasaprojetointegrador.data.NasaItens
-import com.wdretzer.nasaprojetointegrador.imagensnasa.ImgensNasa
-import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
+import com.wdretzer.nasaprojetointegrador.data.extension.DataResult
+import com.wdretzer.nasaprojetointegrador.imagensnasa.ImagensNasa
+import com.wdretzer.nasaprojetointegrador.menuprinipal.MenuPrincipalActivity
 import com.wdretzer.nasaprojetointegrador.perfil.PerfilCompleto
 import com.wdretzer.nasaprojetointegrador.pesquisaimg.PesquisaImagens
 import com.wdretzer.nasaprojetointegrador.viewmodel.NasaViewModel
@@ -36,7 +35,7 @@ class ImagemFavoritosActivity : AppCompatActivity() {
         setContentView(R.layout.activity_imagem_favoritos)
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
 
         val bundle: Bundle? = intent.extras
         if (bundle != null) {
@@ -52,12 +51,12 @@ class ImagemFavoritosActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if(setSearch != ""){
-            val intent = Intent(this, ImgensNasa::class.java).apply {
+            val intent = Intent(this, ImagensNasa::class.java).apply {
                 putExtra("Search", setSearch)
             }
             startActivity(intent)
         } else {
-            val intent = Intent(this, InicioGuia::class.java)
+            val intent = Intent(this, MenuPrincipalActivity::class.java)
             startActivity(intent)
         }
     }
@@ -92,7 +91,7 @@ class ImagemFavoritosActivity : AppCompatActivity() {
     }
 
     private fun sendToHomePlanets() {
-        val intent = Intent(this, InicioGuia::class.java)
+        val intent = Intent(this, MenuPrincipalActivity::class.java)
         startActivity(intent)
     }
 

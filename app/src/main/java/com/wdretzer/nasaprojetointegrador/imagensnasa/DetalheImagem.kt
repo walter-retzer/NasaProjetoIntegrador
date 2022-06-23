@@ -26,7 +26,7 @@ import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.wdretzer.nasaprojetointegrador.R
-import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
+import com.wdretzer.nasaprojetointegrador.menuprinipal.MenuPrincipalActivity
 import com.wdretzer.nasaprojetointegrador.pesquisaimg.PesquisaImagens
 import java.io.File
 import java.io.FileNotFoundException
@@ -60,7 +60,7 @@ class DetalheImagem : AppCompatActivity() {
         setContentView(R.layout.activity_detalhe_imagem)
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
 
         checkBundle()
         buttonMenuPlanets.setOnClickListener { sendToHomePlanets() }
@@ -150,7 +150,7 @@ class DetalheImagem : AppCompatActivity() {
 
 
     private fun sendToHomePlanets() {
-        val intent = Intent(this, InicioGuia::class.java)
+        val intent = Intent(this, MenuPrincipalActivity::class.java)
         startActivity(intent)
     }
 

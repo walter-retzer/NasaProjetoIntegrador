@@ -10,6 +10,6 @@ class CadastroUsuarioGoogle : AppCompatActivity() {
         setContentView(R.layout.activity_cadastro_usuario_google)
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
     }
 }

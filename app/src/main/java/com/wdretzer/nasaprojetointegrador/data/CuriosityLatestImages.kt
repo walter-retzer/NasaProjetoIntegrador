@@ -9,10 +9,10 @@ import retrofit2.http.Query
 
 interface CuriosityLatestImages {
 
-    @GET("rovers/curiosity/latest_photos?api_key=DEMO_KEY")
+    @GET("rovers/curiosity/latest_photos?")
     suspend fun getLatestImagesCuriosity(
         @Query("api_key") key: String = "DEMO_KEY"
-    ): RoverRequest
+    ): RoverLatestImages
 
     companion object {
         val api: CuriosityLatestImages by lazy {
@@ -20,8 +20,7 @@ interface CuriosityLatestImages {
                 "ROVER",
                 Okhttp.build(),
                 GsonFactory.build()
-            )
-                .create(CuriosityLatestImages::class.java)
+            ).create(CuriosityLatestImages::class.java)
         }
     }
 }

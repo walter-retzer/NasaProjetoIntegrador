@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.wdretzer.nasaprojetointegrador">
 
     <queries>
@@ -19,7 +20,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NasaProjetoIntegrador">
+        android:theme="@style/Theme.NasaProjetoIntegrador"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
+        <activity
+            android:name=".roversearch.RoversMissionActivity"
+            android:exported="false" />
         <activity
             android:name=".roversearch.RoverSearchActivity"
             android:exported="false" />
@@ -101,7 +107,7 @@
             android:name=".pesquisaimg.PesquisaImagens"
             android:exported="true" />
         <activity
-            android:name=".menuprinipal.InicioGuia"
+            android:name=".menuprinipal.MenuPrincipalActivity"
             android:exported="true" />
         <activity
             android:name=".imagensnasa.DetalheImagem"
@@ -116,7 +122,7 @@
             android:name=".cadastro.CadastroUsuario"
             android:exported="true" />
         <activity
-            android:name=".imagensnasa.ImgensNasa"
+            android:name=".imagensnasa.ImagensNasa"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
@@ -127,10 +133,10 @@
             android:name=".login.Login"
             android:exported="true" />
         <activity
-            android:name=".splashscreen.SplashActivity"
+            android:name=".welcomescreen.WelcomeScreenActivity"
             android:exported="true" />
         <activity
-            android:name=".startscreen.StartActivity"
+            android:name=".splashscreen.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

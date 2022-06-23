@@ -11,7 +11,7 @@ interface SpiritSearchImages {
 
     @GET("photos?")
     suspend fun getImagesSpirit(
-        @Query("earth_date") search: String = "2009-6-3",
+        @Query("earth_date") search: String = "2009-3-21",
         @Query("api_key") page: String = "DEMO_KEY"
     ): RoverRequest
 
@@ -21,8 +21,7 @@ interface SpiritSearchImages {
                 "SPIRIT",
                 Okhttp.build(),
                 GsonFactory.build()
-            )
-                .create(SpiritSearchImages::class.java)
+            ).create(SpiritSearchImages::class.java)
         }
     }
 }

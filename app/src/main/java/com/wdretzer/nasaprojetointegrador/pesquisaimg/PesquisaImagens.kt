@@ -24,7 +24,7 @@ import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.wdretzer.nasaprojetointegrador.R
-import com.wdretzer.nasaprojetointegrador.imagensnasa.ImgensNasa
+import com.wdretzer.nasaprojetointegrador.imagensnasa.ImagensNasa
 import com.wdretzer.nasaprojetointegrador.util.SharedPrefNasa
 import java.io.File
 import java.io.FileNotFoundException
@@ -55,7 +55,8 @@ class PesquisaImagens : AppCompatActivity() {
         setContentView(R.layout.activity_pesquisa_imagens)
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
+
         translateTextSearch()
     }
 
@@ -122,7 +123,7 @@ class PesquisaImagens : AppCompatActivity() {
 
 
     private fun sendToImagensNasa(search: String) {
-        val intent = Intent(this, ImgensNasa::class.java).apply {
+        val intent = Intent(this, ImagensNasa::class.java).apply {
             putExtra("Search", search)
         }
         startActivity(intent)

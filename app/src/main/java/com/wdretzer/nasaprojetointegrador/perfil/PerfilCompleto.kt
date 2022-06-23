@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.imageview.ShapeableImageView
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.dialogfragments.DialogFragmentSignOut
-import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
+import com.wdretzer.nasaprojetointegrador.menuprinipal.MenuPrincipalActivity
 import com.wdretzer.nasaprojetointegrador.util.SharedPrefNasa
 
 
@@ -31,7 +31,7 @@ class PerfilCompleto : AppCompatActivity() {
         setContentView(R.layout.activity_perfil_completo)
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
 
         avatar.setStrokeColorResource(R.color.cinza)
 
@@ -63,7 +63,7 @@ class PerfilCompleto : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val intent = Intent(this, InicioGuia::class.java)
+        val intent = Intent(this, MenuPrincipalActivity::class.java)
         startActivity(intent)
     }
 

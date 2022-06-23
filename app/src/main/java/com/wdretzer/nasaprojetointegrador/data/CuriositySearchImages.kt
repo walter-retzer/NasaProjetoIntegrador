@@ -11,7 +11,7 @@ interface CuriositySearchImages {
 
     @GET("photos?")
     suspend fun getImagesCuriosity(
-        @Query("earth_date") search: String = "2015-6-3",
+        @Query("earth_date") search: String = "2016-8-18",
         @Query("api_key") page: String = "DEMO_KEY"
     ): RoverRequest
 
@@ -21,8 +21,7 @@ interface CuriositySearchImages {
                 "CURIOSITY",
                 Okhttp.build(),
                 GsonFactory.build()
-            )
-                .create(CuriositySearchImages::class.java)
+            ).create(CuriositySearchImages::class.java)
         }
     }
 }

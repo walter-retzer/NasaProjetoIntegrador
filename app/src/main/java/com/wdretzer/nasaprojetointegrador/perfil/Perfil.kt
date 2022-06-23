@@ -52,7 +52,7 @@ class Perfil : AppCompatActivity() {
         setContentView(R.layout.activity_perfil)
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
 
         try {
             avatar.setImageResource(sharedPref.readString("ImgPerfil").toInt())

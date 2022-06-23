@@ -11,7 +11,7 @@ interface PerseveranceSearchImages {
 
     @GET("photos?")
     suspend fun getImagesPerseverance(
-        @Query("earth_date") search: String = "2022-2-15",
+        @Query("earth_date") search: String = "2022-1-15",
         @Query("api_key") page: String = "DEMO_KEY"
     ): RoverRequest
 
@@ -21,8 +21,7 @@ interface PerseveranceSearchImages {
                 "PERSEVERANCE",
                 Okhttp.build(),
                 GsonFactory.build()
-            )
-                .create(PerseveranceSearchImages::class.java)
+            ).create(PerseveranceSearchImages::class.java)
         }
     }
 }

@@ -16,7 +16,7 @@ class ImagensFavoritas : AppCompatActivity() {
         setContentView(R.layout.activity_imagens_favoritas)
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
 
         buttonPesquisaImagens.setOnClickListener{
             sendToSearchImages()

@@ -9,10 +9,10 @@ import retrofit2.http.Query
 
 interface SpiritLatestImages {
 
-    @GET("rovers/spirit/latest_photos?api_key=DEMO_KEY")
+    @GET("rovers/spirit/latest_photos?")
     suspend fun getLatestImagesSpirit(
         @Query("api_key") key: String = "DEMO_KEY"
-    ): RoverRequest
+    ): RoverLatestImages
 
     companion object {
         val api: SpiritLatestImages by lazy {
@@ -20,8 +20,7 @@ interface SpiritLatestImages {
                 "ROVER",
                 Okhttp.build(),
                 GsonFactory.build()
-            )
-                .create(SpiritLatestImages::class.java)
+            ).create(SpiritLatestImages::class.java)
         }
     }
 }

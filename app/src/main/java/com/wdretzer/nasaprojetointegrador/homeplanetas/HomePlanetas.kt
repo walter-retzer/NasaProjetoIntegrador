@@ -5,7 +5,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.wdretzer.nasaprojetointegrador.R
-import com.wdretzer.nasaprojetointegrador.adapter.AdapterHomePlanets
 
 class HomePlanetas : AppCompatActivity() {
 
@@ -21,7 +20,7 @@ class HomePlanetas : AppCompatActivity() {
         setContentView(R.layout.activity_home_planetas)
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
 
         val bundle: Bundle? = intent.extras
         if (bundle != null) {

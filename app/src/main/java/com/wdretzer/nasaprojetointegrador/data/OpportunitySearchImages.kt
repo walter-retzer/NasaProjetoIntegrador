@@ -11,7 +11,7 @@ interface OpportunitySearchImages {
 
     @GET("photos?")
     suspend fun getImagesOpportunity(
-        @Query("earth_date") search: String = "2015-6-3",
+        @Query("earth_date") search: String = "2016-6-11",
         @Query("api_key") page: String = "DEMO_KEY"
     ): RoverRequest
 
@@ -21,8 +21,7 @@ interface OpportunitySearchImages {
                 "OPPORTUNITY",
                 Okhttp.build(),
                 GsonFactory.build()
-            )
-                .create(OpportunitySearchImages::class.java)
+            ).create(OpportunitySearchImages::class.java)
         }
     }
 }

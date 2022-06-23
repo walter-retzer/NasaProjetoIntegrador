@@ -10,10 +10,10 @@ import retrofit2.http.Query
 interface PerseveranceLatestImages {
     var searchteste: String
 
-    @GET("rovers/perseverance/latest_photos?api_key=DEMO_KEY")
+    @GET("rovers/perseverance/latest_photos?")
     suspend fun getLatestImagesPerseverance(
         @Query("api_key") key: String = "DEMO_KEY"
-    ): RoverRequest
+    ): RoverLatestImages
 
     companion object {
         val api: PerseveranceLatestImages by lazy {
@@ -21,8 +21,7 @@ interface PerseveranceLatestImages {
                 "ROVER",
                 Okhttp.build(),
                 GsonFactory.build()
-            )
-                .create(PerseveranceLatestImages::class.java)
+            ).create(PerseveranceLatestImages::class.java)
         }
     }
 }

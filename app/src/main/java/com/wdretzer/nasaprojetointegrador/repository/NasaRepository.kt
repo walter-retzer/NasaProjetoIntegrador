@@ -5,6 +5,7 @@ import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.wdretzer.nasaprojetointegrador.bancodados.DataBaseFactory
 import com.wdretzer.nasaprojetointegrador.data.*
+import com.wdretzer.nasaprojetointegrador.data.extension.DataResult
 import com.wdretzer.nasaprojetointegrador.data.extension.updateStatus
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -14,23 +15,20 @@ import kotlinx.coroutines.flow.flowOn
 
 class NasaRepository(
     private val api: Nasa = Nasa.api,
-
-
     private val api2: PerseveranceLatestImages = PerseveranceLatestImages.api,
     private val api3: PerseveranceSearchImages = PerseveranceSearchImages.api,
-
     private val api4: CuriosityLatestImages = CuriosityLatestImages.api,
     private val api5: CuriositySearchImages = CuriositySearchImages.api,
-
     private val api6: OpportunityLatestImages = OpportunityLatestImages.api,
     private val api7: OpportunitySearchImages = OpportunitySearchImages.api,
-
     private val api8: SpiritLatestImages = SpiritLatestImages.api,
     private val api9: SpiritSearchImages = SpiritSearchImages.api,
-
+    private val api10: PerseveranceMission = PerseveranceMission.api,
+    private val api11: CuriosityMission = CuriosityMission.api,
+    private val api12: OpportunityMission = OpportunityMission.api,
+    private val api13: SpiritMission = SpiritMission.api,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
-
-) {
+    ) {
 
     private val dao = DataBaseFactory.getDataBase().nasaDao()
 
@@ -70,31 +68,57 @@ class NasaRepository(
 
 
     //Função para receber as últimas imagens tiradas pelo Rover Perseverance:
-    fun requestLatestImagesPerseverance() = flow<DataResult<RoverRequest>> {
-        val response: RoverRequest = api2.getLatestImagesPerseverance()
+    fun requestLatestImagesPerseverance() = flow<DataResult<RoverLatestImages>> {
+        val response: RoverLatestImages = api2.getLatestImagesPerseverance()
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
 
     //Função para receber as últimas imagens tiradas pelo Rover Curiosity:
-    fun requestLatestImagesCuriosity() = flow<DataResult<RoverRequest>> {
-        val response: RoverRequest = api4.getLatestImagesCuriosity()
+    fun requestLatestImagesCuriosity() = flow<DataResult<RoverLatestImages>> {
+        val response: RoverLatestImages = api4.getLatestImagesCuriosity()
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
 
     //Função para receber as últimas imagens tiradas pelo Rover Opportunity:
-    fun requestLatestImagesOpportunity() = flow<DataResult<RoverRequest>> {
-        val response: RoverRequest = api6.getLatestImagesOpportunity()
+    fun requestLatestImagesOpportunity() = flow<DataResult<RoverLatestImages>> {
+        val response: RoverLatestImages = api6.getLatestImagesOpportunity()
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
 
     //Função para receber as últimas imagens tiradas pelo Rover Spirit:
-    fun requestLatestImagesSpirit() = flow<DataResult<RoverRequest>> {
-        val response: RoverRequest = api8.getLatestImagesSpirit()
+    fun requestLatestImagesSpirit() = flow<DataResult<RoverLatestImages>> {
+        val response: RoverLatestImages = api8.getLatestImagesSpirit()
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
+
+
+    //Função para receber os dados da Missão Rovers Perseverance:
+    fun requestMissionPerseverance() = flow<DataResult<DataRoverMission>> {
+        val response: DataRoverMission = api10.getMissionPerseverance()
+        emit(DataResult.Success(response))
+    }.updateStatus().flowOn(dispatcher)
+
+    //Função para receber os dados da Missão Curiosity:
+    fun requestMissionCuriosity() = flow<DataResult<DataRoverMission>> {
+        val response: DataRoverMission = api11.getMissionCuriosity()
+        emit(DataResult.Success(response))
+    }.updateStatus().flowOn(dispatcher)
+
+    //Função para receber os dados da Missão Opportunity:
+    fun requestMissionOpportunity() = flow<DataResult<DataRoverMission>> {
+        val response: DataRoverMission = api12.getMissionOpportunity()
+        emit(DataResult.Success(response))
+    }.updateStatus().flowOn(dispatcher)
+
+    //Função para receber os dados da Missão Opportunity:
+    fun requestMissionSpirit() = flow<DataResult<DataRoverMission>> {
+        val response: DataRoverMission = api13.getMissionSpirit()
+        emit(DataResult.Success(response))
+    }.updateStatus().flowOn(dispatcher)
+
 
 
     //Função para verificar se tem um item favoritado pelo usuario e comparar com a lista recebida pela API:

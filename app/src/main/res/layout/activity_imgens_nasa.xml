@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/simple_background"
-    tools:context=".imagensnasa.ImgensNasa">
+    tools:context=".imagensnasa.ImagensNasa">
 
     <TextView
         android:id="@+id/text_img_encontradas"

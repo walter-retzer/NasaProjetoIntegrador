@@ -9,10 +9,10 @@ import retrofit2.http.Query
 
 interface OpportunityLatestImages {
 
-    @GET("rovers/opportunity/latest_photos?api_key=DEMO_KEY")
+    @GET("rovers/opportunity/latest_photos?")
     suspend fun getLatestImagesOpportunity(
         @Query("api_key") key: String = "DEMO_KEY"
-    ): RoverRequest
+    ): RoverLatestImages
 
     companion object {
         val api: OpportunityLatestImages by lazy {
@@ -20,8 +20,7 @@ interface OpportunityLatestImages {
                 "ROVER",
                 Okhttp.build(),
                 GsonFactory.build()
-            )
-                .create(OpportunityLatestImages::class.java)
+            ).create(OpportunityLatestImages::class.java)
         }
     }
 }

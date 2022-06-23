@@ -4,7 +4,10 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -15,7 +18,7 @@ import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.dialogfragments.DialogFragmentCadastro
-import com.wdretzer.nasaprojetointegrador.menuprinipal.InicioGuia
+import com.wdretzer.nasaprojetointegrador.menuprinipal.MenuPrincipalActivity
 import com.wdretzer.nasaprojetointegrador.util.SharedPrefNasa
 
 
@@ -50,7 +53,7 @@ class CadastroUsuario : AppCompatActivity() {
         setContentView(R.layout.activity_cadastro_usuario)
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
 
         auth = FirebaseAuth.getInstance()
         analytics = Firebase.analytics
@@ -167,7 +170,7 @@ class CadastroUsuario : AppCompatActivity() {
                         ).show()
 
                         Handler().postDelayed({
-                            val intent = Intent(this@CadastroUsuario, InicioGuia::class.java)
+                            val intent = Intent(this@CadastroUsuario, MenuPrincipalActivity::class.java)
                             startActivity(intent)
                         }, 4000)
 
