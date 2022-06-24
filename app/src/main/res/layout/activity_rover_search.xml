@@ -69,47 +69,58 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/menu_planetas_rover"
+        android:id="@+id/btn_menu_planetas_rover"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:elevation="3dp"
         android:src="@drawable/icon_menu_planetas"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/menu_pesquisa_img_rover"
+        app:layout_constraintEnd_toStartOf="@+id/btn_pesquisa_img_rover"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
-        android:id="@+id/menu_pesquisa_img_rover"
+        android:id="@+id/btn_pesquisa_img_rover"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:elevation="3dp"
         android:src="@drawable/icon_telescope"
-        app:layout_constraintEnd_toStartOf="@+id/menu_favoritos_rover"
-        app:layout_constraintStart_toEndOf="@+id/menu_planetas_rover"
+        app:layout_constraintEnd_toStartOf="@+id/btn_menu_rover"
+        app:layout_constraintStart_toEndOf="@+id/btn_menu_planetas_rover"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
-        android:id="@+id/menu_favoritos_rover"
+        android:id="@+id/btn_menu_rover"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="3dp"
+        android:src="@drawable/icon_rovers"
+        app:layout_constraintEnd_toStartOf="@+id/btn_favoritos_rover"
+        app:layout_constraintStart_toEndOf="@+id/btn_pesquisa_img_rover"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_favoritos_rover"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:elevation="3dp"
         android:src="@drawable/icon_heart_black"
-        app:layout_constraintEnd_toStartOf="@+id/menu_perfil_rover"
-        app:layout_constraintStart_toEndOf="@+id/menu_pesquisa_img_rover"
+        app:layout_constraintEnd_toStartOf="@+id/btn_perfil_rover"
+        app:layout_constraintStart_toEndOf="@+id/btn_menu_rover"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
-        android:id="@+id/menu_perfil_rover"
+        android:id="@+id/btn_perfil_rover"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:elevation="3dp"
         android:src="@drawable/icon_perfil_cosmonalta"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/menu_favoritos_rover"
+        app:layout_constraintStart_toEndOf="@+id/btn_favoritos_rover"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

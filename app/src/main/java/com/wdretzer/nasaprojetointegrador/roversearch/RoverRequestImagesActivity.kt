@@ -74,7 +74,7 @@ class RoverRequestImagesActivity : AppCompatActivity(), DatePickerDialog.OnDateS
             lastDateText = bundle.getString("LastDate").toString()
             firstDateText = bundle.getString("FirstDate").toString()
             title.text = bundle.getString("NameRover").toString()
-            textDateRover.text = "Imagens disponiveis de $firstDateText a $lastDateText"
+            textDateRover.text = "Imagens da Missão Rover ${title.text} disponiveis de $firstDateText a $lastDateText"
 
             lastDateText.let {
                 val parser = SimpleDateFormat("dd.MM.yyyy")

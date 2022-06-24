@@ -57,6 +57,7 @@ class SpiritMissionFragment : Fragment(R.layout.fragment_rover_mission) {
     var lastDate: String = ""
     var firstDate: String = ""
     var nameRover: String = ""
+    var update: Boolean = false
 
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -108,7 +109,7 @@ class SpiritMissionFragment : Fragment(R.layout.fragment_rover_mission) {
                     lastDate = converterDate(it.dataResult.rover.max_date)
                     firstDate = converterDate(it.dataResult.rover.landing_date)
 
-                    nameRoverSpirit?.text = "Rover ${it.dataResult.rover.name}"
+                    nameRoverSpirit?.text = "Nome: Rover ${it.dataResult.rover.name}"
 
                     if (it.dataResult.rover.status == "complete")
                         statusRoverSpirit?.text = "Status: Missão Completada"

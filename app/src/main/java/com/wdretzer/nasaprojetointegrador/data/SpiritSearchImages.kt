@@ -11,8 +11,8 @@ interface SpiritSearchImages {
 
     @GET("photos?")
     suspend fun getImagesSpirit(
-        @Query("earth_date") search: String = "2009-3-21",
-        @Query("api_key") page: String = "0OBavfMrXgXKITEZK5wcKr58wvw1Tpi20zv0h3zK"
+        @Query("earth_date") search: String,
+        @Query("api_key") page: String = "DEMO_KEY"
     ): RoverRequest
 
     companion object {

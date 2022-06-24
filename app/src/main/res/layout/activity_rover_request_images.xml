@@ -19,7 +19,7 @@
         android:text="Rovers"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="28sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,8 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|center_vertical"
         android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
         android:background="@drawable/card_background_fav"
         android:backgroundTint="@color/cinza"
         app:cardCornerRadius="20dp"
@@ -40,32 +40,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titulo_rover">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <RelativeLayout
                 android:id="@+id/animmation1"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/card_background_image"
-                android:elevation="-3dp">
+                android:elevation="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/lottie_main"
-                    android:layout_width="300dp"
-                    android:layout_height="300dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerInParent="true"
                     android:backgroundTint="@android:color/transparent"
-                    android:scaleType="fitXY"
+                    android:elevation="5dp"
+                    android:scaleType="centerCrop"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:lottie_autoPlay="true"
-                    app:lottie_fileName="rover.json"
+                    app:lottie_fileName="funny_rover.json"
                     app:lottie_loop="true"
                     app:lottie_speed="2" />
             </RelativeLayout>
@@ -75,25 +79,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:layout_gravity="start"
-                android:layout_marginTop="10dp"
-                android:textAlignment="center"
+                android:layout_marginTop="-8dp"
                 android:text="Imagens disponiveis de 12/12/2022 a 12/12/2022"
+                android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                tools:ignore="RtlCompat" />
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/animmation1" />
 
             <TextView
                 android:id="@+id/text_data"
                 style="@style/TextAppearance.AppCompat.Headline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Escolha uma Data: "
-                android:textSize="22sp"
-                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                android:text="Escolha uma Data:"
                 android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/descricao_input" />
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/animmation1"
+                app:layout_constraintEnd_toStartOf="@+id/data_input"
+                app:layout_constraintTop_toBottomOf="@+id/datas_rover" />
 
             <TextView
                 android:id="@+id/data_input"
@@ -101,7 +108,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_text_input"
                 android:padding="10dp"
-                android:layout_gravity="center"
                 android:text="dd/mm/aaaa"
                 android:textAlignment="center"
                 android:textColor="@color/black"
@@ -110,25 +116,27 @@
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="@+id/text_data"
                 app:layout_constraintStart_toEndOf="@+id/text_data"
+                app:layout_constraintEnd_toEndOf="@+id/animmation1"
                 app:layout_constraintTop_toTopOf="@+id/text_data" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_img_rovers"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="25dp"
                 android:background="@drawable/button"
                 android:imeOptions="actionNext"
                 android:text="Procurar"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textSearch" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_data" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -156,55 +164,66 @@
         android:id="@+id/menu_bottom_rover"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/background_menu_imagens"
         android:elevation="3dp"
-        android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/menu_planetas_rover"
+        android:id="@+id/btn_menu_planetas_rover"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:elevation="3dp"
         android:src="@drawable/icon_menu_planetas"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/menu_pesquisa_img_rover"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_pesquisa_img_rover"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/menu_pesquisa_img_rover"
+        android:id="@+id/btn_pesquisa_img_rover"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:elevation="3dp"
         android:src="@drawable/icon_telescope"
-        app:layout_constraintEnd_toStartOf="@+id/menu_favoritos_rover"
-        app:layout_constraintStart_toEndOf="@+id/menu_planetas_rover"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_menu_rover"
+        app:layout_constraintStart_toEndOf="@+id/btn_menu_planetas_rover" />
 
     <ImageView
-        android:id="@+id/menu_favoritos_rover"
+        android:id="@+id/btn_menu_rover"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="3dp"
+        android:src="@drawable/icon_rovers"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_favoritos_rover"
+        app:layout_constraintStart_toEndOf="@+id/btn_pesquisa_img_rover" />
+
+    <ImageView
+        android:id="@+id/btn_favoritos_rover"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:elevation="3dp"
         android:src="@drawable/icon_heart_black"
-        app:layout_constraintEnd_toStartOf="@+id/menu_perfil_rover"
-        app:layout_constraintStart_toEndOf="@+id/menu_pesquisa_img_rover"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_perfil_rover"
+        app:layout_constraintStart_toEndOf="@+id/btn_menu_rover" />
 
     <ImageView
-        android:id="@+id/menu_perfil_rover"
+        android:id="@+id/btn_perfil_rover"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:elevation="3dp"
         android:src="@drawable/icon_perfil_cosmonalta"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/menu_favoritos_rover"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/btn_favoritos_rover" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

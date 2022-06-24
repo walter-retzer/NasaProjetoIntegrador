@@ -57,6 +57,7 @@ class PerseveranceMissionFragment : Fragment(R.layout.fragment_rover_mission) {
     var lastDate: String = ""
     var firstDate: String = ""
     var nameRover: String = ""
+    var update: Boolean = false
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,13 +71,21 @@ class PerseveranceMissionFragment : Fragment(R.layout.fragment_rover_mission) {
     }
 
     private fun sendToSearchImageRovers() {
-        activity?.let {
-            val intent = Intent(it, RoverRequestImagesActivity::class.java).apply {
-                putExtra("LastDate", lastDate)
-                putExtra("FirstDate", firstDate)
-                putExtra("NameRover", nameRover)
+        if (update) {
+            activity?.let {
+                val intent = Intent(it, RoverRequestImagesActivity::class.java).apply {
+                    putExtra("LastDate", lastDate)
+                    putExtra("FirstDate", firstDate)
+                    putExtra("NameRover", nameRover)
+                }
+                it.startActivity(intent)
             }
-            it.startActivity(intent)
+        } else {
+            Toast.makeText(
+                context,
+                "Dados da Missão ainda não carregados, aguarde!",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
@@ -104,11 +113,12 @@ class PerseveranceMissionFragment : Fragment(R.layout.fragment_rover_mission) {
                 }
 
                 is DataResult.Success -> {
+                    update = true
                     nameRover = it.dataResult.rover.name
                     lastDate = converterDate(it.dataResult.rover.max_date)
                     firstDate = converterDate(it.dataResult.rover.landing_date)
 
-                    nameRoverPerseverance?.text = "Rover ${it.dataResult.rover.name}"
+                    nameRoverPerseverance?.text = "Nome: Rover ${it.dataResult.rover.name}"
 
                     if (it.dataResult.rover.status == "complete")
                         statusRoverPerseverance?.text = "Status: Missão Completada"

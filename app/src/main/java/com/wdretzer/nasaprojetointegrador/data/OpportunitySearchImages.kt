@@ -11,7 +11,7 @@ interface OpportunitySearchImages {
 
     @GET("photos?")
     suspend fun getImagesOpportunity(
-        @Query("earth_date") search: String = "2016-6-11",
+        @Query("earth_date") search: String,
         @Query("api_key") page: String = "DEMO_KEY"
     ): RoverRequest
 

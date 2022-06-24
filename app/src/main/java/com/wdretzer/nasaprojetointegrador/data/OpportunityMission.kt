@@ -11,7 +11,7 @@ interface OpportunityMission {
 
     @GET("opportunity?")
     suspend fun getMissionOpportunity(
-        @Query("api_key") key: String = "0DEMO_KEY"
+        @Query("api_key") key: String = "DEMO_KEY"
     ): DataRoverMission
 
     companion object {

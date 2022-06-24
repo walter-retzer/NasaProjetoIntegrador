@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
+
         android:background="@drawable/card_background_fav"
         android:backgroundTint="@color/cinza"
         app:cardCornerRadius="20dp"
@@ -35,7 +34,7 @@
                 android:layout_margin="20dp"
                 android:scaleType="centerCrop"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
-                app:srcCompat="@drawable/icon_rover"
+                app:srcCompat="@drawable/img_icon_rover"
                 app:strokeColor="@color/cinza"
                 app:strokeWidth="3dp" />
 
@@ -46,7 +45,7 @@
                 android:layout_gravity="start"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="-10dp"
-                android:text="Rover"
+                android:text="Nome: "
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
@@ -84,17 +83,6 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/max_data_rover"
-                android:layout_width="280dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:text="Última data em Operação: "
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <TextView
                 android:id="@+id/launch_data_rover"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,6 +101,17 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:text="Data do Pouso em Marte: "
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/max_data_rover"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Última data em Operação: "
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 

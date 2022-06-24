@@ -32,17 +32,8 @@ class PerfilCompleto : AppCompatActivity() {
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
         supportActionBar?.hide()
-
         avatar.setStrokeColorResource(R.color.cinza)
-
-        deleteUser.setOnClickListener {
-            showDialogDeleteUser()
-//            dialogSignOut.show(
-//                supportFragmentManager,
-//                dialogSignOut.tag
-//            )
-        }
-
+        deleteUser.setOnClickListener { showDialogDeleteUser() }
         buttonEditPerfil.setOnClickListener { sendToEditPerfil() }
 
         try {
@@ -88,6 +79,4 @@ class PerfilCompleto : AppCompatActivity() {
 
         dialog.show()
     }
-
-
 }
