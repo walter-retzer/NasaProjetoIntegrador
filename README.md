@@ -40,6 +40,8 @@ Linguagem Kotlin utilizando:
 
 ![Screen](screen/07_menu_principal.png)
 
+![Screen](screen/25_menu_rover.jpg)
+
 ## TELA DOS PLANETAS
 
 ![Screen](screen/08_planetas.png)
@@ -109,3 +111,25 @@ Linguagem Kotlin utilizando:
 ![Screen](screen/20_perfil.png)
 
 ![Screen](screen/21_perfil.png)
+
+## TELA COM AS INFORMAÇÕES DAS MISSÕES DOS ROVER EM MARTE
+
+![Screen](screen/26_mission.jpg)
+
+![Screen](screen/27_mission.jpg)
+
+![Screen](screen/28_mission.jpg)
+
+![Screen](screen/29_mission.jpg)
+
+## TELA DE PESQUISA DE IMAGENS DO ROVER EM MARTE POR DATA
+
+![Screen](screen/30_filtro_por_data.jpg)
+
+![Screen](screen/31_data.jpg)
+
+## TELA COM AS IMAGENS TIRADAS PELO ROVER NA DATA SELECIONADA
+
+![Screen](screen/32_imagens.jpg)
+
+![Screen](screen/33_imagens.jpg)
