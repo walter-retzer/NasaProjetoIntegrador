@@ -14,6 +14,11 @@ Linguagem Kotlin utilizando:
 - Tela de Abertura e demais Telas com animações utilizando a biblioteca Lottie;
 - Shared Preferences para armazenar o nome e imagem do Avatar do Perfil do Astronauta; 
 
+APIs utilizadas:
+- NASA Mars Rover Photos <https://api.nasa.gov>
+- NASA Image and Video Library <https://images.nasa.gov/docs/images.nasa.gov_api_docs.pdf>
+
+
 ## TELA DE ABERTURA DO APLICATIVO
 
 ![Screen](screen/01_abertura.png)
