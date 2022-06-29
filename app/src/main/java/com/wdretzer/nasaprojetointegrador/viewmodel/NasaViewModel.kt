@@ -17,6 +17,9 @@ class NasaViewModel(
     fun addOrRemoveFavourite(item: NasaItens) =
         repository.addOrRemoveFavourite(item).flowOn(dispatcher).asLiveData()
 
+//    fun addOrRemoveFavouriteRover(item: RoverItens) =
+//        repository.addOrRemoveFavouriteRover(item).flowOn(dispatcher).asLiveData()
+
     fun request(search: String, page: Int) =
         repository.requestData(search, page).flowOn(dispatcher).asLiveData()
 

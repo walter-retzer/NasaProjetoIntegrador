@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -15,8 +16,8 @@ import com.wdretzer.nasaprojetointegrador.data.RoverItens
 
 
 class ImagensRoverAdpter(
-//    private val action: (RoverItens) -> Unit,
-//    private val detailAction: (RoverItens) -> Unit
+    private val action: (RoverItens) -> Unit,
+    private val detailAction: (RoverItens) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val diffUtil = AsyncListDiffer<RoverItens>(this, DIFF_UTIL)
@@ -25,8 +26,7 @@ class ImagensRoverAdpter(
         val inflater = LayoutInflater.from(parent.context)
 
         return ImagensRoversViewHolder(
-            inflater.inflate(R.layout.item_planeta_imagem, parent, false)
-            //inflater.inflate(R.layout.item_planeta_imagem, parent, false), detailAction, action
+            inflater.inflate(R.layout.item_planeta_imagem, parent, false), detailAction, action
         )
     }
 
@@ -43,12 +43,12 @@ class ImagensRoverAdpter(
     }
 
     fun updateItem(item: RoverItens) {
-//        val newList =
-//            diffUtil.currentList.map { nasa ->
-//                if (nasa.href == item.href) item
-//                else nasa
-//            }
-//        diffUtil.submitList(newList)
+        val newList =
+            diffUtil.currentList.map { rover ->
+                if (rover.img_src == item.img_src) item
+                else rover
+            }
+        diffUtil.submitList(newList)
     }
 
     fun updateList(newItens: List<RoverItens>) {
@@ -71,39 +71,41 @@ class ImagensRoverAdpter(
 
 class ImagensRoversViewHolder(
     view: View,
-//    detailAction: (RoverItens) -> Unit,
-//    private val action: (RoverItens) -> Unit
+    private val action: (RoverItens) -> Unit,
+    private val detailAction: (RoverItens) -> Unit
 ) : RecyclerView.ViewHolder(view) {
 
     var imagemPlanetas: ImageView = view.findViewById(R.id.planeta_item)
     var imagemNumber: TextView = view.findViewById(R.id.img_number)
-    private val favourite: ImageButton = view.findViewById<ImageButton>(R.id.btn_fav)
+    private val favourite: ImageButton = view.findViewById(R.id.btn_fav)
     private var itemCorrente: RoverItens? = null
 
-//    init {
-//        view.setOnClickListener {
-//            itemCorrente?.let {
-//                detailAction.invoke(it)
-//            }
-//        }
-//    }
+    init {
+        view.setOnClickListener {
+            itemCorrente?.let {
+                action.invoke(it)
+            }
+        }
+    }
 
     fun bind(item: RoverItens) {
 
-        imagemNumber.text = "Imagem ${(itemViewType + 1)}"
-//        favourite.setImageResource(if (item.isFavourite) R.drawable.icon_heart_fav else R.drawable.icon_heart)
-//
-//        favourite.setOnClickListener {
-//
-//            if (item.isFavourite) {
-//                Toast.makeText(imagemPlanetas.context, "Item Desavoritado!", Toast.LENGTH_SHORT)
-//                    .show()
-//            } else {
-//                Toast.makeText(imagemPlanetas.context, "Item Favoritado!", Toast.LENGTH_SHORT)
-//                    .show()
-//            }
-//            action.invoke(item)
-//        }
+        // imagemNumber.text = "Imagem ${(itemViewType + 1)}"
+        imagemNumber.text = "Imagem ${item.isFavourite}"
+        favourite.setImageResource(if (item.isFavourite) R.drawable.icon_heart_fav else R.drawable.icon_heart)
+
+        favourite.setOnClickListener {
+            //imagemNumber.text = "Imagem ${item.isFavourite}"
+            favourite.setImageResource(if (item.isFavourite) R.drawable.icon_heart_fav else R.drawable.icon_heart)
+            if (item.isFavourite) {
+                Toast.makeText(imagemPlanetas.context, "Item Desavoritado!", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                Toast.makeText(imagemPlanetas.context, "Item Favoritado!", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            detailAction.invoke(item)
+        }
 
         Glide.with(imagemPlanetas.context)
             .load(item.img_src)

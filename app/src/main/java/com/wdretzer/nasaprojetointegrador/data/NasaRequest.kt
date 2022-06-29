@@ -63,5 +63,12 @@ data class NasaMetadata(
 fun NasaItens.toNasaEntity() = NasaEntity(
     href = href,
     data = data,
-    links = links
+    links = links,
+
+//    sol = 0,
+//    cameras = RoverCamera(" ", " ", 0, " "),
+//    idRover = " ",
+//    img_src = " ",
+//    earth_date = " ",
+//    rover = RoverInfo(" ", " ", " ", " ", " ")
 )

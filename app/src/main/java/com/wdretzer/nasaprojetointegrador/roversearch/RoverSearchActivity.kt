@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.wdretzer.nasaprojetointegrador.R
+import com.wdretzer.nasaprojetointegrador.data.RoverItens
 import com.wdretzer.nasaprojetointegrador.data.RoverRequest
 import com.wdretzer.nasaprojetointegrador.data.extension.DataResult
 import com.wdretzer.nasaprojetointegrador.roverimagens.ImagensRoverAdpter
@@ -25,7 +26,7 @@ class RoverSearchActivity : AppCompatActivity() {
         get() = findViewById(R.id.loading_rover)
     private val recycler: RecyclerView
         get() = findViewById(R.id.rover_recycler)
-    private var adp = ImagensRoverAdpter()
+    private var adp = ImagensRoverAdpter(::checkItem){}
     var nextPage: Boolean = false
     var sendDateText: String = ""
     var nameRover: String = ""
@@ -45,6 +46,7 @@ class RoverSearchActivity : AppCompatActivity() {
         }
 
         chamadas()
+        recyclerView()
     }
 
 
@@ -60,6 +62,48 @@ class RoverSearchActivity : AppCompatActivity() {
 
         if (nameRover == "Spirit") viewModelNasa.requestImagesSpirit(sendDateText)
             .observe(this, ::oberservImagesRovers)
+    }
+
+
+    private fun checkItem(item: RoverItens){
+
+        Toast.makeText(this, "${item.camera}", Toast.LENGTH_SHORT).show()
+//        viewModelNasa.addOrRemoveFavouriteRover(item).observe(this) {
+//            if (it is DataResult.Success) {
+//                adp.updateItem(it.dataResult)
+//            }
+//        }
+
+
+
+    }
+
+
+//    private fun saveFavourite(item: NasaItens) {
+//        viewModelNasa.addOrRemoveFavourite(item).observe(this) {
+//            if (it is DataResult.Success) {
+//                adp.updateItem(it.dataResult)
+//            }
+//        }
+//    }
+
+    private fun recyclerView() {
+        adp = ImagensRoverAdpter(::checkItem){
+
+            Toast.makeText(this, "Item Favoritado!", Toast.LENGTH_SHORT)
+
+//            val imagemApi = it.links.first().href
+//            val descriptionApi = it.data.first().title
+//            val dataApi = it.data.first().dateCreated
+//            val criadoresApi = it.data.first().creators
+//            val keywordsApi = it.data.first().keywords
+//
+//            descriptionApi.let { descricao ->
+//                description = descricao
+//            }
+
+        }
+        //recycler.adapter = adp
     }
 
 

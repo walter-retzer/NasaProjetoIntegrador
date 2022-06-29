@@ -28,7 +28,6 @@
         android:id="@+id/view_pager_rovers"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/menu_bottom_rover"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

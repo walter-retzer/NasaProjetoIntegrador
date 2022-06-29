@@ -1,5 +1,6 @@
 package com.wdretzer.nasaprojetointegrador.repository
 
+import android.util.Log
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
@@ -28,7 +29,7 @@ class NasaRepository(
     private val api12: OpportunityMission = OpportunityMission.api,
     private val api13: SpiritMission = SpiritMission.api,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
-    ) {
+) {
 
     private val dao = DataBaseFactory.getDataBase().nasaDao()
 
@@ -120,7 +121,6 @@ class NasaRepository(
     }.updateStatus().flowOn(dispatcher)
 
 
-
     //Função para verificar se tem um item favoritado pelo usuario e comparar com a lista recebida pela API:
     fun itemFav(item: List<NasaItens>) = flow {
         val localItens = dao.listAll()
@@ -153,25 +153,37 @@ class NasaRepository(
             if (itemExist) {
                 dao.deleteByApiId(listOf(item.data.first()))
                 emit(DataResult.Success(item.copy(isFavourite = false)))
-            } else {
 
-                // Realiza a tradução do título para armazenar no banco de dados:
+            } else {
                 val titleEng = item.data.first().title
                 var titlePt = "Title"
 
+                // Realiza a tradução do título para armazenar no banco de dados:
                 val translationConfigs = TranslatorOptions.Builder()
                     .setSourceLanguage(TranslateLanguage.ENGLISH)
                     .setTargetLanguage(TranslateLanguage.PORTUGUESE)
                     .build()
                 val translator = Translation.getClient(translationConfigs)
 
+                translator.downloadModelIfNeeded()
+                    .addOnSuccessListener {
+                        Log.d("Tradutor Eng-Pt:", "Arquivos Eng-Pt prontos para uso!")
+                    }
+                    .addOnFailureListener {
+                        Log.d(
+                            "Tradutor Eng-Pt:",
+                            "Tente novamente, falha com a conexão da internet!"
+                        )
+                    }
+
                 translator.translate(titleEng)
                     .addOnSuccessListener {
                         titlePt = it
                     }
-
-                //Delay para que possa ser completada a tradução do Título:
-                kotlinx.coroutines.delay(1000L)
+                    .addOnFailureListener {
+                        it.printStackTrace()
+                        Log.d("Tradutor Eng-Pt:", "Baixando arquivos de tradução Eng-Pt.")
+                    }
 
                 //Passa o título traduzido para a variavel title:
                 if (titlePt != "Title") {
@@ -189,6 +201,29 @@ class NasaRepository(
             emit(DataResult.Error(IllegalStateException()))
         }
     }.updateStatus().flowOn(dispatcher)
+
+
+//    //Função para Remover ou Favoritar um item:
+//    fun addOrRemoveFavouriteRover(item: RoverItens) = flow {
+//        try {
+//            val numeroRegistro = dao.countApiIdRover(item.img_src)
+//            val itemExist = numeroRegistro >= 1
+//
+//            if (itemExist) {
+//                dao.deleteByApiIdRover(item.img_src)
+//                emit(DataResult.Success(item.copy(isFavourite = false)))
+//            } else {
+//
+//
+//                //Insere a lista no Banco de Dados:
+//                dao.insert(item.toRoverEntity())
+//                emit(DataResult.Success(item.copy(isFavourite = true)))
+//            }
+//
+//        } catch (e: Exception) {
+//            emit(DataResult.Error(IllegalStateException()))
+//        }
+//    }.updateStatus().flowOn(dispatcher)
 
 
     companion object {

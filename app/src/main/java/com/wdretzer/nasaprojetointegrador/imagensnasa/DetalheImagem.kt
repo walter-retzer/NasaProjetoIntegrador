@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -135,6 +136,9 @@ class DetalheImagem : AppCompatActivity() {
             }
             .addOnFailureListener {
                 it.printStackTrace()
+                Log.d(
+                    "Tradutor Eng-Pt:", "Tente novamente, falha com a conexão da internet!"
+                )
             }
 
         translator.translate(str)
@@ -145,6 +149,10 @@ class DetalheImagem : AppCompatActivity() {
                 if (type == "Keyword") {
                     keywordsDetalhe.text = "Plavras-Chaves: $it"
                 }
+            }
+            .addOnFailureListener {
+                it.printStackTrace()
+                Log.d("Tradutor Eng-Pt:", "Baixando arquivos de tradução Eng-Pt.")
             }
     }
 
