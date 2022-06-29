@@ -41,12 +41,8 @@ class ItensFavoritosAdapter(
     }
 
     fun updateItem(item: NasaItens) {
-        val newList =
-            diffUtil.currentList.map { nasa ->
-                if (nasa.href == item.href) item
-                else nasa
-            }
-        diffUtil.submitList(newList)
+        val list = mutableListOf(item)
+        diffUtil.submitList(diffUtil.currentList.minus(list))
     }
 
     companion object {
@@ -56,7 +52,7 @@ class ItensFavoritosAdapter(
             }
 
             override fun areContentsTheSame(oldItem: NasaItens, newItem: NasaItens): Boolean {
-                return oldItem.links == newItem.links
+                return oldItem.links.first() == newItem.links.first()
             }
         }
     }

@@ -11,9 +11,9 @@
         android:id="@+id/titulo_detalhe_imagem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
-        android:layout_marginStart="25dp"
         android:background="@drawable/background_text_splash"
         android:padding="10dp"
         android:text="Imagens Favoritas"
@@ -43,9 +43,9 @@
         android:id="@+id/menu_bottom_fav"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/background_menu_imagens"
         android:elevation="3dp"
-        android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -58,9 +58,9 @@
         android:layout_marginBottom="5dp"
         android:elevation="3dp"
         android:src="@drawable/icon_menu_planetas"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/pesquisar_img_fav"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/pesquisar_img_fav"
@@ -69,20 +69,20 @@
         android:layout_marginBottom="5dp"
         android:elevation="3dp"
         android:src="@drawable/icon_telescope"
-        app:layout_constraintEnd_toStartOf="@+id/favoritar_fav"
-        app:layout_constraintStart_toEndOf="@+id/inicio_fav"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rover_fav"
+        app:layout_constraintStart_toEndOf="@+id/inicio_fav" />
 
     <ImageView
-        android:id="@+id/favoritar_fav"
+        android:id="@+id/rover_fav"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:elevation="3dp"
-        android:src="@drawable/icon_heart_black"
+        android:src="@drawable/icon_rovers"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/perfil_fav"
-        app:layout_constraintStart_toEndOf="@+id/pesquisar_img_fav"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/pesquisar_img_fav" />
 
     <ImageView
         android:id="@+id/perfil_fav"
@@ -91,8 +91,28 @@
         android:layout_marginBottom="5dp"
         android:elevation="3dp"
         android:src="@drawable/icon_perfil_cosmonalta"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/favoritar_fav"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/rover_fav" />
+
+    <FrameLayout
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent"
+        android:elevation="5dp"
+        android:padding="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="5dp" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

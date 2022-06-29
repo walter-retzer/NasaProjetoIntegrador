@@ -15,7 +15,7 @@ data class RoverItens(
     val img_src: String,
     val earth_date: String,
     val rover: RoverInfo,
-    val isFavourite: Boolean = false
+    val isFavouriteRoverImg: Boolean = false
 )
 
 //{

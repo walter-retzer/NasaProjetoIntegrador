@@ -65,10 +65,10 @@ fun NasaItens.toNasaEntity() = NasaEntity(
     data = data,
     links = links,
 
-//    sol = 0,
-//    cameras = RoverCamera(" ", " ", 0, " "),
-//    idRover = " ",
-//    img_src = " ",
-//    earth_date = " ",
-//    rover = RoverInfo(" ", " ", " ", " ", " ")
+    sol = 0,
+    cameras = RoverCamera(" ", " ", 0, " "),
+    idRover = " ",
+    img_src = href,
+    earth_date = " ",
+    rover = RoverInfo(" ", " ", " ", " ", " ")
 )

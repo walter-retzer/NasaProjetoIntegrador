@@ -91,13 +91,13 @@ class ImagensRoversViewHolder(
     fun bind(item: RoverItens) {
 
         // imagemNumber.text = "Imagem ${(itemViewType + 1)}"
-        imagemNumber.text = "Imagem ${item.isFavourite}"
-        favourite.setImageResource(if (item.isFavourite) R.drawable.icon_heart_fav else R.drawable.icon_heart)
+        imagemNumber.text = "Imagem ${item.isFavouriteRoverImg}"
+        favourite.setImageResource(if (item.isFavouriteRoverImg) R.drawable.icon_heart_fav else R.drawable.icon_heart)
 
         favourite.setOnClickListener {
             //imagemNumber.text = "Imagem ${item.isFavourite}"
-            favourite.setImageResource(if (item.isFavourite) R.drawable.icon_heart_fav else R.drawable.icon_heart)
-            if (item.isFavourite) {
+            favourite.setImageResource(if (item.isFavouriteRoverImg) R.drawable.icon_heart_fav else R.drawable.icon_heart)
+            if (item.isFavouriteRoverImg) {
                 Toast.makeText(imagemPlanetas.context, "Item Desavoritado!", Toast.LENGTH_SHORT)
                     .show()
             } else {

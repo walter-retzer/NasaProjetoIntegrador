@@ -30,10 +30,13 @@ class ImagensNasa : AppCompatActivity() {
     private val buttonMenuPerfil: ImageView by lazy { findViewById(R.id.menu_perfil) }
     private val totalItens: TextView by lazy { findViewById(R.id.text_img_encontradas) }
     private val viewModelNasa: NasaViewModel by viewModels()
+
     private val loading: FrameLayout
         get() = findViewById(R.id.loading)
+
     private val recycler: RecyclerView
         get() = findViewById(R.id.nasa_recycler)
+
     private var adp = ImagensAdpter(::saveFavourite) {}
     var page = 1
     var totalImagens: Int = 0
@@ -128,7 +131,7 @@ class ImagensNasa : AppCompatActivity() {
         }
     }
 
-    fun oberservarNasa(result: DataResult<NasaRequest>) {
+    private fun oberservarNasa(result: DataResult<NasaRequest>) {
         when (result) {
 
             is DataResult.Loading -> {

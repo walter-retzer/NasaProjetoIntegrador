@@ -136,12 +136,22 @@ class NasaRepository(
 
 
     //Função para pegar os dados do item Favoritado:
-    fun getFavourite() = flow<MutableList<NasaItens>> {
+    fun getFavourite1() = flow<MutableList<FavouriteItens>> {
+        val localItens = dao.listAll().map {
+            FavouriteItens(it)
+        }
+        emit((localItens as MutableList<FavouriteItens>))
+    }.flowOn(dispatcher)
+
+
+    //Função para pegar os dados do item Favoritado:
+    fun getFavourite() = flow {
         val localItens = dao.listAll().map {
             NasaItens(it)
         }
-        emit((localItens as MutableList<NasaItens>))
-    }.flowOn(dispatcher)
+        //emit((localItens as MutableList<NasaItens>))
+        emit(DataResult.Success(localItens as MutableList<NasaItens>))
+    }.updateStatus().flowOn(dispatcher)
 
 
     //Função para Remover ou Favoritar um item:

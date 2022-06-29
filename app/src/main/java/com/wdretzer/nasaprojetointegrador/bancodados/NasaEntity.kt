@@ -22,23 +22,23 @@ class NasaEntity(
 
 
 
-//    @ColumnInfo
-//    val idRover: String = " ",
-//
-//    @ColumnInfo
-//    val sol: Int = 0,
-//
-//    @ColumnInfo
-//    val cameras:  RoverCamera,
-//
-//    @ColumnInfo
-//    val img_src: String = " ",
-//
-//    @ColumnInfo
-//    val earth_date: String = " ",
-//
-//    @ColumnInfo
-//    val rover:  RoverInfo,
+    @ColumnInfo
+    val idRover: String = " ",
+
+    @ColumnInfo
+    val sol: Int = 0,
+
+    @ColumnInfo
+    val cameras:  RoverCamera,
+
+    @ColumnInfo
+    val img_src: String = " ",
+
+    @ColumnInfo
+    val earth_date: String = " ",
+
+    @ColumnInfo
+    val rover:  RoverInfo,
 
 
 
@@ -67,20 +67,22 @@ class Converters {
 
 
 
-//    // Funções para converter as Listas da Classe Links
-//    @TypeConverter
-//    fun listToJsonString3(value: RoverCamera?): String = Gson().toJson(value)
-//
-//    @TypeConverter
-//    fun jsonStringToList3(value: String) = Gson().fromJson(value, RoverCamera::class.java)
-//
-//
-//    // Funções para converter as Listas da Classe Links
-//    @TypeConverter
-//    fun listToJsonString4(value: RoverInfo?): String = Gson().toJson(value)
-//
-//    @TypeConverter
-//    fun jsonStringToList4(value: String) = Gson().fromJson(value, RoverInfo::class.java)
+    // Funções para converter as Listas da Classe Links
+    @TypeConverter
+    fun listToJsonString3(value: RoverCamera?): String = Gson().toJson(value)
+
+    @TypeConverter
+    fun jsonStringToList3(value: String) = Gson().fromJson(value, RoverCamera::class.java)
+
+
+    // Funções para converter as Listas da Classe Links
+    @TypeConverter
+    fun listToJsonString4(value: RoverInfo?): String = Gson().toJson(value)
+
+    @TypeConverter
+    fun jsonStringToList4(value: String) = Gson().fromJson(value, RoverInfo::class.java)
+
+
 //
 //
 //    // Funções para converter as Listas da Classe Links

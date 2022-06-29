@@ -17,7 +17,7 @@ object DataBaseFactory {
         val dataBase = Room.databaseBuilder(
             context.applicationContext,
             AppDataBase::class.java,
-            "trash"
+            "qwerty"
         )
 
         dataBase.allowMainThreadQueries()

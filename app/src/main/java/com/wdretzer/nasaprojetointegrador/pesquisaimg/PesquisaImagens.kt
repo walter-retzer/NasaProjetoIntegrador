@@ -35,11 +35,6 @@ import java.util.*
 
 class PesquisaImagens : AppCompatActivity() {
 
-    val sharedPref: SharedPrefNasa = SharedPrefNasa.instance
-
-//    private val firebaseDB = FirebaseDatabase.getInstance()
-//    private val ref = firebaseDB.getReference("doctors")
-
     private val buttonPlanetas: Button by lazy { findViewById(R.id.btn_searchImagens) }
     private val animationView: LottieAnimationView by lazy { findViewById(R.id.lottie) }
     private val img: ImageView by lazy { findViewById(R.id.search_imagem) }
@@ -47,6 +42,8 @@ class PesquisaImagens : AppCompatActivity() {
     private val textSearch: TextInputEditText
         get() = findViewById(R.id.input_search_img)
     private var searchWords: String = ""
+    val sharedPref: SharedPrefNasa = SharedPrefNasa.instance
+    val localStorage: String = "/Android/data/com.wdretzer.nasaprojetointegrador"
 
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -171,7 +168,8 @@ class PesquisaImagens : AppCompatActivity() {
         try {
             nameFile = sharedPref.readString("Id")
         } catch (e: IllegalArgumentException) {
-            Toast.makeText(this, "Erro ao criar o nome do Arquivo Search!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Erro ao criar o nome do Arquivo Search!", Toast.LENGTH_SHORT)
+                .show()
         }
 
         val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy_HH.mm.ss")
@@ -203,7 +201,7 @@ class PesquisaImagens : AppCompatActivity() {
 
 
     private fun getDisc(): File {
-        val file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+        val file = Environment.getExternalStorageDirectory().toString() + localStorage
         return File(file, "NASA_SEARCH")
     }
 
