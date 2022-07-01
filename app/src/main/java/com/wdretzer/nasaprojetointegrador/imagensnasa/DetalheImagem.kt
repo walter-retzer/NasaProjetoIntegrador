@@ -71,7 +71,7 @@ class DetalheImagem : AppCompatActivity() {
     }
 
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat", "SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.N)
     private fun checkBundle() {
         keywordsDetalhe.visibility = View.GONE
@@ -122,6 +122,7 @@ class DetalheImagem : AppCompatActivity() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun translate(str: String, type: String) {
 
         val translationConfigs = TranslatorOptions.Builder()

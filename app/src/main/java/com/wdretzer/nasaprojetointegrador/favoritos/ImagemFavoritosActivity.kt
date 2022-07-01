@@ -2,6 +2,7 @@ package com.wdretzer.nasaprojetointegrador.favoritos
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
@@ -11,7 +12,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wdretzer.nasaprojetointegrador.R
-import com.wdretzer.nasaprojetointegrador.data.NasaItens
+import com.wdretzer.nasaprojetointegrador.data.FavouritesItens
 import com.wdretzer.nasaprojetointegrador.data.extension.DataResult
 import com.wdretzer.nasaprojetointegrador.imagensnasa.ImagensNasa
 import com.wdretzer.nasaprojetointegrador.menuprinipal.MenuPrincipalActivity
@@ -35,7 +36,7 @@ class ImagemFavoritosActivity : AppCompatActivity() {
     private val recycler: RecyclerView
         get() = findViewById(R.id.nasa_recycler_fav)
 
-    private var adp = ItensFavoritosAdapter(::saveFavourite)
+    private var adp = ItensFavoritosAdapter(::removeFavourite)
 
     private var setSearch: String = ""
 
@@ -75,14 +76,23 @@ class ImagemFavoritosActivity : AppCompatActivity() {
     }
 
     private fun showFavourite() {
-        viewModelNasa.getFavourite().observe(this) {
+        viewModelNasa.getFavouriteImages().observe(this) {
 
             if (it is DataResult.Loading) {
                 loading!!.isVisible = it.isLoading
             }
 
             if (it is DataResult.Success) {
+                Log.d("BD_FAV:", "Lista: ${it.dataResult}")
                 adp.updateList(it.dataResult)
+
+                if (it.dataResult.size == 0){
+                    Toast.makeText(
+                        this,
+                        "Ainda não há imagens favoritas salvas!",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
 
             if (it is DataResult.Error) {
@@ -95,23 +105,65 @@ class ImagemFavoritosActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveFavourite(item: NasaItens) {
-        viewModelNasa.addOrRemoveFavourite(item).observe(this) {
-
+    private fun removeFavourite(item: FavouritesItens) {
+        // deletar o item no banco de dados Nasa!!
+        viewModelNasa.removeFavouriteImg(item).observe(this) {
             if (it is DataResult.Loading) {
                 loading!!.isVisible = it.isLoading
             }
 
             if (it is DataResult.Success) {
-                adp.updateItem(item)
+                adp.updateItem(it.dataResult)
             }
 
             if (it is DataResult.Error) {
-                Toast.makeText(
-                    this,
-                    "Erro ao acessar as imagens favoritas salvas.",
-                    Toast.LENGTH_LONG
-                ).show()
+                Log.d("BD FavImgNasa:", "Erro ${it.error} ao remover item ${item.img} do BD!")
+                Toast.makeText(this, "Erro ao deletar item!", Toast.LENGTH_LONG).show()
+            }
+
+            if (it is DataResult.Empty) {
+                Log.d("BD FavImg:", "Retorno vazio ao remover item ${item.img} do BD!")
+            }
+        }
+
+        // deletar a img no banco de Dados Fav:
+        viewModelNasa.addOrRemoveFavouriteImg(item).observe(this) {
+            if (it is DataResult.Success) {
+                Log.d("BD FavImg:", "Item Removido com Sucesso do BD FavImg!")
+            }
+
+            if (it is DataResult.Loading) {
+                loading!!.isVisible = it.isLoading
+            }
+
+            if (it is DataResult.Error) {
+                Log.d("BD FavImg:", "Erro ${it.error} ao remover item ${item.img} do BD!")
+                Toast.makeText(this, "Erro ao deletar item!", Toast.LENGTH_LONG).show()
+            }
+
+            if (it is DataResult.Empty) {
+                Log.d("BD FavImg:", "Retorno vazio ao remover item ${item.img} do BD!")
+            }
+        }
+
+
+        // deletar a img no banco de Dados Rover:
+        viewModelNasa.removeFavouriteImgRover(item.img).observe(this) {
+            if (it is DataResult.Success) {
+                Log.d("BD FavRoverImg:", "Item Removido com Sucesso do BD FavRoverImg!")
+            }
+
+            if (it is DataResult.Loading) {
+                loading!!.isVisible = it.isLoading
+            }
+
+            if (it is DataResult.Error) {
+                Log.d("BD FavRoverImg:", "Erro ${it.error} ao remover item ${item.img} do BD!")
+                Toast.makeText(this, "Erro ao deletar item!", Toast.LENGTH_LONG).show()
+            }
+
+            if (it is DataResult.Empty) {
+                Log.d("BD FavImg:", "Retorno vazio ao remover item ${item.img} do BD!")
             }
         }
     }

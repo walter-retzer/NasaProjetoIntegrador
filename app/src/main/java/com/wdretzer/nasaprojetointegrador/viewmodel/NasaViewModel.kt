@@ -2,7 +2,9 @@ package com.wdretzer.nasaprojetointegrador.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import com.wdretzer.nasaprojetointegrador.data.FavouritesItens
 import com.wdretzer.nasaprojetointegrador.data.NasaItens
+import com.wdretzer.nasaprojetointegrador.data.RoverItens
 import com.wdretzer.nasaprojetointegrador.repository.NasaRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -17,8 +19,17 @@ class NasaViewModel(
     fun addOrRemoveFavourite(item: NasaItens) =
         repository.addOrRemoveFavourite(item).flowOn(dispatcher).asLiveData()
 
-//    fun addOrRemoveFavouriteRover(item: RoverItens) =
-//        repository.addOrRemoveFavouriteRover(item).flowOn(dispatcher).asLiveData()
+    fun addOrRemoveFavouriteImg(item: FavouritesItens) =
+        repository.addOrRemoveFavouriteImg(item).flowOn(dispatcher).asLiveData()
+
+    fun addOrRemoveFavouriteImgRover(item: RoverItens) =
+        repository.addOrRemoveFavouriteImgRover(item).flowOn(dispatcher).asLiveData()
+
+    fun removeFavouriteImg(item: FavouritesItens) =
+        repository.removeFavouriteImg(item).flowOn(dispatcher).asLiveData()
+
+    fun removeFavouriteImgRover(item: String) =
+        repository.removeFavouriteImgRover(item).flowOn(dispatcher).asLiveData()
 
     fun request(search: String, page: Int) =
         repository.requestData(search, page).flowOn(dispatcher).asLiveData()
@@ -61,5 +72,9 @@ class NasaViewModel(
 
     fun getFavourite() = repository.getFavourite().flowOn(dispatcher).asLiveData()
 
+    fun getFavouriteImages() = repository.getFavouriteImages().flowOn(dispatcher).asLiveData()
+
     fun itemFav(item: List<NasaItens>) = repository.itemFav(item).flowOn(dispatcher).asLiveData()
+
+    fun itemFavRover(item: List<RoverItens>) = repository.itemFavRover(item).flowOn(dispatcher).asLiveData()
 }

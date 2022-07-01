@@ -1,5 +1,7 @@
 package com.wdretzer.nasaprojetointegrador.favoritos
 
+import android.annotation.SuppressLint
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +14,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.wdretzer.nasaprojetointegrador.R
-import com.wdretzer.nasaprojetointegrador.data.NasaItens
+import com.wdretzer.nasaprojetointegrador.data.FavouritesItens
 
 
 class ItensFavoritosAdapter(
-    private val action: (NasaItens) -> Unit
+    private val action: (FavouritesItens) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val diffUtil = AsyncListDiffer<NasaItens>(this, DIFF_UTIL)
+    val diffUtil = AsyncListDiffer<FavouritesItens>(this, DIFF_UTIL)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -36,23 +38,29 @@ class ItensFavoritosAdapter(
 
     override fun getItemCount(): Int = diffUtil.currentList.size
 
-    fun updateList(newItens: MutableList<NasaItens>) {
+    fun updateList(newItens: MutableList<FavouritesItens>) {
         diffUtil.submitList(diffUtil.currentList.plus(newItens))
     }
 
-    fun updateItem(item: NasaItens) {
+    fun updateItem(item: FavouritesItens) {
         val list = mutableListOf(item)
         diffUtil.submitList(diffUtil.currentList.minus(list))
     }
 
     companion object {
-        val DIFF_UTIL = object : DiffUtil.ItemCallback<NasaItens>() {
-            override fun areItemsTheSame(oldItem: NasaItens, newItem: NasaItens): Boolean {
+        val DIFF_UTIL = object : DiffUtil.ItemCallback<FavouritesItens>() {
+            override fun areItemsTheSame(
+                oldItem: FavouritesItens,
+                newItem: FavouritesItens
+            ): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: NasaItens, newItem: NasaItens): Boolean {
-                return oldItem.links.first() == newItem.links.first()
+            override fun areContentsTheSame(
+                oldItem: FavouritesItens,
+                newItem: FavouritesItens
+            ): Boolean {
+                return oldItem.img == newItem.img
             }
         }
     }
@@ -61,29 +69,32 @@ class ItensFavoritosAdapter(
 
 class FavouriteViewHolder(
     view: View,
-    private val action: (NasaItens) -> Unit
+    private val action: (FavouritesItens) -> Unit
 ) : RecyclerView.ViewHolder(view) {
 
     private val imagemFav: ImageView = view.findViewById(R.id.planeta_item)
     private val textFav: TextView = view.findViewById(R.id.img_number)
     private val favourite: ImageButton = view.findViewById(R.id.btn_fav)
 
-    fun bind(itensFav: NasaItens) {
+    @SuppressLint("SetTextI18n")
+    fun bind(itensFav: FavouritesItens) {
 
-        textFav.text = itensFav.data.first().title
+        textFav.text = itensFav.title
 
         Glide.with(imagemFav.context)
-            .load(itensFav.links.first().href)
+            .load(itensFav.img)
             .placeholder(R.drawable.new_star_background)
             .error(R.drawable.icon_error)
             .into(imagemFav)
 
-        favourite.setImageResource(if (itensFav.isFavourite) R.drawable.icon_heart else R.drawable.icon_heart_fav)
+        favourite.setImageResource(R.drawable.icon_heart_fav)
 
         favourite.setOnClickListener {
-            action.invoke(itensFav)
+            favourite.setImageResource(R.drawable.icon_heart)
             Toast.makeText(favourite.context, "Item Desfavoritado!", Toast.LENGTH_SHORT).show()
-            favourite.setImageResource(if (itensFav.isFavourite) R.drawable.icon_heart else R.drawable.icon_heart_fav)
+            Handler().postDelayed({
+                action.invoke(itensFav)
+            }, 500)
         }
     }
 }

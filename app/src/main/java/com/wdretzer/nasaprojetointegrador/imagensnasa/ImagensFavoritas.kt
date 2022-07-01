@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.pesquisaimg.PesquisaImagens
 
+
 class ImagensFavoritas : AppCompatActivity() {
 
     private val buttonPesquisaImagens: Button by lazy { findViewById(R.id.inicio_fav) }

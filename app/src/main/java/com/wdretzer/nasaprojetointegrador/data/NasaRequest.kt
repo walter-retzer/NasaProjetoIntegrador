@@ -1,7 +1,7 @@
 package com.wdretzer.nasaprojetointegrador.data
 
 import com.google.gson.annotations.SerializedName
-import com.wdretzer.nasaprojetointegrador.bancodados.NasaEntity
+import com.wdretzer.nasaprojetointegrador.bancodadosnasa.NasaEntity
 
 
 // Modelo de Data Class de Retorno da API NASA:
@@ -28,7 +28,7 @@ data class NasaItens(
     constructor(nasaEntity: NasaEntity) : this(
         nasaEntity.href,
         nasaEntity.data,
-        nasaEntity.links
+        nasaEntity.links,
     )
 }
 
@@ -64,11 +64,4 @@ fun NasaItens.toNasaEntity() = NasaEntity(
     href = href,
     data = data,
     links = links,
-
-    sol = 0,
-    cameras = RoverCamera(" ", " ", 0, " "),
-    idRover = " ",
-    img_src = href,
-    earth_date = " ",
-    rover = RoverInfo(" ", " ", " ", " ", " ")
 )

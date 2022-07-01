@@ -1,23 +1,23 @@
-package com.wdretzer.nasaprojetointegrador.bancodados
+package com.wdretzer.nasaprojetointegrador.bancodadosfav
 
 import android.content.Context
 import androidx.room.Room
 
-object DataBaseFactory {
+object DataBaseFactoryFav {
 
-    private var instance: AppDataBase? = null
+    private var instance: AppDataBaseFav? = null
 
-    fun getDataBase() = instance ?: throw IllegalStateException("Database is not initialized")
+    fun getDataBaseFav() = instance ?: throw IllegalStateException("Database is not initialized")
 
-    fun build(context: Context): AppDataBase {
+    fun build(context: Context): AppDataBaseFav {
 
         val currentInstance = instance
         if (currentInstance != null) return currentInstance
 
         val dataBase = Room.databaseBuilder(
             context.applicationContext,
-            AppDataBase::class.java,
-            "qwerty"
+            AppDataBaseFav::class.java,
+            "Favoritos"
         )
 
         dataBase.allowMainThreadQueries()

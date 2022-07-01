@@ -1,5 +1,6 @@
 package com.wdretzer.nasaprojetointegrador.imagensnasa
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,13 +88,13 @@ class ImagensViewHolder(
         }
     }
 
+    @SuppressLint("SetTextI18n")
     fun bind(item: NasaItens) {
 
         imagemNumber.text = "Imagem ${(itemViewType + 1)}"
         favourite.setImageResource(if (item.isFavourite) R.drawable.icon_heart_fav else R.drawable.icon_heart)
 
         favourite.setOnClickListener {
-
             if (item.isFavourite) {
                 Toast.makeText(imagemPlanetas.context, "Item Desavoritado!", Toast.LENGTH_SHORT)
                     .show()

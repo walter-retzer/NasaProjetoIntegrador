@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -146,10 +147,10 @@ class PesquisaImagens : AppCompatActivity() {
             fileReference
                 .putFile(this)
                 .addOnSuccessListener {
-                    //Toast.makeText(this@PesquisaImagens, "Arquivo Enviado ao Firebase Storage!", Toast.LENGTH_SHORT).show()
+                    Log.d("Firebase Storage:", "Arquivo Enviado ao Firebase Storage com sucesso!")
                 }
                 .addOnFailureListener {
-                    //Toast.makeText(this@PesquisaImagens, "Arquivo Não Enviado ao Firebase Storage!", Toast.LENGTH_SHORT).show()
+                    Log.d("Firebase Storage:", "rquivo Não Enviado ao Firebase Storage!")
                 }
         }
     }
@@ -165,11 +166,17 @@ class PesquisaImagens : AppCompatActivity() {
         }
 
         var nameFile = ""
+
         try {
+
             nameFile = sharedPref.readString("Id")
+
         } catch (e: IllegalArgumentException) {
-            Toast.makeText(this, "Erro ao criar o nome do Arquivo Search!", Toast.LENGTH_SHORT)
-                .show()
+            Toast.makeText(
+                this,
+                "Erro ao criar o nome do Arquivo Search!",
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
         val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy_HH.mm.ss")
@@ -187,16 +194,14 @@ class PesquisaImagens : AppCompatActivity() {
 
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
-            //Toast.makeText(this, "Arquivo para o Firebase Storage Inexistente!", Toast.LENGTH_SHORT).show()
+            Log.d("Firebase Storage:", "Arquivo para o Firebase Storage Inexistente!")
 
         } catch (e: IOException) {
             e.printStackTrace()
-            //Toast.makeText(this, "Falha ao Salvar o Arquivo!", Toast.LENGTH_SHORT).show()
-
+            Log.d("Firebase Storage:", "Falha ao Salvar o Arquivo!")
         }
 
         return Uri.parse(newFile.toUri().toString())
-
     }
 
 

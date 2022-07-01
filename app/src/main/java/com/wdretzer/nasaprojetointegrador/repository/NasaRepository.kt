@@ -4,7 +4,9 @@ import android.util.Log
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
-import com.wdretzer.nasaprojetointegrador.bancodados.DataBaseFactory
+import com.wdretzer.nasaprojetointegrador.bancodadosfav.DataBaseFactoryFav
+import com.wdretzer.nasaprojetointegrador.bancodadosnasa.DataBaseFactory
+import com.wdretzer.nasaprojetointegrador.bancodadosrover.DataBaseFactoryRover
 import com.wdretzer.nasaprojetointegrador.data.*
 import com.wdretzer.nasaprojetointegrador.data.extension.DataResult
 import com.wdretzer.nasaprojetointegrador.data.extension.updateStatus
@@ -30,8 +32,10 @@ class NasaRepository(
     private val api13: SpiritMission = SpiritMission.api,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
+    private val dao = DataBaseFactory.getDataBaseNasa().nasaDao()
+    private val daoFav = DataBaseFactoryFav.getDataBaseFav().favDao()
+    private val daoRover = DataBaseFactoryRover.getDataBaseRover().roverDao()
 
-    private val dao = DataBaseFactory.getDataBase().nasaDao()
 
     //Função para receber os dados da API da Nasa Image:
     fun requestData(search: String, page: Int) = flow<DataResult<NasaRequest>> {
@@ -102,17 +106,20 @@ class NasaRepository(
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
+
     //Função para receber os dados da Missão Curiosity:
     fun requestMissionCuriosity() = flow<DataResult<DataRoverMission>> {
         val response: DataRoverMission = api11.getMissionCuriosity()
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
+
     //Função para receber os dados da Missão Opportunity:
     fun requestMissionOpportunity() = flow<DataResult<DataRoverMission>> {
         val response: DataRoverMission = api12.getMissionOpportunity()
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
+
 
     //Função para receber os dados da Missão Opportunity:
     fun requestMissionSpirit() = flow<DataResult<DataRoverMission>> {
@@ -121,7 +128,7 @@ class NasaRepository(
     }.updateStatus().flowOn(dispatcher)
 
 
-    //Função para verificar se tem um item favoritado pelo usuario e comparar com a lista recebida pela API:
+    //Função para verificar se tem um item favoritado pelo usuario e comparar com a lista recebida pela API NASA:
     fun itemFav(item: List<NasaItens>) = flow {
         val localItens = dao.listAll()
         val novaLista = item.map { itNasaItens ->
@@ -135,16 +142,30 @@ class NasaRepository(
     }.flowOn(dispatcher)
 
 
-    //Função para pegar os dados do item Favoritado:
-    fun getFavourite1() = flow<MutableList<FavouriteItens>> {
-        val localItens = dao.listAll().map {
-            FavouriteItens(it)
+    //Função para verificar se tem um item favoritado pelo usuario e comparar com a lista recebida pela API com as info dos Rovers:
+    fun itemFavRover(item: List<RoverItens>) = flow {
+        val localItens = daoRover.listAll()
+        val novaLista = item.map { roverItens ->
+            if (localItens.filter { roverEntity ->
+                    roverEntity.imgRover == roverItens.imgRover
+                }.getOrNull(0) != null)
+                roverItens.copy(isFavouriteRoverImg = true)
+            else roverItens
         }
-        emit((localItens as MutableList<FavouriteItens>))
+        emit(novaLista)
     }.flowOn(dispatcher)
 
 
-    //Função para pegar os dados do item Favoritado:
+    //Função para pegar os dados dos itens que foram favoritados no BD Img Fav:
+    fun getFavouriteImages() = flow {
+        val localItens = daoFav.listAll().map {
+            FavouritesItens(it)
+        }
+        emit(DataResult.Success((localItens as MutableList<FavouritesItens>)))
+    }.updateStatus().flowOn(dispatcher)
+
+
+    //Função para pegar os dados do item Favoritado no BD Nasa:
     fun getFavourite() = flow {
         val localItens = dao.listAll().map {
             NasaItens(it)
@@ -154,7 +175,7 @@ class NasaRepository(
     }.updateStatus().flowOn(dispatcher)
 
 
-    //Função para Remover ou Favoritar um item:
+    //Função para Remover ou Favoritar um item no BD Nasa:
     fun addOrRemoveFavourite(item: NasaItens) = flow {
         try {
             val numeroRegistro = dao.countApiId(listOf(item.data.first()))
@@ -213,27 +234,60 @@ class NasaRepository(
     }.updateStatus().flowOn(dispatcher)
 
 
-//    //Função para Remover ou Favoritar um item:
-//    fun addOrRemoveFavouriteRover(item: RoverItens) = flow {
-//        try {
-//            val numeroRegistro = dao.countApiIdRover(item.img_src)
-//            val itemExist = numeroRegistro >= 1
-//
-//            if (itemExist) {
-//                dao.deleteByApiIdRover(item.img_src)
-//                emit(DataResult.Success(item.copy(isFavourite = false)))
-//            } else {
-//
-//
-//                //Insere a lista no Banco de Dados:
-//                dao.insert(item.toRoverEntity())
-//                emit(DataResult.Success(item.copy(isFavourite = true)))
-//            }
-//
-//        } catch (e: Exception) {
-//            emit(DataResult.Error(IllegalStateException()))
-//        }
-//    }.updateStatus().flowOn(dispatcher)
+    //Função para Remover ou Favoritar um item no BD Img Fav:
+    fun addOrRemoveFavouriteImg(item: FavouritesItens) = flow {
+        try {
+            val numeroRegistro = daoFav.countApiId(item.img)
+            val itemExist = numeroRegistro >= 1
+
+            Log.d("Count:", "n = $numeroRegistro")
+
+            if (itemExist) {
+                daoFav.deleteByApiImg(item.img)
+                emit(DataResult.Success(item))
+            } else {
+                daoFav.insert(item.toFavEntity())
+                emit(DataResult.Success(item))
+            }
+        } catch (e: Exception) {
+            emit(DataResult.Error(IllegalStateException()))
+        }
+    }.updateStatus().flowOn(dispatcher)
+
+
+    //Função para Remover ou Favoritar um item no BD Rover:
+    fun addOrRemoveFavouriteImgRover(item: RoverItens) = flow {
+        try {
+            val numeroRegistro = daoRover.countApiId(item.imgRover)
+            val itemExist = numeroRegistro >= 1
+
+            Log.d("Count:", "n = $numeroRegistro")
+
+            if (itemExist) {
+                daoRover.deleteByApiImgSrc(item.imgRover)
+                emit(DataResult.Success(item.copy(isFavouriteRoverImg = false)))
+            } else {
+                daoRover.insert(item.toRoverEntity())
+                emit(DataResult.Success(item.copy(isFavouriteRoverImg = true)))
+            }
+        } catch (e: Exception) {
+            emit(DataResult.Error(IllegalStateException()))
+        }
+    }.updateStatus().flowOn(dispatcher)
+
+
+    //Função para Remover um item no BD Img FAV:
+    fun removeFavouriteImg(item: FavouritesItens) = flow {
+        dao.deleteByApiId(item.data)
+        emit(DataResult.Success(item))
+    }.updateStatus().flowOn(dispatcher)
+
+
+    //Função para Remover um item no BD Rover Fav:
+    fun removeFavouriteImgRover(imagem: String) = flow {
+        daoRover.deleteByApiImgSrc(imagem)
+        emit(DataResult.Success(imagem))
+    }.updateStatus().flowOn(dispatcher)
 
 
     companion object {

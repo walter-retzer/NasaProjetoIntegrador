@@ -1,7 +1,9 @@
 package com.wdretzer.nasaprojetointegrador.imagensnasa
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,6 +14,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wdretzer.nasaprojetointegrador.R
+import com.wdretzer.nasaprojetointegrador.data.FavouritesItens
 import com.wdretzer.nasaprojetointegrador.data.NasaItens
 import com.wdretzer.nasaprojetointegrador.data.NasaRequest
 import com.wdretzer.nasaprojetointegrador.data.extension.DataResult
@@ -56,6 +59,7 @@ class ImagensNasa : AppCompatActivity() {
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
         supportActionBar?.hide()
+        // recycler.adapter = adp
 
         val bundle: Bundle? = intent.extras
         if (bundle != null) {
@@ -123,14 +127,61 @@ class ImagensNasa : AppCompatActivity() {
         recycler.adapter = adp
     }
 
+
     private fun saveFavourite(item: NasaItens) {
+        // Deleta o item no BD Nasa:
         viewModelNasa.addOrRemoveFavourite(item).observe(this) {
             if (it is DataResult.Success) {
                 adp.updateItem(it.dataResult)
             }
+
+            if (it is DataResult.Loading) {
+                loading.isVisible = it.isLoading
+            }
+
+            if (it is DataResult.Error) {
+                Toast.makeText(this, "Erro ao Favoritar ou Remover", Toast.LENGTH_LONG).show()
+            }
+
+            if (it is DataResult.Empty) {
+                Log.d(
+                    "RoverSearch:",
+                    "Retorno vazio ao favoritar/remover item ${item} no BD!"
+                )
+                Toast.makeText(this, "Retorno Vazio!", Toast.LENGTH_LONG).show()
+            }
         }
+
+        val itemFavourite =
+            FavouritesItens(item.links.first().href, item.data.first().title, item.data)
+
+        // Deleta o item no BD Fav Img:
+        viewModelNasa.addOrRemoveFavouriteImg(itemFavourite).observe(this) {
+            if (it is DataResult.Success) {
+                Log.d("Imagens NASA:", "Item Removido/Favoritado com Sucesso do BD!")
+            }
+
+            if (it is DataResult.Loading) {
+                loading.isVisible = it.isLoading
+            }
+
+            if (it is DataResult.Error) {
+                Toast.makeText(this, "Erro ao Favoritar ou Remover", Toast.LENGTH_LONG).show()
+            }
+
+            if (it is DataResult.Empty) {
+                Log.d(
+                    "RoverSearch:",
+                    "Retorno vazio ao favoritar/remover item ${item} no BD!"
+                )
+                Toast.makeText(this, "Retorno Vazio!", Toast.LENGTH_LONG).show()
+            }
+        }
+
     }
 
+
+    @SuppressLint("SetTextI18n")
     private fun oberservarNasa(result: DataResult<NasaRequest>) {
         when (result) {
 

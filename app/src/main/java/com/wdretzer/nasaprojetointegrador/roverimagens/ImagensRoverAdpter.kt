@@ -1,5 +1,6 @@
 package com.wdretzer.nasaprojetointegrador.roverimagens
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +46,7 @@ class ImagensRoverAdpter(
     fun updateItem(item: RoverItens) {
         val newList =
             diffUtil.currentList.map { rover ->
-                if (rover.img_src == item.img_src) item
+                if (rover.imgRover == item.imgRover) item
                 else rover
             }
         diffUtil.submitList(newList)
@@ -88,15 +89,13 @@ class ImagensRoversViewHolder(
         }
     }
 
+    @SuppressLint("SetTextI18n")
     fun bind(item: RoverItens) {
 
-        // imagemNumber.text = "Imagem ${(itemViewType + 1)}"
-        imagemNumber.text = "Imagem ${item.isFavouriteRoverImg}"
+        imagemNumber.text = "Imagem ${(itemViewType + 1)}"
         favourite.setImageResource(if (item.isFavouriteRoverImg) R.drawable.icon_heart_fav else R.drawable.icon_heart)
 
         favourite.setOnClickListener {
-            //imagemNumber.text = "Imagem ${item.isFavourite}"
-            favourite.setImageResource(if (item.isFavouriteRoverImg) R.drawable.icon_heart_fav else R.drawable.icon_heart)
             if (item.isFavouriteRoverImg) {
                 Toast.makeText(imagemPlanetas.context, "Item Desavoritado!", Toast.LENGTH_SHORT)
                     .show()
@@ -108,13 +107,13 @@ class ImagensRoversViewHolder(
         }
 
         Glide.with(imagemPlanetas.context)
-            .load(item.img_src)
+            .load(item.imgRover)
             .placeholder(R.drawable.simple_background)
             .error(R.drawable.icon_error)
             .into(imagemPlanetas)
 
         itemCorrente = item
-        item.img_src.let {
+        item.imgRover.let {
             Glide.with(imagemPlanetas.context)
                 .load(it)
                 .placeholder(R.drawable.simple_background)
