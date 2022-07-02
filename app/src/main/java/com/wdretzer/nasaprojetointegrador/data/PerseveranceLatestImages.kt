@@ -12,7 +12,7 @@ interface PerseveranceLatestImages {
 
     @GET("rovers/perseverance/latest_photos?")
     suspend fun getLatestImagesPerseverance(
-        @Query("api_key") key: String = "DEMO_KEY"
+        @Query("api_key") key: String = "0OBavfMrXgXKITEZK5wcKr58wvw1Tpi20zv0h3zK"
     ): RoverLatestImages
 
     companion object {

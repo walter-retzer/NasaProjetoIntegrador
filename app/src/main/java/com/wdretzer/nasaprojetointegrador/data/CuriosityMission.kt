@@ -11,7 +11,7 @@ interface CuriosityMission {
 
     @GET("curiosity?")
     suspend fun getMissionCuriosity(
-        @Query("api_key") key: String = "DEMO_KEY"
+        @Query("api_key") key: String = "0OBavfMrXgXKITEZK5wcKr58wvw1Tpi20zv0h3zK"
     ): DataRoverMission
 
     companion object {

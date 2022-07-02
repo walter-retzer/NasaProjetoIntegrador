@@ -11,7 +11,7 @@ interface SpiritLatestImages {
 
     @GET("rovers/spirit/latest_photos?")
     suspend fun getLatestImagesSpirit(
-        @Query("api_key") key: String = "DEMO_KEY"
+        @Query("api_key") key: String = "0OBavfMrXgXKITEZK5wcKr58wvw1Tpi20zv0h3zK"
     ): RoverLatestImages
 
     companion object {

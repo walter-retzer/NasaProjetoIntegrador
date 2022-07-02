@@ -22,10 +22,7 @@ class MenuPrincipalActivity : AppCompatActivity() {
     private val buttonImgFav: RelativeLayout by lazy { findViewById(com.wdretzer.nasaprojetointegrador.R.id.animmation3) }
     private val buttonPerfil: RelativeLayout by lazy { findViewById(com.wdretzer.nasaprojetointegrador.R.id.animmation4) }
     private val buttonRover: RelativeLayout by lazy { findViewById(com.wdretzer.nasaprojetointegrador.R.id.animmation5) }
-    //private val buttonRover: ShapeableImageView by lazy { findViewById(com.wdretzer.nasaprojetointegrador.R.id.imagem_icon_rover) }
 
-//    private val imagemRover: ShapeableImageView
-//        get() = findViewById(R.id.imagem_icon_rover)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,14 +31,6 @@ class MenuPrincipalActivity : AppCompatActivity() {
         // Desabilita a Action Bar que exibe o nome do Projeto:
         supportActionBar?.hide()
         getTokenFirebase()
-
-//        Glide.with(this)
-//            .asGif()
-//            //.load("https://i.pinimg.com/originals/97/42/11/974211f04879e1cc45f8beeac40a0d5e.gif")
-//            .load("https://i.pinimg.com/originals/c0/ea/4c/c0ea4c7c49f456d5a90d11aa13683391.gif")
-//            .placeholder(R.drawable.img_icon_rover)
-//            .error(R.drawable.icon_error)
-//            .into(imagemRover)
 
         buttonPlanetas.setOnClickListener {
             val position: Int = 1

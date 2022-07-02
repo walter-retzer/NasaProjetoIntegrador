@@ -188,10 +188,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/img_detalhe_imagem"
-        app:layout_constraintEnd_toEndOf="@+id/img_detalhe_imagem"
-        app:layout_constraintStart_toStartOf="@+id/img_detalhe_imagem"
-        app:layout_constraintTop_toTopOf="@+id/img_detalhe_imagem"
+        app:layout_constraintBottom_toBottomOf="@+id/img_detalhe_rover"
+        app:layout_constraintEnd_toEndOf="@+id/img_detalhe_rover"
+        app:layout_constraintStart_toStartOf="@+id/img_detalhe_rover"
+        app:layout_constraintTop_toTopOf="@+id/img_detalhe_rover"
         tools:context=".pesquisaimg.PesquisaImagens">
 
         <com.airbnb.lottie.LottieAnimationView
