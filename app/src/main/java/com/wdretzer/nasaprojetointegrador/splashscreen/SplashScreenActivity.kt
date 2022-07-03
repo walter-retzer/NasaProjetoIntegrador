@@ -5,7 +5,6 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
@@ -51,17 +50,17 @@ class SplashScreenActivity : AppCompatActivity(R.layout.activity_start) {
     private fun checkLogin(){
         try {
             idLogin = sharedPref.readString("Id")
-            Toast.makeText(this, "Id: $idLogin", Toast.LENGTH_SHORT).show()
-
+            Log.d("SplashScreen:", "Id: $idLogin")
 
             if (sharedPref.readString("Id").isEmpty()) {
-                Toast.makeText(this, "Id vazio!!", Toast.LENGTH_SHORT).show()
+                Log.d("SplashScreen:", "Id vazio!!")
+
                 // Iniciando as Telas de Boas Vindas:
                 Handler().postDelayed({
                     mMediaPlayer!!.stop()
                     val intent = Intent(this, WelcomeScreenActivity::class.java)
                     startActivity(intent)
-                }, 10000)
+                }, 30000)
 
             } else {
                 // Iniciando as Telas de Login, pelo fato do usuário estar logado:
@@ -72,9 +71,8 @@ class SplashScreenActivity : AppCompatActivity(R.layout.activity_start) {
                 }, 3000)
             }
 
-
         } catch (e: IllegalArgumentException) {
-            Toast.makeText(this, "Erro ao ler Id!!", Toast.LENGTH_SHORT).show()
+            Log.d("SplashScreen:", "Erro ao ler Id!!!")
         }
     }
 

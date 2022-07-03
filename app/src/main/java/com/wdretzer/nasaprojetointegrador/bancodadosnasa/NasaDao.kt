@@ -11,6 +11,9 @@ interface NasaDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE )
     fun insert(vararg nasaEntity: NasaEntity)
 
+    @Query("DELETE FROM nasaFav")
+    fun deleteAll()
+
     @Query("SELECT * FROM nasaFav ORDER BY id DESC")
     fun listAll(): List<NasaEntity>
 

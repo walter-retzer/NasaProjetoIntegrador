@@ -77,4 +77,10 @@ class NasaViewModel(
     fun itemFav(item: List<NasaItens>) = repository.itemFav(item).flowOn(dispatcher).asLiveData()
 
     fun itemFavRover(item: List<RoverItens>) = repository.itemFavRover(item).flowOn(dispatcher).asLiveData()
+
+    fun deleteAllBDNasa() = repository.deleteAllBDNasa().flowOn(dispatcher).asLiveData()
+
+    fun deleteAllBDFav() = repository.deleteAllBDFav().flowOn(dispatcher).asLiveData()
+
+    fun deleteAllBDRover() = repository.deleteAllBDRover().flowOn(dispatcher).asLiveData()
 }

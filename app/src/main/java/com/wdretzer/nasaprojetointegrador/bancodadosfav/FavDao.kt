@@ -10,6 +10,9 @@ interface FavDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE )
     fun insert(vararg nasaFav: FavEntity)
 
+    @Query("DELETE FROM favImgFav")
+    fun deleteAll()
+
     @Query("SELECT * FROM favImgFav ORDER BY id DESC")
     fun listAll(): List<FavEntity>
 

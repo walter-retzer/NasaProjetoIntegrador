@@ -6,7 +6,6 @@ import android.icu.text.SimpleDateFormat
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.os.Handler
 import android.util.Log
 import android.view.View
@@ -206,8 +205,7 @@ class PesquisaImagens : AppCompatActivity() {
 
 
     private fun getDisc(): File {
-        val file = Environment.getExternalStorageDirectory().toString() + localStorage
-        return File(file, "NASA_SEARCH")
+        return File(this.externalCacheDir!!.absolutePath, "/Nasa")
     }
 
 }

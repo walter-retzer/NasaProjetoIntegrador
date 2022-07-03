@@ -290,6 +290,27 @@ class NasaRepository(
     }.updateStatus().flowOn(dispatcher)
 
 
+    //Função para deletar todos os dados no BD Img Nasa:
+    fun deleteAllBDNasa() = flow {
+        val delete = dao.deleteAll()
+        emit(DataResult.Success(delete))
+    }.updateStatus().flowOn(dispatcher)
+
+
+    //Função para deletar todos os dados no BD Img FAV:
+    fun deleteAllBDFav() = flow {
+        val delete = daoFav.deleteAll()
+        emit(DataResult.Success(delete))
+    }.updateStatus().flowOn(dispatcher)
+
+
+    //Função para deletar todos os dados no BD Rover:
+    fun deleteAllBDRover() = flow {
+        val delete = daoRover.deleteAll()
+        emit(DataResult.Success(delete))
+    }.updateStatus().flowOn(dispatcher)
+
+
     companion object {
         val instance: NasaRepository by lazy { NasaRepository() }
     }

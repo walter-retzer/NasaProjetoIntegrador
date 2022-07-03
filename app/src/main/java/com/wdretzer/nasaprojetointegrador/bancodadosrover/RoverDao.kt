@@ -10,6 +10,9 @@ interface RoverDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE )
     fun insert(vararg roverEntity: RoverEntity)
 
+    @Query("DELETE FROM roverFav")
+    fun deleteAll()
+
     @Query("SELECT * FROM roverFav ORDER BY id DESC")
     fun listAll(): List<RoverEntity>
 

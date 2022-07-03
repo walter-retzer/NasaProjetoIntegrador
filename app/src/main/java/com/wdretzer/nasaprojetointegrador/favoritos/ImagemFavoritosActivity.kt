@@ -1,11 +1,12 @@
 package com.wdretzer.nasaprojetointegrador.favoritos
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -16,7 +17,6 @@ import com.wdretzer.nasaprojetointegrador.data.FavouritesItens
 import com.wdretzer.nasaprojetointegrador.data.extension.DataResult
 import com.wdretzer.nasaprojetointegrador.imagensnasa.ImagensNasa
 import com.wdretzer.nasaprojetointegrador.menuprinipal.MenuPrincipalActivity
-import com.wdretzer.nasaprojetointegrador.perfil.PerfilCompleto
 import com.wdretzer.nasaprojetointegrador.pesquisaimg.PesquisaImagens
 import com.wdretzer.nasaprojetointegrador.roversearch.RoversMissionActivity
 import com.wdretzer.nasaprojetointegrador.viewmodel.NasaViewModel
@@ -28,7 +28,7 @@ class ImagemFavoritosActivity : AppCompatActivity() {
     private val buttonHomePlanets: ImageView by lazy { findViewById(R.id.inicio_fav) }
     private val buttonPesquisaImagens: ImageView by lazy { findViewById(R.id.pesquisar_img_fav) }
     private val buttonMenuRovers: ImageView by lazy { findViewById(R.id.rover_fav) }
-    private val buttonMenuPerfil: ImageView by lazy { findViewById(R.id.perfil_fav) }
+    private val buttonDeleteFav: ImageView by lazy { findViewById(R.id.delete_all_fav) }
 
     private val loading: FrameLayout?
         get() = findViewById(R.id.loading)
@@ -53,7 +53,7 @@ class ImagemFavoritosActivity : AppCompatActivity() {
         showFavourite()
         buttonPesquisaImagens.setOnClickListener { sendToSearchImage() }
         buttonHomePlanets.setOnClickListener { sendToHomePlanets() }
-        buttonMenuPerfil.setOnClickListener { sendToPerfil() }
+        buttonDeleteFav.setOnClickListener { showDialogDeleAllFAv() }
         buttonMenuRovers.setOnClickListener { sendToRovers() }
     }
 
@@ -79,14 +79,14 @@ class ImagemFavoritosActivity : AppCompatActivity() {
         viewModelNasa.getFavouriteImages().observe(this) {
 
             if (it is DataResult.Loading) {
-                loading!!.isVisible = it.isLoading
+                loading?.isVisible = it.isLoading
             }
 
             if (it is DataResult.Success) {
                 Log.d("BD_FAV:", "Lista: ${it.dataResult}")
                 adp.updateList(it.dataResult)
 
-                if (it.dataResult.size == 0){
+                if (it.dataResult.size == 0) {
                     Toast.makeText(
                         this,
                         "Ainda não há imagens favoritas salvas!",
@@ -168,6 +168,96 @@ class ImagemFavoritosActivity : AppCompatActivity() {
         }
     }
 
+
+    private fun deleteAllFav() {
+
+        viewModelNasa.deleteAllBDNasa().observe(this) {
+            if (it is DataResult.Success) {
+                Toast.makeText(this, "Todos os dados BD Nasa foram deletados!", Toast.LENGTH_SHORT)
+                    .show()
+                this.recreate()
+            }
+
+            if (it is DataResult.Loading) {
+                loading?.isVisible = it.isLoading
+            }
+
+            if (it is DataResult.Error) {
+                Toast.makeText(this, "Erro ao ao deletar dados no BD Nasa!", Toast.LENGTH_LONG)
+                    .show()
+            }
+
+            if (it is DataResult.Empty) {
+                Log.d("RoverSearch:", "Retorno vazio ao deletar dados no BD!")
+                Toast.makeText(this, "Retorno Vazio!", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        viewModelNasa.deleteAllBDFav().observe(this) {
+            if (it is DataResult.Success) {
+                Toast.makeText(this, "Todos os dados BD FAV foram deletados!", Toast.LENGTH_SHORT)
+                    .show()
+                this.recreate()
+            }
+
+            if (it is DataResult.Loading) {
+                loading?.isVisible = it.isLoading
+            }
+
+            if (it is DataResult.Error) {
+                Toast.makeText(this, "Erro ao ao deletar dados no BD FAV!", Toast.LENGTH_LONG)
+                    .show()
+            }
+
+            if (it is DataResult.Empty) {
+                Log.d("RoverSearch:", "Retorno vazio ao deletar dados no BD!")
+                Toast.makeText(this, "Retorno Vazio!", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        viewModelNasa.deleteAllBDRover().observe(this) {
+            if (it is DataResult.Success) {
+                Toast.makeText(this, "Todos os dados BD Rover foram deletados!", Toast.LENGTH_SHORT)
+                    .show()
+                this.recreate()
+            }
+
+            if (it is DataResult.Loading) {
+                loading?.isVisible = it.isLoading
+            }
+
+            if (it is DataResult.Error) {
+                Toast.makeText(this, "Erro ao ao deletar dados no BD Rover!", Toast.LENGTH_LONG)
+                    .show()
+            }
+
+            if (it is DataResult.Empty) {
+                Log.d("RoverSearch:", "Retorno vazio ao deletar dados no BD!")
+                Toast.makeText(this, "Retorno Vazio!", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun showDialogDeleAllFAv() {
+        val dialog = Dialog(this)
+        dialog.setCancelable(false)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(R.layout.fragment_dialog_delete_user)
+
+        val btnCancelar = dialog.findViewById(R.id.btn_cancelar) as Button
+        val btnDelete = dialog.findViewById(R.id.btn_apagar) as Button
+
+        val body = dialog.findViewById(R.id.frag_title) as TextView
+        body.text = "Deseja realmente apagar todas as imagens favoritas?"
+
+        btnCancelar.setOnClickListener { dialog.dismiss() }
+        btnDelete.setOnClickListener {
+            deleteAllFav()
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
+
     private fun sendToSearchImage() {
         val intent = Intent(this, PesquisaImagens::class.java)
         startActivity(intent)
@@ -175,11 +265,6 @@ class ImagemFavoritosActivity : AppCompatActivity() {
 
     private fun sendToHomePlanets() {
         val intent = Intent(this, MenuPrincipalActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun sendToPerfil() {
-        val intent = Intent(this, PerfilCompleto::class.java)
         startActivity(intent)
     }
 

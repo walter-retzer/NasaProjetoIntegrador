@@ -81,16 +81,16 @@
         android:elevation="3dp"
         android:src="@drawable/icon_rovers"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/perfil_fav"
+        app:layout_constraintEnd_toStartOf="@+id/delete_all_fav"
         app:layout_constraintStart_toEndOf="@+id/pesquisar_img_fav" />
 
     <ImageView
-        android:id="@+id/perfil_fav"
+        android:id="@+id/delete_all_fav"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="8dp"
         android:elevation="3dp"
-        android:src="@drawable/icon_perfil_cosmonalta"
+        android:src="@drawable/icon_delete_black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/rover_fav" />
