@@ -16,14 +16,17 @@
     <application
         android:name=".util.AppUtil"
         android:allowBackup="false"
-        tools:replace="android:allowBackup"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NasaProjetoIntegrador"
         android:usesCleartextTraffic="true"
+        tools:replace="android:allowBackup"
         tools:targetApi="m">
+        <activity
+            android:name=".perfil.PerfilSettingsActivity"
+            android:exported="false" />
         <activity
             android:name=".roversearch.DetalheImagemRover"
             android:exported="false" />

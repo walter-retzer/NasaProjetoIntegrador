@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/activity_perfil_settings">
+
+    <View
+        android:id="@+id/bg_yellow"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:alpha="0.73"
+        android:importantForAccessibility="no"
+        android:scaleType="centerCrop"
+        android:src="@drawable/top_background"
+        app:layout_constraintBottom_toBottomOf="@id/bg_yellow"
+        app:layout_constraintTop_toTopOf="@id/bg_yellow" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/divider"
+        app:layout_constraintBottom_toBottomOf="@id/bg_yellow"
+        app:layout_constraintTop_toTopOf="@id/bg_yellow" />
+</merge>

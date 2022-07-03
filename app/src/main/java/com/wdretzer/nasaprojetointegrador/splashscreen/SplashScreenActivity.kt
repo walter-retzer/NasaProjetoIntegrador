@@ -64,7 +64,7 @@ class SplashScreenActivity : AppCompatActivity(R.layout.activity_start) {
                 }, 10000)
 
             } else {
-                // Iniciando as Telas de Boas Vindas:
+                // Iniciando as Telas de Login, pelo fato do usuário estar logado:
                 Handler().postDelayed({
                     mMediaPlayer!!.stop()
                     val intent = Intent(this, MenuPrincipalActivity::class.java)

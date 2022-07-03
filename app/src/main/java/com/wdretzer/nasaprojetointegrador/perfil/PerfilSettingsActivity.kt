@@ -23,67 +23,54 @@ import com.google.firebase.auth.FirebaseAuth
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.dialogfragments.DialogFragmentSignOut
 import com.wdretzer.nasaprojetointegrador.login.Login
-import com.wdretzer.nasaprojetointegrador.menuprinipal.MenuPrincipalActivity
 import com.wdretzer.nasaprojetointegrador.util.SharedPrefNasa
 
+class PerfilSettingsActivity : AppCompatActivity() {
 
-class PerfilCompleto : AppCompatActivity() {
-
+    private val deleteUser: ImageView by lazy { findViewById(R.id.delete_user_conta) }
+    private val logoutUser: ImageView by lazy { findViewById(R.id.logout_user) }
+    private val deleteFav: ImageView by lazy { findViewById(R.id.delete_fav) }
+    private val astronautaNome: TextView by lazy { findViewById(R.id.nome_astronauta) }
+    private val avatarImg: ShapeableImageView by lazy { findViewById(R.id.img_settings) }
     private lateinit var auth: FirebaseAuth
     val sharedPref: SharedPrefNasa = SharedPrefNasa.instance
     val dialogSignOut = DialogFragmentSignOut()
-    private val buttonEditPerfil: TextView by lazy { findViewById(R.id.btn_edit_perfil) }
-    private val astronautaPerfil: TextView by lazy { findViewById(R.id.nome_astronauta) }
-    private val avatar: ShapeableImageView by lazy { findViewById(R.id.perfil_imagem_avatar_completo) }
-    private val deleteUser: ImageView by lazy { findViewById(R.id.delete_user) }
-    private val logoutUser: ImageView by lazy { findViewById(R.id.logout_user) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_perfil_completo)
+        setContentView(R.layout.activity_perfil_settings)
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
         supportActionBar?.hide()
-        avatar.setStrokeColorResource(R.color.cinza)
+
+        itensSettings()
+
         deleteUser.setOnClickListener { showDialogDeleteUser() }
-        //logoutUser.setOnClickListener { showDialogLogoutUser() }
-        logoutUser.setOnClickListener { sendToEditPerfilSettings() }
-        buttonEditPerfil.setOnClickListener { sendToEditPerfil() }
+        logoutUser.setOnClickListener { showDialogLogoutUser() }
+        deleteFav.setOnClickListener { deleteAllFav() }
 
         auth = FirebaseAuth.getInstance()
 
+    }
+
+    private fun itensSettings() {
         try {
-            avatar.setImageResource(sharedPref.readString("ImgPerfil").toInt())
+            avatarImg.setImageResource(sharedPref.readString("ImgPerfil").toInt())
         } catch (e: IllegalArgumentException) {
-            Toast.makeText(this, "Edite a Foto do seu Perfil!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Erro ao carregar img!", Toast.LENGTH_SHORT).show()
         }
 
         try {
-            astronautaPerfil.text = sharedPref.readString("Astronauta")
+            astronautaNome.text = sharedPref.readString("Astronauta")
         } catch (e: IllegalArgumentException) {
-            Toast.makeText(this, "Edite o Nome do seu Astronauta!", Toast.LENGTH_SHORT).show()
-        }
-
-        if (sharedPref.readString("Astronauta").isEmpty()) {
-            astronautaPerfil.text = "Nome do Astronauta"
+            Toast.makeText(this, "Erro ao carregar nome do Astronaurta!", Toast.LENGTH_SHORT).show()
         }
     }
 
-    override fun onBackPressed() {
-        val intent = Intent(this, MenuPrincipalActivity::class.java)
-        startActivity(intent)
+    private fun deleteAllFav() {
+
     }
 
-    private fun sendToEditPerfil() {
-        val intent = Intent(this, Perfil::class.java)
-        startActivity(intent)
-    }
-
-
-    private fun sendToEditPerfilSettings() {
-        val intent = Intent(this, PerfilSettingsActivity::class.java)
-        startActivity(intent)
-    }
 
     private fun showDialogDeleteUser() {
         val dialog = Dialog(this)

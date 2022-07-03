@@ -2,6 +2,7 @@ package com.wdretzer.nasaprojetointegrador.perfil
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -92,13 +93,16 @@ class Perfil : AppCompatActivity() {
                 } else if (nomeAstronauta.text.isNotEmpty() && perfilImg == null) {
                     saveNamePerfil(nomeAstronauta.text.toString())
                     Toast.makeText(this, "Perfil Salvo!", Toast.LENGTH_SHORT).show()
+                    sendToPerfil()
                 } else if (nomeAstronauta.text.isNotEmpty() && perfilImg != null) {
                     saveImagemPerfil(perfilImg.toString())
                     saveNamePerfil(nomeAstronauta.text.toString())
                     Toast.makeText(this, "Perfil Salvo!", Toast.LENGTH_SHORT).show()
+                    sendToPerfil()
                 } else if (nomeAstronauta.text.isEmpty() && perfilImg != null) {
                     saveImagemPerfil(perfilImg.toString())
                     Toast.makeText(this, "Perfil Salvo!", Toast.LENGTH_SHORT).show()
+                    sendToPerfil()
                 }
             } catch (e: IllegalArgumentException) {
                 Toast.makeText(this, "Erro ao Salvar Dados do Perfil!", Toast.LENGTH_SHORT).show()
@@ -117,5 +121,12 @@ class Perfil : AppCompatActivity() {
 
     fun saveNamePerfil(name: String) {
         sharedPref.saveString("Astronauta", name)
+    }
+
+    private fun sendToPerfil() {
+        Handler().postDelayed({
+            val intent = Intent(this, PerfilCompleto::class.java)
+            startActivity(intent)
+        }, 3000)
     }
 }

@@ -30,23 +30,23 @@
         android:id="@+id/delete_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_delete"
         android:layout_marginEnd="25dp"
         android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/tituloPerfil"
+        android:src="@drawable/icon_delete"
         app:layout_constraintBottom_toBottomOf="@+id/tituloPerfil"
-        app:layout_constraintTop_toTopOf="@+id/tituloPerfil"/>
+        app:layout_constraintEnd_toEndOf="@+id/tituloPerfil"
+        app:layout_constraintTop_toTopOf="@+id/tituloPerfil" />
 
     <ImageView
         android:id="@+id/logout_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_settings"
         android:layout_marginStart="25dp"
         android:padding="10dp"
-        app:layout_constraintStart_toStartOf="@+id/tituloPerfil"
+        android:src="@drawable/icon_settings"
         app:layout_constraintBottom_toBottomOf="@+id/tituloPerfil"
-        app:layout_constraintTop_toTopOf="@+id/tituloPerfil"/>
+        app:layout_constraintStart_toStartOf="@+id/tituloPerfil"
+        app:layout_constraintTop_toTopOf="@+id/tituloPerfil" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/perfil_imagem_avatar_completo"
