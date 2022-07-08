@@ -4,16 +4,25 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.icu.text.SimpleDateFormat
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
+import com.google.firebase.storage.FirebaseStorage
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.favoritos.ImagemFavoritosActivity
 import com.wdretzer.nasaprojetointegrador.menuprinipal.MenuPrincipalActivity
 import com.wdretzer.nasaprojetointegrador.perfil.PerfilCompleto
 import com.wdretzer.nasaprojetointegrador.pesquisaimg.PesquisaImagens
+import com.wdretzer.nasaprojetointegrador.util.SharedPrefNasa
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileWriter
+import java.io.IOException
 import java.util.*
 
 
@@ -45,6 +54,8 @@ class RoverRequestImagesActivity : AppCompatActivity(), DatePickerDialog.OnDateS
 
     private val textData: TextView
         get() = findViewById(R.id.data_input)
+
+    val sharedPref: SharedPrefNasa = SharedPrefNasa.instance
 
     var firstDay = 0
     var firstMonth = 0
@@ -82,7 +93,10 @@ class RoverRequestImagesActivity : AppCompatActivity(), DatePickerDialog.OnDateS
         btnMenuFav.setOnClickListener { sendToFavoritos() }
         btnPerfil.setOnClickListener { sendToPerfil() }
         btnSearch.setOnClickListener {
-            if (dataSend != " ") sendToRoverSearchActivity()
+            if (dataSend != " "){
+                sendToRoverSearchActivity()
+                uploadToFirebase(saveFile())
+            }
             else Toast.makeText(this, "Selecione uma data válida!", Toast.LENGTH_LONG).show()
         }
     }
@@ -186,5 +200,86 @@ class RoverRequestImagesActivity : AppCompatActivity(), DatePickerDialog.OnDateS
     private fun sendToPerfil() {
         val intent = Intent(this, PerfilCompleto::class.java)
         startActivity(intent)
+    }
+
+
+    @SuppressLint("SimpleDateFormat")
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun uploadToFirebase(uri: Uri) {
+
+        var nameFile = ""
+        try {
+            nameFile = sharedPref.readString("Id")
+        } catch (e: IllegalArgumentException) {
+            Toast.makeText(this, "Erro ao ler o Id", Toast.LENGTH_SHORT).show()
+        }
+
+        val firebaseStorage = FirebaseStorage.getInstance()
+        val storage = firebaseStorage.getReference("Pesquisa")
+        val fileReference = storage.child("search_$nameFile.txt")
+
+        uri.apply {
+            fileReference
+                .putFile(this)
+                .addOnSuccessListener {
+                    Log.d("Firebase Storage:", "Arquivo Enviado ao Firebase Storage com sucesso!")
+                }
+                .addOnFailureListener {
+                    Log.d("Firebase Storage:", "rquivo Não Enviado ao Firebase Storage!")
+                }
+        }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun saveFile(): Uri {
+        val file = getDisc()
+
+        if (!file.exists() && !file.mkdirs()) {
+            file.mkdir()
+        }
+
+        var nameFile = ""
+
+        try {
+
+            nameFile = sharedPref.readString("Id")
+
+        } catch (e: IllegalArgumentException) {
+            Toast.makeText(
+                this,
+                "Erro ao criar o nome do Arquivo Search!",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy_HH.mm.ss")
+        val date = simpleDateFormat.format(Date())
+        val name = "search_$nameFile.txt"
+        val fileName = file.absolutePath + "/" + name
+        val newFile = File(fileName)
+
+        try {
+
+            val fileWriter = FileWriter(newFile, true)
+            newFile.appendText("Data: $date; Rover: ${title.text} , Data Pesquisada: ${textData.text} " + "; \n")
+            fileWriter.flush()
+            fileWriter.close()
+
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+            Log.d("Firebase Storage:", "Arquivo para o Firebase Storage Inexistente!")
+
+        } catch (e: IOException) {
+            e.printStackTrace()
+            Log.d("Firebase Storage:", "Falha ao Salvar o Arquivo!")
+        }
+
+        return Uri.parse(newFile.toUri().toString())
+    }
+
+
+    private fun getDisc(): File {
+        return File(this.externalCacheDir!!.absolutePath, "/Nasa")
     }
 }
