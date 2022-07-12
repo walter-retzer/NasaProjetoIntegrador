@@ -262,7 +262,7 @@ class RoverRequestImagesActivity : AppCompatActivity(), DatePickerDialog.OnDateS
         try {
 
             val fileWriter = FileWriter(newFile, true)
-            newFile.appendText("Data: $date; Rover: ${title.text} , Data Pesquisada: ${textData.text} " + "; \n")
+            newFile.appendText("Data: $date; Rover: ${title.text}; Data Pesquisada: ${textData.text}; \n")
             fileWriter.flush()
             fileWriter.close()
 
