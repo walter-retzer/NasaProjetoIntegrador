@@ -1,5 +1,6 @@
 package com.wdretzer.nasaprojetointegrador.favoritos
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
@@ -238,6 +239,8 @@ class ImagemFavoritosActivity : AppCompatActivity() {
         }
     }
 
+
+    @SuppressLint("SetTextI18n")
     private fun showDialogDeleAllFAv() {
         val dialog = Dialog(this)
         dialog.setCancelable(false)

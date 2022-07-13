@@ -59,13 +59,9 @@ class ImagensNasa : AppCompatActivity() {
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
         supportActionBar?.hide()
-        // recycler.adapter = adp
 
         val bundle: Bundle? = intent.extras
-        if (bundle != null) {
-            setSearchText = bundle.getString("Search").toString()
-            //Toast.makeText(this, "Bundle = ${setSearchText}", Toast.LENGTH_LONG).show()
-        }
+        if (bundle != null) setSearchText = bundle.getString("Search").toString()
 
         buttonHomePlanets.setOnClickListener { sendToHomePlanets() }
         buttonPesquisaImagens.setOnClickListener { sendToSearchImage() }
@@ -77,9 +73,11 @@ class ImagensNasa : AppCompatActivity() {
         setScrollView()
     }
 
+
     private fun chamadas(search: String, page: Int) {
         viewModelNasa.request(search, page).observe(this, ::oberservarNasa)
     }
+
 
     private fun recyclerView() {
         adp = ImagensAdpter(::saveFavourite) {
@@ -145,7 +143,7 @@ class ImagensNasa : AppCompatActivity() {
 
             if (it is DataResult.Empty) {
                 Log.d(
-                    "RoverSearch:",
+                    "Imagens NASA:",
                     "Retorno vazio ao favoritar/remover item ${item} no BD!"
                 )
                 Toast.makeText(this, "Retorno Vazio!", Toast.LENGTH_LONG).show()
@@ -171,13 +169,12 @@ class ImagensNasa : AppCompatActivity() {
 
             if (it is DataResult.Empty) {
                 Log.d(
-                    "RoverSearch:",
+                    "Imagens NASA:",
                     "Retorno vazio ao favoritar/remover item ${item} no BD!"
                 )
                 Toast.makeText(this, "Retorno Vazio!", Toast.LENGTH_LONG).show()
             }
         }
-
     }
 
 
@@ -193,15 +190,51 @@ class ImagensNasa : AppCompatActivity() {
                 Toast.makeText(this, "Falha em encontrar as imagens!", Toast.LENGTH_LONG).show()
             }
 
+            is DataResult.Empty -> {
+                Toast.makeText(this, "Não há dados de retorno!", Toast.LENGTH_LONG).show()
+            }
+
             is DataResult.Success -> {
                 viewModelNasa.itemFav(result.dataResult.collection.items).observe(this) {
-                    adp.updateList(it)
+                    if (it is DataResult.Success) {
+                        Log.d(
+                            "Imagens NASA:",
+                            "Verificando se há algum item da lista: ${result.dataResult.collection.items} salvo como favorito no BD!"
+                        )
+                        adp.updateList(it.dataResult)
+                    }
+
+                    if (it is DataResult.Loading) {
+                        loading.isVisible = it.isLoading
+                    }
+
+                    if (it is DataResult.Error) {
+                        Toast.makeText(
+                            this,
+                            "Erro ao verificar itens salvos como favoritos no BD!",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                        Log.d(
+                            "Imagens NASA:",
+                            "Erro ao verificar se há algum item da lista: ${result.dataResult.collection.items} salvo como favorito no BD!"
+                        )
+                    }
+
+                    if (it is DataResult.Empty) {
+                        Log.d(
+                            "Imagens NASA:",
+                            "Retorno vazio ao verificar se há algum item da lista: ${result.dataResult.collection.items} salvo como favorito no BD!"
+                        )
+                        Toast.makeText(this, "Retorno Vazio!", Toast.LENGTH_LONG).show()
+                    }
                 }
 
                 nextPage = result.dataResult.collection.links != null
 
-                totalItens.text =
-                    "${result.dataResult.collection.metadata.totalHits} Imagens Encontradas!"
+                if (result.dataResult.collection.metadata.totalHits > 0) totalItens.text =
+                    "${result.dataResult.collection.metadata.totalHits} Imagens \nEncontradas"
+                else totalItens.text = "Nenhuma Imagem \nFoi Encontrada"
 
                 totalImagens += (result.dataResult.collection.items.size)
                 Toast.makeText(this, "Há $totalImagens imagens disponíveis!!", Toast.LENGTH_LONG)
@@ -209,6 +242,7 @@ class ImagensNasa : AppCompatActivity() {
             }
         }
     }
+
 
     private fun setScrollView() {
         recycler
@@ -228,6 +262,7 @@ class ImagensNasa : AppCompatActivity() {
                 }
             })
     }
+
 
     private fun sendToDetalheImage(
         description: String? = null,

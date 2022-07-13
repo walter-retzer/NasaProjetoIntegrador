@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,115 +7,121 @@
     android:background="@drawable/simple_background"
     tools:context=".imagensnasa.ImagensNasa">
 
-    <TextView
-        android:id="@+id/text_img_encontradas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/background_text_splash"
-        android:padding="10dp"
-        android:text="Imagens Encontradas"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="24sp"
+        <TextView
+            android:id="@+id/text_img_encontradas"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="35dp"
+            android:background="@drawable/background_text_splash"
+            android:padding="10dp"
+            android:text="Imagens \nEncontradas"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/nasa_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginTop="105dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:itemCount="8"
+            tools:listitem="@layout/item_planeta_imagem"
+            tools:spanCount="2" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/background_menu_imagens"
+        android:elevation="2dp"
+        app:hideOnScroll="true"
+        app:labelVisibilityMode="selected"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_insetEdge="bottom"
+        app:layout_scrollFlags="scroll|enterAlways|snap">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            android:elevation="3dp"
+            tools:context=".roversearch.RoverSearchActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/nasa_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/menu_bottom"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_img_encontradas"
-        app:spanCount="2"
-        tools:itemCount="8"
-        tools:listitem="@layout/item_planeta_imagem"
-        tools:spanCount="2" />
+            <ImageView
+                android:id="@+id/menu_planetas"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:elevation="3dp"
+                android:src="@drawable/icon_menu_planetas"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/menu_pesquisa_img"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/menu_pesquisa_img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:elevation="3dp"
+                android:src="@drawable/icon_telescope"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/menu_favoritos"
+                app:layout_constraintStart_toEndOf="@+id/menu_planetas" />
+
+            <ImageView
+                android:id="@+id/menu_favoritos"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:elevation="3dp"
+                android:src="@drawable/icon_heart_black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/menu_perfil"
+                app:layout_constraintStart_toEndOf="@+id/menu_pesquisa_img" />
+
+            <ImageView
+                android:id="@+id/menu_perfil"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:elevation="3dp"
+                android:src="@drawable/icon_perfil_cosmonalta"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/menu_favoritos" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <FrameLayout
         android:id="@+id/loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:background="@android:color/transparent"
         android:backgroundTint="@android:color/transparent"
-        android:padding="16dp"
-        android:visibility="gone"
         android:elevation="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="16dp"
+        android:visibility="gone">
 
         <ProgressBar
-            android:elevation="5dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:elevation="5dp" />
     </FrameLayout>
 
-
-
-    <ImageView
-        android:id="@+id/menu_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/background_menu_imagens"
-        android:elevation="3dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-    <ImageView
-        android:id="@+id/menu_planetas"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="5dp"
-        android:elevation="3dp"
-        android:src="@drawable/icon_menu_planetas"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/menu_pesquisa_img"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <ImageView
-        android:id="@+id/menu_pesquisa_img"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="5dp"
-        android:elevation="3dp"
-        android:src="@drawable/icon_telescope"
-        app:layout_constraintEnd_toStartOf="@+id/menu_favoritos"
-        app:layout_constraintStart_toEndOf="@+id/menu_planetas"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <ImageView
-        android:id="@+id/menu_favoritos"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="5dp"
-        android:elevation="3dp"
-        android:src="@drawable/icon_heart_black"
-        app:layout_constraintEnd_toStartOf="@+id/menu_perfil"
-        app:layout_constraintStart_toEndOf="@+id/menu_pesquisa_img"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <ImageView
-        android:id="@+id/menu_perfil"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="5dp"
-        android:elevation="3dp"
-        android:src="@drawable/icon_perfil_cosmonalta"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/menu_favoritos"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

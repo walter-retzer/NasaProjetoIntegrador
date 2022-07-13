@@ -138,8 +138,8 @@ class NasaRepository(
                 itNasaItens.copy(isFavourite = true)
             else itNasaItens
         }
-        emit(novaLista)
-    }.flowOn(dispatcher)
+        emit(DataResult.Success(novaLista))
+    }.updateStatus().flowOn(dispatcher)
 
 
     //Função para verificar se tem um item favoritado pelo usuario e comparar com a lista recebida pela API com as info dos Rovers:
@@ -152,8 +152,8 @@ class NasaRepository(
                 roverItens.copy(isFavouriteRoverImg = true)
             else roverItens
         }
-        emit(novaLista)
-    }.flowOn(dispatcher)
+        emit(DataResult.Success(novaLista))
+    }.updateStatus().flowOn(dispatcher)
 
 
     //Função para pegar os dados dos itens que foram favoritados no BD Img Fav:
@@ -170,7 +170,6 @@ class NasaRepository(
         val localItens = dao.listAll().map {
             NasaItens(it)
         }
-        //emit((localItens as MutableList<NasaItens>))
         emit(DataResult.Success(localItens as MutableList<NasaItens>))
     }.updateStatus().flowOn(dispatcher)
 
@@ -216,7 +215,7 @@ class NasaRepository(
                         Log.d("Tradutor Eng-Pt:", "Baixando arquivos de tradução Eng-Pt.")
                     }
 
-                //Passa o título traduzido para a variavel title:
+                //Passa o título traduzido para a variável title:
                 if (titlePt != "Title") {
                     item.data.map {
                         it.title = titlePt

@@ -231,10 +231,40 @@ class RoverSearchActivity : AppCompatActivity() {
 
             is DataResult.Success -> {
                 viewModelNasa.itemFavRover(result.dataResult.photos).observe(this) {
-                    adp.updateList(it)
-                    recycler.adapter = adp
-                    totalItens.text = "${result.dataResult.photos.size} Imagens Encontradas!"
-                    Log.d("Lista:", "${result.dataResult.photos}")
+                    if (it is DataResult.Success) {
+                        adp.updateList(it.dataResult)
+                        recycler.adapter = adp
+                        totalItens.text = "${result.dataResult.photos.size} Imagens Encontradas!"
+                        Log.d(
+                            "RoverSearch:",
+                            "Verificando se há algum item da lista: ${result.dataResult.photos} salvo como favorito no BD!"
+                        )
+                    }
+
+                    if (it is DataResult.Loading) {
+                        loading.isVisible = it.isLoading
+                    }
+
+                    if (it is DataResult.Error) {
+                        Toast.makeText(
+                            this,
+                            "Erro ao verificar se há algum item salvo como favorito no BD!",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                        Log.d(
+                            "RoverSearch:",
+                            "Erro ao verificar se há algum item da lista: ${result.dataResult.photos} salvo como favorito no BD!"
+                        )
+                    }
+
+                    if (it is DataResult.Empty) {
+                        Log.d(
+                            "RoverSearch:",
+                            "Retorno vazio ao verificar se há algum item da lista: ${result.dataResult.photos} salvo como favorito no BD!!"
+                        )
+                        Toast.makeText(this, "Retorno Vazio!", Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         }
