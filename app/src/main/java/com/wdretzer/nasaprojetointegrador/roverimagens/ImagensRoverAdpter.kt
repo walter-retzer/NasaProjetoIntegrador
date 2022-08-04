@@ -104,21 +104,22 @@ class ImagensRoversViewHolder(
                     .show()
             }
             detailAction.invoke(item)
-        }
 
-        Glide.with(imagemPlanetas.context)
-            .load(item.imgRover)
-            .placeholder(R.drawable.simple_background)
-            .error(R.drawable.icon_error)
-            .into(imagemPlanetas)
 
-        itemCorrente = item
-        item.imgRover.let {
             Glide.with(imagemPlanetas.context)
-                .load(it)
+                .load(item.imgRover)
                 .placeholder(R.drawable.simple_background)
                 .error(R.drawable.icon_error)
                 .into(imagemPlanetas)
+
+            itemCorrente = item
+            item.imgRover.let {
+                Glide.with(imagemPlanetas.context)
+                    .load(it)
+                    .placeholder(R.drawable.simple_background)
+                    .error(R.drawable.icon_error)
+                    .into(imagemPlanetas)
+            }
         }
     }
 }

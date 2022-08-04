@@ -10,6 +10,7 @@
     tools:context=".dialogfragments.DialogFragmentCadastro">
 
     <TextView
+        android:id="@+id/dialog"
         style="@style/TextAppearance.AppCompat.Headline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
