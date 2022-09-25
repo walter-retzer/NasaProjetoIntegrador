@@ -104,6 +104,7 @@ class ImagensRoversViewHolder(
                     .show()
             }
             detailAction.invoke(item)
+
         }
 
         Glide.with(imagemPlanetas.context)

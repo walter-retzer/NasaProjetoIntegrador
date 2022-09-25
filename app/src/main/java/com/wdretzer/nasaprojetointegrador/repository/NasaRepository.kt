@@ -45,29 +45,29 @@ class NasaRepository(
 
 
     //Função para receber os dados dos Rovers API - Perseverance Search Images earth_date:
-    fun requestImagesPerseverance(date: String) = flow<DataResult<RoverRequest>> {
-        val response: RoverRequest = api3.getImagesPerseverance(date)
+    fun requestImagesPerseverance(api_key: String, date: String) = flow<DataResult<RoverRequest>> {
+        val response: RoverRequest = api3.getImagesPerseverance(api_key, date)
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
 
     //Função para receber os dados dos Rovers API - Curiosity Search Images earth_date:
-    fun requestImagesCuriosity(date: String) = flow<DataResult<RoverRequest>> {
-        val response: RoverRequest = api5.getImagesCuriosity(date)
+    fun requestImagesCuriosity(api_key: String, date: String) = flow<DataResult<RoverRequest>> {
+        val response: RoverRequest = api5.getImagesCuriosity(api_key, date)
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
 
     //Função para receber os dados dos Rovers API - Opportunity Search Images earth_date:
-    fun requestImagesOpportunity(date: String) = flow<DataResult<RoverRequest>> {
-        val response: RoverRequest = api7.getImagesOpportunity(date)
+    fun requestImagesOpportunity(api_key: String, date: String) = flow<DataResult<RoverRequest>> {
+        val response: RoverRequest = api7.getImagesOpportunity(api_key, date)
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
 
     //Função para receber os dados dos Rovers API - Spirit Search Images earth_date:
-    fun requestImagesSpirit(date: String) = flow<DataResult<RoverRequest>> {
-        val response: RoverRequest = api9.getImagesSpirit(date)
+    fun requestImagesSpirit(api_key: String, date: String) = flow<DataResult<RoverRequest>> {
+        val response: RoverRequest = api9.getImagesSpirit(api_key, date)
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
@@ -101,29 +101,29 @@ class NasaRepository(
 
 
     //Função para receber os dados da Missão Rovers Perseverance:
-    fun requestMissionPerseverance() = flow<DataResult<DataRoverMission>> {
-        val response: DataRoverMission = api10.getMissionPerseverance()
+    fun requestMissionPerseverance(api_key: String) = flow<DataResult<DataRoverMission>> {
+        val response: DataRoverMission = api10.getMissionPerseverance(api_key)
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
 
     //Função para receber os dados da Missão Curiosity:
-    fun requestMissionCuriosity() = flow<DataResult<DataRoverMission>> {
-        val response: DataRoverMission = api11.getMissionCuriosity()
+    fun requestMissionCuriosity(api_key: String) = flow<DataResult<DataRoverMission>> {
+        val response: DataRoverMission = api11.getMissionCuriosity(api_key)
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
 
     //Função para receber os dados da Missão Opportunity:
-    fun requestMissionOpportunity() = flow<DataResult<DataRoverMission>> {
-        val response: DataRoverMission = api12.getMissionOpportunity()
+    fun requestMissionOpportunity(api_key: String) = flow<DataResult<DataRoverMission>> {
+        val response: DataRoverMission = api12.getMissionOpportunity(api_key)
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 
 
     //Função para receber os dados da Missão Opportunity:
-    fun requestMissionSpirit() = flow<DataResult<DataRoverMission>> {
-        val response: DataRoverMission = api13.getMissionSpirit()
+    fun requestMissionSpirit(api_key: String) = flow<DataResult<DataRoverMission>> {
+        val response: DataRoverMission = api13.getMissionSpirit(api_key)
         emit(DataResult.Success(response))
     }.updateStatus().flowOn(dispatcher)
 

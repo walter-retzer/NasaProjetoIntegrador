@@ -12,6 +12,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.wdretzer.nasaprojetointegrador.BuildConfig
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.data.FavouritesItens
 import com.wdretzer.nasaprojetointegrador.data.RoverItens
@@ -48,6 +49,8 @@ class RoverSearchActivity : AppCompatActivity() {
     private val recycler: RecyclerView
         get() = findViewById(R.id.rover_recycler)
 
+    private lateinit var key: String
+
     private val viewModelNasa: NasaViewModel by viewModels()
     private val totalItens: TextView by lazy { findViewById(R.id.text_img_rovers_found) }
     private var adp = ImagensRoverAdpter(::saveOrRemoFavorite) {}
@@ -68,6 +71,9 @@ class RoverSearchActivity : AppCompatActivity() {
 
         // Desabilita a Action Bar que exibe o nome do Projeto:
         supportActionBar?.hide()
+
+       key = BuildConfig.KEY
+
         recycler.adapter = adp
 
         val bundle: Bundle? = intent.extras
@@ -88,16 +94,16 @@ class RoverSearchActivity : AppCompatActivity() {
 
 
     private fun chamadas() {
-        if (nameRover == "Perseverance") viewModelNasa.requestImagesPerseverance(sendDateText)
+        if (nameRover == "Perseverance") viewModelNasa.requestImagesPerseverance(key, sendDateText)
             .observe(this, ::oberservImagesRovers)
 
-        if (nameRover == "Curiosity") viewModelNasa.requestImagesCuriosity(sendDateText)
+        if (nameRover == "Curiosity") viewModelNasa.requestImagesCuriosity(key,sendDateText)
             .observe(this, ::oberservImagesRovers)
 
-        if (nameRover == "Opportunity") viewModelNasa.requestImagesOpportunity(sendDateText)
+        if (nameRover == "Opportunity") viewModelNasa.requestImagesOpportunity(key,sendDateText)
             .observe(this, ::oberservImagesRovers)
 
-        if (nameRover == "Spirit") viewModelNasa.requestImagesSpirit(sendDateText)
+        if (nameRover == "Spirit") viewModelNasa.requestImagesSpirit(key,sendDateText)
             .observe(this, ::oberservImagesRovers)
     }
 

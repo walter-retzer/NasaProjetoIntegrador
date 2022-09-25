@@ -1,5 +1,6 @@
 package com.wdretzer.nasaprojetointegrador.perfil
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -171,6 +172,7 @@ class PerfilSettingsActivity : AppCompatActivity() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun showDialogLogoutUser() {
         val dialog = Dialog(this)
         dialog.setCancelable(false)
@@ -194,6 +196,7 @@ class PerfilSettingsActivity : AppCompatActivity() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun showDialogDeleAllFAv() {
         val dialog = Dialog(this)
         dialog.setCancelable(false)

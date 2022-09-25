@@ -12,7 +12,6 @@ object Okhttp {
             val loggingInterceptor = HttpLoggingInterceptor()
             loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
             addInterceptor(loggingInterceptor)
-
         }
 
         readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)

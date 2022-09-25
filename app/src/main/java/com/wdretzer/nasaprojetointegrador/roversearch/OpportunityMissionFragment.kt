@@ -15,6 +15,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.imageview.ShapeableImageView
+import com.wdretzer.nasaprojetointegrador.BuildConfig
 import com.wdretzer.nasaprojetointegrador.R
 import com.wdretzer.nasaprojetointegrador.data.extension.DataResult
 import com.wdretzer.nasaprojetointegrador.viewmodel.NasaViewModel
@@ -59,6 +60,14 @@ class OpportunityMissionFragment : Fragment(R.layout.fragment_rover_mission) {
     var nameRover: String = ""
     var update: Boolean = false
 
+    private lateinit var key: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        key = BuildConfig.KEY
+    }
+
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -94,7 +103,7 @@ class OpportunityMissionFragment : Fragment(R.layout.fragment_rover_mission) {
     @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n")
     private fun chamadas() {
-        viewModelRover.requestMissionOpportunity().observe(viewLifecycleOwner) {
+        viewModelRover.requestMissionOpportunity(key).observe(viewLifecycleOwner) {
             when (it) {
                 is DataResult.Loading -> {
                     loading!!.isVisible = it.isLoading

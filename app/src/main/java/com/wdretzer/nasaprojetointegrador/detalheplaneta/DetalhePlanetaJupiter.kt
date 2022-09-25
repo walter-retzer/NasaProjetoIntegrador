@@ -97,6 +97,7 @@ class DetalhePlanetaJupiter : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
                 Log.i("firebase", "Error to read Firebase!", error.toException())
             }
+
         })
     }
 }

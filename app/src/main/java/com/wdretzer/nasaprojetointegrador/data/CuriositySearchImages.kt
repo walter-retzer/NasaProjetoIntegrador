@@ -11,8 +11,8 @@ interface CuriositySearchImages {
 
     @GET("photos?")
     suspend fun getImagesCuriosity(
-        @Query("earth_date") search: String,
-        @Query("api_key") page: String = "0OBavfMrXgXKITEZK5wcKr58wvw1Tpi20zv0h3zK"
+        @Query("api_key") page: String,
+        @Query("earth_date") date: String,
     ): RoverRequest
 
     companion object {
